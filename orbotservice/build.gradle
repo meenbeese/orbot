@@ -1,34 +1,30 @@
+apply from: '../dependencies.gradle'
 apply plugin: 'com.android.library'
-apply from: "../commons.gradle"
-apply from : '../dependencies.gradle'
 
 android {
-    ndkVersion '21.3.6528147'
-
-    /**
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['./src/main/libs']
-        }
-    }**/
-
+    compileSdk 33
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 33
+        minSdk 23
+        targetSdk 33
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    packagingOptions {
-        resources {
-            excludes += ['META-INF/androidx.localbroadcastmanager_localbroadcastmanager.version']
+            proguardFiles 'proguard-rules.txt'
         }
     }
 
+    packagingOptions {
+        resources {
+            exclude 'META-INF/androidx.localbroadcastmanager_localbroadcastmanager.version'
+        }
+    }
 
     lint {
         abortOnError true
@@ -39,36 +35,27 @@ android {
         textReport false
         xmlReport false
     }
+
+    dependencies {
+        implementation files('../libs/geoip.jar')
+
+        /* Orbot Libraries */
+        api project(':OrbotLib')
+        api libs.guardian_jtorctl
+        api libs.tor_android
+
+        /* Android Core */
+        implementation libs.android_shell
+        implementation libs.androidx_core
+        implementation libs.androidx_localbroadcast
+     // implementation libs.ipt_proxy
+        implementation libs.guardian_jsocks
+        implementation libs.portmapper
+        implementation libs.pcap_core
+        implementation libs.pcap_factory
+        implementation libs.androidx_work
+        implementation libs.androidx_work_kotlin
+
+    }
     namespace 'org.torproject.android.service'
-}
-
-dependencies {
-
-    api libs.guardian_jtorctl
-
-    //use locally built ipt_proxy+go_tun2socks
-    api project(':OrbotLib')
-
-    api libs.tor_android
-
-            implementation(
-            libs.android_shell,
-            libs.androidx_core,
-            libs.androidx_localbroadcast,
-        //    libs.ipt_proxy,
-            libs.guardian_jsocks,
-            libs.portmapper,
-            libs.pcap_core,
-            libs.pcap_factory,
-            libs.androidx_work,
-            libs.androidx_work_kotlin
-    )
-
-    //building from AAR built from https://github.com/guardianproject/tor-android/commit/95eca2a8c9eb44068f11332d7731580a13ef7b28
-    //    until a new full release is done
-    //implementation files('../libs/tor-android-binary-release.aar')
-
-    implementation files('../libs/geoip.jar')
-
-
 }

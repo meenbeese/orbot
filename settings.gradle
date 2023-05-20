@@ -1,17 +1,10 @@
-include ':intentintegrator'
-include ':appcore'
-include ':orbotservice'
-include ':OrbotLib'
-//include ':tor-android'
-include ':app'
-include ':app-tv'
-
-/**
-enableFeaturePreview("VERSION_CATALOGS")
-dependencyResolutionManagement {
-    versionCatalogs {
-        lib {
-            from(files("./gradle/libs.versions.toml"))
-        }
-    }
-}**/
+rootProject.name = 'Orbot'
+include (
+        ':intentintegrator',
+        ':appcore',
+        ':orbotservice',
+        ':OrbotLib',
+     // ':tor-android',
+        ':app',
+        ':app-tv'
+)

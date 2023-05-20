@@ -1,23 +1,27 @@
 apply plugin: 'com.android.library'
-apply from: "../commons.gradle"
 
 android {
+    compileSdk 33
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 33
-        consumerProguardFiles "consumer-rules.pro"
+        minSdk 23
+        targetSdk 33
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard-rules.txt'
         }
     }
-    namespace 'com.google.zxing.integration.android'
-}
 
-dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    libs.androidx_appcompat
+    dependencies {
+        implementation fileTree(dir: 'libs', include: ['*.jar'])
+        implementation libs.androidx_appcompat
+    }
+    namespace 'com.google.zxing.integration.android'
 }

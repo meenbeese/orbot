@@ -30,8 +30,19 @@ object LocaleHelper {
     }
 
     @TargetApi(Build.VERSION_CODES.N)
-    private fun updateResources(context: Context, language: String): Context {
-        val locale = Locale(language)
+    private fun updateResources(context: Context, locale: String): Context {
+
+        var language = locale
+        var region = ""
+
+        if (language.contains("_"))
+        {
+            var parts = locale.split("_")
+            language = parts[0]
+            region = parts[1]
+        }
+
+        val locale = Locale(language,region)
         Locale.setDefault(locale)
         val configuration = context.resources.configuration
         configuration.setLocale(locale)
@@ -46,9 +57,7 @@ object LocaleHelper {
         val resources = context.resources
         val configuration = resources.configuration
         configuration.locale = locale
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            configuration.setLayoutDirection(locale)
-        }
+        configuration.setLayoutDirection(locale)
         resources.updateConfiguration(configuration, resources.displayMetrics)
         return context
     }

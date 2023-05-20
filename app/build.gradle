@@ -1,8 +1,8 @@
-apply from: "../commons-device.gradle"
+apply from: '../dependencies.gradle'
+apply from: '../commons.gradle'
 apply plugin: 'kotlin-android'
-apply from : '../dependencies.gradle'
 
-/* gets the version name from the latest Git tag, stripping the leading v off */
+/* Gets the version name from the latest Git tag, stripping the leading v off */
 def getVersionName = { ->
     def stdout = new ByteArrayOutputStream()
     exec {
@@ -17,107 +17,82 @@ static def versionCodeEpoch() {
 }
 
 android {
+    compileSdk 33
     defaultConfig {
-        applicationId "org.torproject.android"
+        applicationId 'org.torproject.android'
         versionName getVersionName()
-        minSdkVersion 18
-        compileSdkVersion 33
-        targetSdkVersion 33
-        multiDexEnabled true
+        minSdk 23
+        targetSdk 33
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-        archivesBaseName = "Orbot"
-    }
-    compileOptions {
-//        coreLibraryDesugaringEnabled true
-    }
-    buildTypes {
-        release {
-            shrinkResources false
-            minifyEnabled false
-        }
+        archivesBaseName = 'Orbot'
     }
 
-    flavorDimensions "free"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17
+    }
+
+    flavorDimensions 'free'
 
     productFlavors {
         fullperm {
-            dimension "free"
+            dimension 'free'
             applicationId 'org.torproject.android'
-            versionCode 1700200400
+            versionCode 1700200500
             versionName getVersionName()
-            archivesBaseName = "Orbot-${versionName}"
+            archivesBaseName = 'Orbot-${versionName}'
         }
 
         nightly {
-            dimension "free"
+            dimension 'free'
             applicationId 'org.torproject.android.nightly'
             versionName getVersionName()
             versionCode versionCodeEpoch()
-            archivesBaseName = "Orbot-${versionName}"
-        }
-    }
-
-    splits {
-        abi {
-            universalApk true
-        }
-    }
-    packagingOptions {
-        jniLibs {
-            /**
-            excludes += ['lib/x86/libgojni.so',
-                         'lib/x86_64/libgojni.so',
-                         'lib/arm64-v8a/libgojni.so',
-                         'lib/armeabi-v7a/libgojni.so',
-                         'lib/armeabi/libgojni.so']
-             **/
-        }
-
-        resources {
-            excludes += ['META-INF/androidx.localbroadcastmanager_localbroadcastmanager.version']
+            archivesBaseName = 'Orbot-${versionName}'
         }
     }
 
     dependencies {
-        implementation(
-                project(':appcore'),
-                project(':intentintegrator'),
-                project(':orbotservice'),
-                libs.android_material,
-                libs.android_volley,
-                libs.androidx_localbroadcast,
+        /* Orbot Libraries */
+        implementation project(':appcore')
+        implementation project(':intentintegrator')
+        implementation project(':orbotservice')
+        implementation project(':OrbotLib')
 
-                //use locally built ipt_proxy+go_tun2socks
-                project(':OrbotLib')
-             //   libs.ipt_proxy
-        )
+        /* Android Core */
+        implementation libs.androidx_appcompat
+        implementation libs.androidx_core_ktx
+        implementation libs.androidx_constraint
+        implementation libs.androidx_coordinator
+        implementation libs.androidx_leanback_core
+        implementation libs.androidx_leanback_paging
+        implementation libs.androidx_leanback_preferences
+        implementation libs.androidx_leanback_tab
+        implementation libs.androidx_localbroadcast
+        implementation libs.androidx_palette
+        implementation libs.androidx_recyclerview
+        implementation libs.androidx_navigation_fragment
+        implementation libs.androidx_navigation_ui
 
-        implementation "com.squareup.retrofit2:retrofit:2.9.0"
-        implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+        /* Design */
+        implementation libs.android_material
+        implementation libs.android_snowfall
+        implementation libs.android_volley
 
+        /* HTTP Client */
+        implementation libs.squareup_gson
+        implementation libs.squareup_retrofit
+
+        /* Testing */
+        implementation libs.apl_appintro
+        implementation libs.junit_junit
+        androidTestImplementation libs.androidx_test_espresso
+        androidTestImplementation libs.androidx_test_junit
         androidTestImplementation libs.fastlane_screengrab
-//        coreLibraryDesugaring 'com.android.tools:desugar_j dk_libs:1.1.5'
-
-
-    }
-    lint {
-        abortOnError false
-        checkReleaseBuilds false
-        disable 'InvalidPackage'
-        htmlReport true
-        lintConfig file('../lint.xml')
-        textReport false
-        xmlReport false
     }
     namespace 'org.torproject.android'
-}
-dependencies {
-    implementation "androidx.core:core-ktx:1.8.0"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    // Kotlin
-    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
 }
