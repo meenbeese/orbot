@@ -1,51 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="?dialogPreferredPadding">
+    android:layout_margin="8dp"
+    app:cardElevation="8dp">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Small" />
+        android:orientation="vertical"
+        android:padding="?dialogPreferredPadding">
 
-    <org.torproject.android.core.ui.NoPersonalizedLearningEditText
-        android:id="@+id/hsName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text" />
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/local_port"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Small" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <org.torproject.android.core.ui.NoPersonalizedLearningEditText
-        android:id="@+id/hsLocalPort"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:digits="0123456789"
-        android:ems="10"
-        android:inputType="number"
-        android:maxLength="5" />
+            <org.torproject.android.core.ui.NoPersonalizedLearningEditText
+                android:id="@+id/hsName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/onion_port"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Small" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <org.torproject.android.core.ui.NoPersonalizedLearningEditText
-        android:id="@+id/hsOnionPort"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:digits="0123456789"
-        android:ems="10"
-        android:inputType="number"
-        android:maxLength="5" />
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/local_port" />
 
-</LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <org.torproject.android.core.ui.NoPersonalizedLearningEditText
+                android:id="@+id/hsLocalPort"
+                android:digits="0123456789"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/onion_port" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <org.torproject.android.core.ui.NoPersonalizedLearningEditText
+                android:id="@+id/hsOnionPort"
+                android:digits="0123456789"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
