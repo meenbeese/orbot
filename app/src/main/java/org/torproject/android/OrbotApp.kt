@@ -4,11 +4,10 @@ import android.app.Application
 import android.content.res.Configuration
 import org.torproject.android.core.Languages
 import org.torproject.android.core.LocaleHelper
-import org.torproject.android.service.OrbotConstants
 import org.torproject.android.service.util.Prefs
 import java.util.Locale
 
-class OrbotApp : Application(), OrbotConstants {
+class OrbotApp : Application() {
 
     override fun onCreate() {
         super.onCreate()

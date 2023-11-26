@@ -3,6 +3,8 @@
 
 package org.torproject.android.ui;
 
+import static org.torproject.android.service.OrbotConstants.*;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -33,7 +35,6 @@ import androidx.core.content.ContextCompat;
 
 import org.torproject.android.BuildConfig;
 import org.torproject.android.R;
-import org.torproject.android.service.OrbotConstants;
 import org.torproject.android.service.util.Prefs;
 import org.torproject.android.service.vpn.TorifiedApp;
 
@@ -45,7 +46,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class AppManagerActivity extends AppCompatActivity implements OnClickListener, OrbotConstants {
+public class AppManagerActivity extends AppCompatActivity implements OnClickListener {
 
 
     class TorifiedAppWrapper {

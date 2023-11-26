@@ -16,6 +16,8 @@
 
 package org.torproject.android.service.vpn;
 
+import static org.torproject.android.service.OrbotConstants.*;
+
 import android.annotation.TargetApi;
 import android.app.Service;
 import android.content.Intent;
@@ -61,7 +63,7 @@ import androidx.annotation.ChecksSdkIntAtLeast;
 import IPtProxy.IPtProxy;
 import IPtProxy.PacketFlow;
 
-public class OrbotVpnManager implements Handler.Callback, OrbotConstants {
+public class OrbotVpnManager implements Handler.Callback {
     private static final String TAG = "OrbotVpnService";
     @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.LOLLIPOP)
     private final static boolean mIsLollipop = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
@@ -111,9 +113,9 @@ public class OrbotVpnManager implements Handler.Callback, OrbotConstants {
                 } else if (action.equals(OrbotConstants.LOCAL_ACTION_PORTS)) {
                     Log.d(TAG, "setting VPN ports");
 
-                    int torSocks = intent.getIntExtra(OrbotService.EXTRA_SOCKS_PROXY_PORT, -1);
-                    int torHttp = intent.getIntExtra(OrbotService.EXTRA_HTTP_PROXY_PORT,-1);
-                    int torDns = intent.getIntExtra(OrbotService.EXTRA_DNS_PORT, -1);
+                    int torSocks = intent.getIntExtra(EXTRA_SOCKS_PROXY_PORT, -1);
+                    int torHttp = intent.getIntExtra(EXTRA_HTTP_PROXY_PORT,-1);
+                    int torDns = intent.getIntExtra(EXTRA_DNS_PORT, -1);
 
                     //if running, we need to restart
                     if ((torSocks != -1 && torSocks != mTorSocks
