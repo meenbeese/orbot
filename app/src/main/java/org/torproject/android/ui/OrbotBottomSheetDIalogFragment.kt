@@ -8,6 +8,7 @@ import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
@@ -26,12 +27,16 @@ open class OrbotBottomSheetDialogFragment : BottomSheetDialogFragment() {
     private var backPressed = false
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
             val dialog = object : BottomSheetDialog(requireActivity(), theme) {
-                override fun onBackPressed() {
-                    super.onBackPressed()
-                    backPressed = true
+                init {
+                    setOnKeyListener { _, keyCode, event ->
+                        if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP) {
+                            backPressed = true
+                        }
+                        false
+                    }
                 }
             }
-            dialog.setOnShowListener {setupRatio(dialog)}
+            dialog.setOnShowListener { setupRatio(dialog) }
             return dialog
     }
 
