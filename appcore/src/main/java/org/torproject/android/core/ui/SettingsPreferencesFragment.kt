@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.annotation.XmlRes
 import androidx.preference.*
+
 import org.torproject.android.core.Languages
 import org.torproject.android.core.R
 import org.torproject.android.service.util.Prefs
@@ -21,8 +22,8 @@ class SettingsPreferencesFragment : PreferenceFragmentCompat() {
 
         prefLocale = findPreference("pref_default_locale")
         val languages = Languages[requireActivity()]
-        prefLocale?.entries = languages!!.allNames
-        prefLocale?.entryValues = languages.supportedLocales
+        prefLocale?.entries = languages?.allNames
+        prefLocale?.entryValues = languages?.supportedLocales
         prefLocale?.value = Prefs.getDefaultLocale()
         prefLocale?.onPreferenceChangeListener =
             Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
@@ -51,21 +52,17 @@ class SettingsPreferencesFragment : PreferenceFragmentCompat() {
             }
         }
 
-        val prefFlagSecure = findPreference<CheckBoxPreference>("pref_flag_secure")
+        val prefFlagSecure = findPreference<SwitchPreferenceCompat>("pref_flag_secure")
         prefFlagSecure?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
 
             Prefs.setSecureWindow(newValue as Boolean)
-            (activity as BaseActivity)?.resetSecureFlags()
+            (activity as BaseActivity).resetSecureFlags()
 
             true
         }
-
-
-
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-
         setPreferencesFromResource(R.xml.preferences, rootKey)
         initPrefs()
     }

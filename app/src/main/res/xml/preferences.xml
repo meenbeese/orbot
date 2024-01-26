@@ -13,7 +13,7 @@
             app:iconSpaceReserved="false"
             />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:enabled="true"
             android:key="pref_start_boot"
@@ -22,8 +22,7 @@
             app:iconSpaceReserved="false"
             />
 
-
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="pref_allow_background_starts"
             android:summary="@string/pref_allow_background_starts_summary"
@@ -31,7 +30,7 @@
             app:iconSpaceReserved="false"
             />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="pref_open_proxy_on_all_interfaces"
             android:summary="@string/pref_open_proxy_on_all_interfaces_summary"
@@ -39,7 +38,7 @@
             app:iconSpaceReserved="false"
             />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:key="pref_power_user"
             android:defaultValue="false"
             android:summary="@string/power_user_description"
@@ -47,7 +46,7 @@
             app:iconSpaceReserved="false"
             />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:key="pref_flag_secure"
             android:defaultValue="true"
             android:summary="@string/pref_flag_secure_summary"
@@ -94,7 +93,7 @@
             app:iconSpaceReserved="false"
             />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="pref_strict_nodes"
             android:summary="@string/strict_nodes_description"
@@ -108,7 +107,7 @@
 
         app:iconSpaceReserved="false"
         >
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:enabled="true"
             android:key="pref_or"
@@ -142,7 +141,7 @@
 
         app:iconSpaceReserved="false"
         >
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:enabled="true"
             android:key="pref_reachable_addresses"
@@ -165,7 +164,7 @@
 
         app:iconSpaceReserved="false"
         >
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:enabled="true"
             android:key="pref_isolate_dest"
@@ -173,7 +172,7 @@
             android:title="@string/pref_isolate_dest"
             app:iconSpaceReserved="false"
             />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:enabled="true"
             android:key="pref_isolate_port"
@@ -181,7 +180,7 @@
             android:title="@string/pref_isolate_port"
             app:iconSpaceReserved="false"
             />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:enabled="true"
             android:key="pref_isolate_protocol"
@@ -189,7 +188,7 @@
             android:title="@string/pref_isolate_protocol"
             app:iconSpaceReserved="false"
             />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:enabled="true"
             android:key="pref_prefer_ipv6"
@@ -197,7 +196,7 @@
             android:title="@string/pref_prefer_ipv6"
             app:iconSpaceReserved="false"
             />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:enabled="true"
             android:key="pref_disable_ipv4"
@@ -212,7 +211,7 @@
 
         app:iconSpaceReserved="false"
         >
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:enabled="true"
             android:key="pref_connection_padding"
@@ -220,7 +219,7 @@
             android:title="@string/pref_connection_padding"
             app:iconSpaceReserved="false"
             />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:enabled="true"
             android:key="pref_reduced_connection_padding"
@@ -228,7 +227,7 @@
             android:title="@string/pref_reduced_connection_padding"
             app:iconSpaceReserved="false"
             />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:enabled="true"
             android:key="pref_circuit_padding"
@@ -236,7 +235,7 @@
             android:title="@string/pref_circuit_padding"
             app:iconSpaceReserved="false"
             />
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:enabled="true"
             android:key="pref_reduced_circuit_padding"
@@ -343,7 +342,7 @@
             />
 
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:enabled="true"
             android:key="pref_enable_logging"
@@ -353,7 +352,7 @@
             />
 
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:enabled="true"
             android:key="pref_disable_network"
@@ -367,7 +366,7 @@
         app:iconSpaceReserved="false"
         >
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="pref_show_snowflake_proxy_msg"
             android:title="@string/snowflake_proxy_msg_title"
