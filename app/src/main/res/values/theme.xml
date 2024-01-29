@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <style name="DefaultTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="DefaultTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/new_background_secondary</item>
     </style>
 
