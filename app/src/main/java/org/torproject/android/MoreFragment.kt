@@ -74,7 +74,7 @@ class MoreFragment : Fragment() {
         lvMore = view.findViewById(R.id.lvMoreActions)
 
         val listItems =
-            arrayListOf(OrbotMenuAction(R.string.v3_hosted_services, R.drawable.ic_menu_onion) {
+            arrayListOf(OrbotMenuAction(R.string.v3_hosted_services, R.drawable.ic_hosted_services) {
                 startActivity(Intent(requireActivity(), OnionServiceActivity::class.java))
             },
                 OrbotMenuAction(
