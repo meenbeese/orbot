@@ -4,11 +4,13 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.EditText
 
@@ -67,14 +69,29 @@ open class OrbotBottomSheetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun getHeight(): Int {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) return getHeightLegacy()
+
+        val windowManager = requireActivity().getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val windowMetrics = windowManager.currentWindowMetrics
+        val windowInsets = windowMetrics.windowInsets
+
+        val insets = windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
+        val insetsWidth = insets.right + insets.left
+        val insetsHeight = insets.top + insets.bottom
+
+        val bounds = windowMetrics.bounds
+        val legacySize = Point(bounds.width() - insetsWidth, bounds.height() - insetsHeight)
+        val heightPercent = if (legacySize.y > 2000) 55 else 65
+
+        return legacySize.y * heightPercent / 100
+    }
+
+    // Should be deleted once minSdkVersion is >= 30
+    private fun getHeightLegacy(): Int {
         val windowManager = requireActivity().getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val displayMetrics = DisplayMetrics()
-        val display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            requireActivity().display
-        } else {
-            @Suppress("DEPRECATION")
-            windowManager.defaultDisplay
-        }
+        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val display = windowManager.defaultDisplay
         display?.getRealMetrics(displayMetrics)
         val heightPercent = if (displayMetrics.heightPixels > 2000) 50 else 65
         return displayMetrics.heightPixels * heightPercent / 100
