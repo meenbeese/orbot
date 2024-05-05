@@ -62,11 +62,11 @@ open class OrbotBottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun getHeight() : Int{
-        // todo handle bigger device heights
+    private fun getHeight(): Int {
         val displayMetrics = DisplayMetrics()
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
-        return displayMetrics.heightPixels * 65 / 100
+        val heightPercent = if (displayMetrics.heightPixels > 2000) 50 else 65
+        return displayMetrics.heightPixels * heightPercent / 100
     }
 
     @SuppressLint("ClickableViewAccessibility")
