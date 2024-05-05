@@ -2,12 +2,16 @@ package org.torproject.android
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
+import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowManager
 import android.widget.EditText
+
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -63,8 +67,15 @@ open class OrbotBottomSheetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun getHeight(): Int {
+        val windowManager = requireActivity().getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val displayMetrics = DisplayMetrics()
-        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            requireActivity().display
+        } else {
+            @Suppress("DEPRECATION")
+            windowManager.defaultDisplay
+        }
+        display?.getRealMetrics(displayMetrics)
         val heightPercent = if (displayMetrics.heightPixels > 2000) 50 else 65
         return displayMetrics.heightPixels * heightPercent / 100
     }
