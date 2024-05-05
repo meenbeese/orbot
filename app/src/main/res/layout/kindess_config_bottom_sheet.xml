@@ -47,7 +47,7 @@
             android:textColor="@android:color/white"
 
             />
-        <androidx.appcompat.widget.SwitchCompat
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/swKindnessConfigWifi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,8 +55,7 @@
             app:showText="false"
             android:textSize="24sp"
             android:padding="@dimen/activity_horizontal_margin"
-            android:textColor="@android:color/white"
-            />
+            android:textColor="@android:color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -80,7 +79,7 @@
             android:textColor="@android:color/white"
 
             />
-        <androidx.appcompat.widget.SwitchCompat
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/swKindnessConfigCharging"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,9 +87,7 @@
             app:showText="false"
             android:textSize="24sp"
             android:padding="@dimen/activity_horizontal_margin"
-            android:textColor="@android:color/white"
-
-            />
+            android:textColor="@android:color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

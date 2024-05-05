@@ -11,7 +11,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.SwitchCompat;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import org.torproject.android.R;
 
@@ -46,7 +46,7 @@ public class OnionV3ListAdapter extends CursorAdapter {
         TextView domain = view.findViewById(R.id.hs_onion);
         domain.setText(cursor.getString(cursor.getColumnIndex(OnionServiceContentProvider.OnionService.DOMAIN)));
 
-        SwitchCompat enabled = view.findViewById(R.id.hs_switch);
+        SwitchMaterial enabled = view.findViewById(R.id.hs_switch);
         enabled.setChecked(cursor.getInt(cursor.getColumnIndex(OnionServiceContentProvider.OnionService.ENABLED)) == 1);
         enabled.setOnCheckedChangeListener((buttonView, isChecked) -> {
             ContentResolver resolver = context.getContentResolver();

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.appcompat.widget.SwitchCompat
+
+import com.google.android.material.switchmaterial.SwitchMaterial
+
 import org.torproject.android.service.util.Prefs
 
 class KindessConfigBottomSheet : OrbotBottomSheetDialogFragment() {
@@ -19,8 +21,8 @@ class KindessConfigBottomSheet : OrbotBottomSheetDialogFragment() {
         v.findViewById<View>(R.id.tvCancel).setOnClickListener { dismiss() }
         btnAction = v.findViewById(R.id.btnAction)
 
-        val configWifi = v.findViewById<SwitchCompat>(R.id.swKindnessConfigWifi)
-        val configCharging = v.findViewById<SwitchCompat>(R.id.swKindnessConfigCharging)
+        val configWifi = v.findViewById<SwitchMaterial>(R.id.swKindnessConfigWifi)
+        val configCharging = v.findViewById<SwitchMaterial>(R.id.swKindnessConfigCharging)
 
         btnAction.setOnClickListener {
 

@@ -11,7 +11,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.SwitchCompat;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import org.torproject.android.R;
 
@@ -35,7 +35,7 @@ public class ClientAuthListAdapter extends CursorAdapter {
         TextView domain = view.findViewById(R.id.cookie_onion);
         String url = cursor.getString(cursor.getColumnIndex(ClientAuthContentProvider.V3ClientAuth.DOMAIN)) + ".onion";
         domain.setText(url);
-        SwitchCompat enabled = view.findViewById(R.id.cookie_switch);
+        SwitchMaterial enabled = view.findViewById(R.id.cookie_switch);
         enabled.setChecked(cursor.getInt(cursor.getColumnIndex(ClientAuthContentProvider.V3ClientAuth.ENABLED)) == 1);
         enabled.setOnCheckedChangeListener((buttonView, isChecked) -> {
             ContentResolver resolver = context.getContentResolver();
