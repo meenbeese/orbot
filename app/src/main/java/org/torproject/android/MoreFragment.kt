@@ -11,8 +11,10 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+
 import org.torproject.android.OrbotActivity.Companion.REQUEST_CODE_SETTINGS
 import org.torproject.android.OrbotActivity.Companion.REQUEST_VPN_APP_SELECT
+import org.torproject.android.core.getPackageInfoCompat
 import org.torproject.android.core.putNotSystem
 import org.torproject.android.core.ui.SettingsActivity
 import org.torproject.android.service.OrbotConstants
@@ -56,8 +58,7 @@ class MoreFragment : Fragment() {
         sb.append("\n\n")
 
         val manager = requireActivity().packageManager
-        val info =
-            manager.getPackageInfo(requireActivity().packageName, PackageManager.GET_ACTIVITIES)
+        val info = manager.getPackageInfoCompat(requireActivity().packageName, PackageManager.GET_ACTIVITIES)
         sb.append(getString(R.string.app_name)).append(" ").append(info.versionName).append("\n")
         sb.append("Tor v").append(getTorVersion())
 

@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import org.torproject.android.R
+import org.torproject.android.core.getPackageInfoCompat
 import org.torproject.android.service.OrbotConstants
 import org.torproject.android.service.util.Prefs
 import org.torproject.android.service.util.Utils
@@ -83,7 +84,7 @@ class OrbotMenuActionAdapter(context: Context, list: ArrayList<OrbotMenuAction>)
 
                 if (tordApp.isNotEmpty()) {
                     try {
-                        packageManager.getPackageInfo(tordApp, 0)
+                        packageManager.getPackageInfoCompat(tordApp, 0)
                         val iv = ImageView(context)
                         val applicationInfo = packageManager.getApplicationInfo(tordApp, 0)
                         iv.setImageDrawable(packageManager.getApplicationIcon(tordApp))

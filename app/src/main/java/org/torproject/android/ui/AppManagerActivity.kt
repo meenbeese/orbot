@@ -32,6 +32,7 @@ import kotlinx.coroutines.withContext
 
 import org.torproject.android.BuildConfig
 import org.torproject.android.R
+import org.torproject.android.core.getPackageInfoCompat
 import org.torproject.android.service.OrbotConstants
 import org.torproject.android.service.util.Prefs
 import org.torproject.android.service.vpn.TorifiedApp
@@ -312,8 +313,8 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
                 }
                 val app = TorifiedApp()
                 try {
-                    val pInfo = pMgr.getPackageInfo(aInfo.packageName, PackageManager.GET_PERMISSIONS)
-                    if (pInfo?.requestedPermissions != null) {
+                    val pInfo = pMgr.getPackageInfoCompat(aInfo.packageName, PackageManager.GET_PERMISSIONS)
+                    if (pInfo.requestedPermissions != null) {
                         for (permInfo in pInfo.requestedPermissions) {
                             if (permInfo == Manifest.permission.INTERNET) {
                                 app.setUsesInternet(true)
