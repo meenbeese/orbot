@@ -66,19 +66,14 @@
 			android:layout_margin="0dp"
 			android:src="@drawable/toroff" />
 
-		<Switch
+		<com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/btnVPN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/activate"
             android:layout_margin="9dp"
             android:layout_gravity="center"
-            app:switchPadding="3dp"
-
-            />
-
-
-
+            app:switchPadding="3dp" />
 
 			<TextView
 				android:id="@+id/trafficDown"
@@ -103,16 +98,15 @@
 				android:lines="1"
 				/>
 
-		<Switch
+		<com.google.android.material.switchmaterial.SwitchMaterial
 			android:id="@+id/btnSnowflake"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/snowflake_mode"
 			android:layout_margin="9dp"
 			android:layout_gravity="center"
-			app:switchPadding="3dp"
+			app:switchPadding="3dp" />
 
-			/>
     </LinearLayout>
 
 

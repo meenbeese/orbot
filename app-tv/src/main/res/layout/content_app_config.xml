@@ -32,14 +32,13 @@
         android:layout_below="@+id/privacy_title"
         />
 
-        <Switch
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switch_app_tor"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-
             android:layout_toRightOf="@+id/privacy_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 
@@ -64,15 +63,13 @@
             android:textSize="16dp"
             android:layout_below="@+id/off_apps_title"
             />
-        <Switch
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switch_app_data"
-
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-
             android:layout_toRightOf="@+id/off_apps_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 
@@ -98,17 +95,13 @@
             android:layout_below="@+id/wifi_title"
             />
 
-        <Switch
-
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switch_app_wifi"
-
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-
             android:layout_toRightOf="@+id/wifi_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 

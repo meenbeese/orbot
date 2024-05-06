@@ -9,7 +9,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Switch;
 import org.torproject.android.tv.R;
 import org.torproject.android.service.OrbotConstants;
 import org.torproject.android.service.util.Prefs;
@@ -17,6 +16,8 @@ import org.torproject.android.service.vpn.TorifiedApp;
 
 import static org.torproject.android.service.OrbotConstants.PREFS_KEY_TORIFIED;
 import static org.torproject.android.tv.TeeveeMainActivity.getApp;
+
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.Objects;
 
@@ -55,7 +56,7 @@ public class AppConfigActivity extends AppCompatActivity {
         boolean mAppData = mPrefs.getBoolean(pkgId + OrbotConstants.APP_DATA_KEY, false);
         boolean mAppWifi = mPrefs.getBoolean(pkgId + OrbotConstants.APP_WIFI_KEY, false);
 
-        Switch switchAppTor = findViewById(R.id.switch_app_tor);
+        SwitchMaterial switchAppTor = findViewById(R.id.switch_app_tor);
         switchAppTor.setChecked(mAppTor);
         switchAppTor.setOnCheckedChangeListener((buttonView, isChecked) -> {
             mPrefs.edit().putBoolean(pkgId + OrbotConstants.APP_TOR_KEY,isChecked).commit();
@@ -64,7 +65,7 @@ public class AppConfigActivity extends AppCompatActivity {
             setResult(RESULT_OK,response);
         });
 
-        Switch switchAppData = findViewById(R.id.switch_app_data);
+        SwitchMaterial switchAppData = findViewById(R.id.switch_app_data);
         switchAppData.setChecked(mAppData);
         switchAppData.setOnCheckedChangeListener((buttonView, isChecked) -> {
             mPrefs.edit().putBoolean(pkgId + OrbotConstants.APP_DATA_KEY,isChecked).commit();
@@ -74,7 +75,7 @@ public class AppConfigActivity extends AppCompatActivity {
         });
         switchAppData.setEnabled(false);
 
-        Switch switchAppWifi = findViewById(R.id.switch_app_wifi);
+        SwitchMaterial switchAppWifi = findViewById(R.id.switch_app_wifi);
         switchAppWifi.setChecked(mAppWifi);
         switchAppWifi.setOnCheckedChangeListener((buttonView, isChecked) -> {
             mPrefs.edit().putBoolean(pkgId + OrbotConstants.APP_WIFI_KEY,isChecked).commit();
@@ -83,9 +84,6 @@ public class AppConfigActivity extends AppCompatActivity {
             setResult(RESULT_OK,response);
         });
         switchAppWifi.setEnabled(false);
-
-
-
     }
 
     private void addApp ()

@@ -23,7 +23,7 @@
             android:name=".TeeveeMainActivity"
             android:excludeFromRecents="false"
             android:launchMode="singleTop"
-            android:theme="@style/Theme.Leanback"
+            android:theme="@style/Theme.MaterialComponents"
             android:exported="true"
             >
             <intent-filter>

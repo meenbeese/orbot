@@ -36,7 +36,6 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -44,6 +43,7 @@ import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.jetradarmobile.snowfall.SnowfallView;
@@ -95,8 +95,8 @@ public class TeeveeMainActivity extends Activity implements OrbotConstants, OnLo
     private TextView downloadText = null;
     private TextView uploadText = null;
     private TextView mTxtOrbotLog = null;
-    private Switch mBtnVPN = null;
-    private Switch mBtnSnowflake = null;
+    private SwitchMaterial mBtnVPN = null;
+    private SwitchMaterial mBtnSnowflake = null;
     /* Some tracking bits */
     private String torStatus = null; //latest status reported from the tor service
     private Intent lastStatusIntent;  // the last ACTION_STATUS Intent received
