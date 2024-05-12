@@ -40,7 +40,6 @@ configurations {
 dependencies {
     implementation(
             project(':appcore'),
-            project(':intentintegrator'),
             project(':orbotservice'),
             libs.android_material,
             libs.android_snowfall,
