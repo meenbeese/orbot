@@ -60,7 +60,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         super.onCreate(savedInstanceState)
         pMgr = packageManager
         this.setContentView(R.layout.layout_apps)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         listAppsAll = findViewById(R.id.applistview)
         progressBar = findViewById(R.id.progressBar)
 
@@ -82,14 +82,18 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_save_apps) {
-            saveAppSettings()
-            finish()
-        } else if (item.itemId == android.R.id.home) {
-            finish()
-            return true
+        return when (item.itemId) {
+            R.id.menu_save_apps -> {
+                saveAppSettings()
+                finish()
+                true
+            }
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun reloadApps() {
@@ -155,66 +159,61 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
                 if (entry == null) {
                     // Inflate a new view
                     entry = ListEntry()
-                    entry.container = convertView!!.findViewById(R.id.appContainer)
-                    entry.icon = convertView.findViewById(R.id.itemicon)
-                    entry.box = convertView.findViewById(R.id.itemcheck)
-                    entry.text = convertView.findViewById(R.id.itemtext)
-                    entry.header = convertView.findViewById(R.id.tvHeader)
-                    entry.subheader = convertView.findViewById(R.id.tvSubheader)
-                    convertView.tag = entry
+                    entry.container = convertView?.findViewById(R.id.appContainer)
+                    entry.icon = convertView?.findViewById(R.id.itemicon)
+                    entry.box = convertView?.findViewById(R.id.itemcheck)
+                    entry.text = convertView?.findViewById(R.id.itemtext)
+                    entry.header = convertView?.findViewById(R.id.tvHeader)
+                    entry.subheader = convertView?.findViewById(R.id.tvSubheader)
+                    convertView?.tag = entry
                 }
                 val taw = uiList[position]
                 if (taw.header != null) {
-                    entry.header!!.text = taw.header
-                    entry.header!!.visibility = View.VISIBLE
-                    entry.subheader!!.visibility = View.GONE
-                    entry.container!!.visibility = View.GONE
+                    entry.header?.text = taw.header
+                    entry.header?.visibility = View.VISIBLE
+                    entry.subheader?.visibility = View.GONE
+                    entry.container?.visibility = View.GONE
                 } else if (taw.subheader != null) {
-                    entry.subheader!!.visibility = View.VISIBLE
-                    entry.subheader!!.text = taw.subheader
-                    entry.container!!.visibility = View.GONE
-                    entry.header!!.visibility = View.GONE
+                    entry.subheader?.visibility = View.VISIBLE
+                    entry.subheader?.text = taw.subheader
+                    entry.container?.visibility = View.GONE
+                    entry.header?.visibility = View.GONE
                 } else {
                     val app = taw.app
-                    entry.header!!.visibility = View.GONE
-                    entry.subheader!!.visibility = View.GONE
-                    entry.container!!.visibility = View.VISIBLE
-                    if (entry.icon != null) {
+                    entry.header?.visibility = View.GONE
+                    entry.subheader?.visibility = View.GONE
+                    entry.container?.visibility = View.VISIBLE
+                    entry.icon?.let { icon ->
                         try {
-                            entry.icon!!.setImageDrawable(pMgr!!.getApplicationIcon(app!!.packageName))
-                            entry.icon!!.tag = entry.box
-                            entry.icon!!.setOnClickListener(this@AppManagerActivity)
+                            app?.let {
+                                icon.setImageDrawable(pMgr?.getApplicationIcon(it.packageName))
+                                icon.tag = entry.box
+                                icon.setOnClickListener(this@AppManagerActivity)
+                            }
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
                     }
-                    if (entry.text != null) {
-                        entry.text!!.text = app!!.name
-                        entry.text!!.tag = entry.box
-                        entry.text!!.setOnClickListener(this@AppManagerActivity)
-                    }
-                    if (entry.box != null) {
-                        entry.box!!.isChecked = app!!.isTorified
-                        entry.box!!.tag = app
-                        entry.box!!.setOnClickListener(this@AppManagerActivity)
-                    }
-                }
-                convertView!!.onFocusChangeListener =
-                    OnFocusChangeListener { v: View, hasFocus: Boolean ->
-                        if (hasFocus) v.setBackgroundColor(
-                            ContextCompat.getColor(
-                                context, R.color.dark_purple
-                            )
-                        ) else {
-                            v.setBackgroundColor(
-                                ContextCompat.getColor(
-                                    context,
-                                    android.R.color.transparent
-                                )
-                            )
+                    entry.text?.let { text ->
+                        app?.let {
+                            text.text = it.name
+                            text.tag = entry.box
+                            text.setOnClickListener(this@AppManagerActivity)
                         }
                     }
-                return convertView
+                    entry.box?.let { box ->
+                        app?.let {
+                            box.isChecked = it.isTorified
+                            box.tag = it
+                            box.setOnClickListener(this@AppManagerActivity)
+                        }
+                    }
+                }
+                convertView?.onFocusChangeListener = OnFocusChangeListener { v: View, hasFocus: Boolean ->
+                    val color = if (hasFocus) R.color.dark_purple else android.R.color.transparent
+                    v.setBackgroundColor(ContextCompat.getColor(context, color))
+                }
+                return convertView!!
             }
         }
     }
@@ -222,34 +221,39 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     private fun saveAppSettings() {
         val tordApps = StringBuilder()
         val response = Intent()
-        for (tApp in allApps!!) {
-            if (tApp.isTorified) {
-                tordApps.append(tApp.packageName)
-                tordApps.append("|")
-                response.putExtra(tApp.packageName, true)
+
+        allApps?.let { apps ->
+            apps.filter { it.isTorified }.forEach { app ->
+                tordApps.append(app.packageName).append("|")
+                response.putExtra(app.packageName, true)
             }
         }
-        for (tApp in suggestedApps!!) {
-            if (tApp.isTorified) {
-                tordApps.append(tApp.packageName)
-                tordApps.append("|")
-                response.putExtra(tApp.packageName, true)
+        suggestedApps?.let { apps ->
+            apps.filter { it.isTorified }.forEach { app ->
+                tordApps.append(app.packageName).append("|")
+                response.putExtra(app.packageName, true)
             }
         }
-        val edit = mPrefs!!.edit()
-        edit.putString(OrbotConstants.PREFS_KEY_TORIFIED, tordApps.toString())
-        edit.apply()
+        mPrefs?.edit()?.apply {
+            putString(OrbotConstants.PREFS_KEY_TORIFIED, tordApps.toString())
+            apply()
+        }
+
         setResult(RESULT_OK, response)
     }
 
     override fun onClick(v: View) {
-        var cbox: CheckBox? = null
-        if (v is CheckBox) cbox = v else if (v.tag is CheckBox) cbox =
-            v.tag as CheckBox else if (v.tag is ListEntry) cbox = (v.tag as ListEntry).box
-        if (cbox != null) {
-            val app = cbox.tag as TorifiedApp
-            app.isTorified = !app.isTorified
-            cbox.isChecked = app.isTorified
+        val cbox = when {
+            v is CheckBox -> v
+            v.tag is CheckBox -> v.tag as? CheckBox
+            v.tag is ListEntry -> (v.tag as? ListEntry)?.box
+            else -> null
+        }
+        cbox?.let { box ->
+            (box.tag as? TorifiedApp)?.let { app ->
+                app.isTorified = !app.isTorified
+                box.isChecked = app.isTorified
+            }
         }
     }
 
