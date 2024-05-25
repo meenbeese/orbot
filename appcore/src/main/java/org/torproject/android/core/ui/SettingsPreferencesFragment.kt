@@ -7,8 +7,14 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
+
 import androidx.annotation.XmlRes
-import androidx.preference.*
+import androidx.preference.EditTextPreference
+import androidx.preference.ListPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreferenceCompat
 
 import org.torproject.android.core.Languages
 import org.torproject.android.core.R
@@ -25,15 +31,14 @@ class SettingsPreferencesFragment : PreferenceFragmentCompat() {
         prefLocale?.entries = languages?.allNames
         prefLocale?.entryValues = languages?.supportedLocales
         prefLocale?.value = Prefs.getDefaultLocale()
-        prefLocale?.onPreferenceChangeListener =
-            Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
-                val language = newValue as String?
-                val intentResult = Intent()
-                intentResult.putExtra("locale", language)
-                requireActivity().setResult(RESULT_OK, intentResult)
-                requireActivity().finish()
-                false
-            }
+        prefLocale?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
+            val language = newValue as String?
+            val intentResult = Intent()
+            intentResult.putExtra("locale", language)
+            requireActivity().setResult(RESULT_OK, intentResult)
+            requireActivity().finish()
+            false
+        }
 
         val bridgesEnabled = Prefs.bridgesEnabled()
         findPreference<Preference>("pref_be_a_snowflake")?.isEnabled = !bridgesEnabled
@@ -68,9 +73,7 @@ class SettingsPreferencesFragment : PreferenceFragmentCompat() {
     }
 
     private fun setNoPersonalizedLearningOnEditTextPreferences() {
-        val preferenceScreen = preferenceScreen
-        val categoryCount = preferenceScreen.preferenceCount
-        for (i in 0 until categoryCount) {
+        for (i in 0 until preferenceScreen.preferenceCount) {
             var p = preferenceScreen.getPreference(i)
             if (p is PreferenceCategory) {
                 val pc = p
@@ -91,9 +94,10 @@ class SettingsPreferencesFragment : PreferenceFragmentCompat() {
         private const val BUNDLE_KEY_PREFERENCES_XML = "prefxml"
 
         @JvmStatic
-        fun createIntent(context: Context?, @XmlRes xmlPrefId: Int): Intent =
-                Intent(context, SettingsPreferencesFragment::class.java).apply {
-                    putExtra(BUNDLE_KEY_PREFERENCES_XML, xmlPrefId)
-                }
+        fun createIntent(context: Context?, @XmlRes xmlPrefId: Int): Intent {
+            return Intent(context, SettingsPreferencesFragment::class.java).apply {
+                putExtra(BUNDLE_KEY_PREFERENCES_XML, xmlPrefId)
+            }
+        }
     }
 }
