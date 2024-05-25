@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="DefaultTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="DefaultTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-    <style name="DefaultTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="DefaultTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
     <style name="BottomSheetTextView" parent="android:Widget.TextView">
         <item name="android:textColor">@android:color/white</item>
