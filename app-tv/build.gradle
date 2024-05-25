@@ -1,5 +1,6 @@
 apply from: '../dependencies.gradle'
 apply from: '../commons-device.gradle'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     defaultConfig {
@@ -29,6 +30,10 @@ android {
         }
     }
     namespace 'org.torproject.android.tv'
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
 }
 
 configurations {
@@ -44,6 +49,7 @@ dependencies {
             project(':orbotservice'),
             libs.android_material,
             libs.android_snowfall,
+            libs.androidx_core,
             libs.androidx_constraint,
             libs.androidx_coordinator,
             libs.androidx_leanback_core,
@@ -54,5 +60,6 @@ dependencies {
             libs.androidx_recyclerview,
             libs.apl_appintro
     )
+    implementation 'androidx.core:core-ktx:1.13.1'
     androidTestImplementation libs.fastlane_screengrab
 }
