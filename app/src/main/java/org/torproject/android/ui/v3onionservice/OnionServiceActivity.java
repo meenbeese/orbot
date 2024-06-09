@@ -16,14 +16,16 @@ import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.torproject.android.R;
 import org.torproject.android.core.DiskUtils;
 import org.torproject.android.core.LocaleHelper;
+
+import java.util.Objects;
 
 public class OnionServiceActivity extends AppCompatActivity {
 
@@ -43,9 +45,10 @@ public class OnionServiceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hosted_services);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         mLayoutRoot = findViewById(R.id.hostedServiceCoordinatorLayout);
         fab = findViewById(R.id.fab);

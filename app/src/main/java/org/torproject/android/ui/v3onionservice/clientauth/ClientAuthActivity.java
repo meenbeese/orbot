@@ -19,6 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.appbar.MaterialToolbar;
+
 import org.torproject.android.R;
 import org.torproject.android.core.DiskUtils;
 import org.torproject.android.core.LocaleHelper;
@@ -45,8 +47,10 @@ public class ClientAuthActivity extends AppCompatActivity {
         setContentView(R.layout.activity_v3auth);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
-        setSupportActionBar(findViewById(R.id.toolbar));
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         mResolver = getContentResolver();
         mAdapter = new ClientAuthListAdapter(this, mResolver.query(ClientAuthContentProvider.CONTENT_URI, ClientAuthContentProvider.PROJECTION, null, null, null));

@@ -19,8 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -36,6 +36,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class CustomBridgesActivity extends AppCompatActivity implements TextWatcher {
 
@@ -51,8 +52,10 @@ public class CustomBridgesActivity extends AppCompatActivity implements TextWatc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_bridges);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

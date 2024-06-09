@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,6 +16,8 @@ import org.torproject.android.service.vpn.TorifiedApp;
 
 import static org.torproject.android.service.OrbotConstants.PREFS_KEY_TORIFIED;
 import static org.torproject.android.tv.TeeveeMainActivity.getApp;
+
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.Objects;
 
@@ -30,10 +31,11 @@ public class AppConfigActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_config);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         final String pkgId = getIntent().getStringExtra(Intent.EXTRA_PACKAGE_NAME);
 
