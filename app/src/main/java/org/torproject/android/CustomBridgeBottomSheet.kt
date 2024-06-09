@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
+
+import com.google.android.material.button.MaterialButton
+
 import org.torproject.android.service.util.Prefs
 
 class CustomBridgeBottomSheet(private val callbacks: ConnectionHelperCallbacks) :
@@ -15,7 +17,7 @@ class CustomBridgeBottomSheet(private val callbacks: ConnectionHelperCallbacks) 
         private const val bridgeStatement = "obfs4"
     }
 
-    private lateinit var btnAction: Button
+    private lateinit var btnAction: MaterialButton
     private lateinit var etBridges: EditText
 
     override fun onCreateView(

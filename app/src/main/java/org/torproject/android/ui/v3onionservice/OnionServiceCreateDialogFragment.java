@@ -9,13 +9,14 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.button.MaterialButton;
 
 import org.torproject.android.R;
 
@@ -58,7 +59,7 @@ public class OnionServiceCreateDialogFragment extends DialogFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                Button btn = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                MaterialButton btn = (MaterialButton) alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
                 try {
                     int localPort = Integer.parseInt(etLocalPort.getText().toString());
                     int onionPort = Integer.parseInt(etOnionPort.getText().toString());

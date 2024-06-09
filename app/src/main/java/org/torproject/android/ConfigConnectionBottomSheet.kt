@@ -1,6 +1,7 @@
 package org.torproject.android
 
 import IPtProxy.IPtProxy
+
 import android.content.Context
 import android.os.Bundle
 import android.telephony.TelephonyManager
@@ -8,16 +9,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.CompoundButton
 import android.widget.RadioButton
 import android.widget.Toast
+
 import androidx.appcompat.content.res.AppCompatResources
+
+import com.google.android.material.button.MaterialButton
+
 import org.torproject.android.circumvention.Bridges
 import org.torproject.android.circumvention.CircumventionApiManager
 import org.torproject.android.circumvention.SettingsRequest
 import org.torproject.android.service.OrbotService
 import org.torproject.android.service.util.Prefs
+
 import java.io.File
 import java.net.Authenticator
 import java.net.PasswordAuthentication
@@ -35,8 +40,8 @@ class ConfigConnectionBottomSheet() :
     private lateinit var rbRequestBridge: RadioButton
     private lateinit var rbCustom: RadioButton
 
-    private lateinit var btnAction: Button
-    private lateinit var btnAskTor: Button
+    private lateinit var btnAction: MaterialButton
+    private lateinit var btnAskTor: MaterialButton
 
     companion object {
         public fun newInstance(callbacks: ConnectionHelperCallbacks): ConfigConnectionBottomSheet {

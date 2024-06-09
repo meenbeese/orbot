@@ -2,14 +2,17 @@ package org.torproject.android
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
+
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+
+import com.google.android.material.button.MaterialButton
+
 import org.torproject.android.core.putNotSystem
 import org.torproject.android.service.OrbotConstants
 import org.torproject.android.service.OrbotService
@@ -20,7 +23,7 @@ class KindnessFragment : Fragment() {
     private lateinit var tvAllTimeTotal: TextView
     private lateinit var tvWeeklyTotal: TextView
     private lateinit var swVolunteerMode: SwitchCompat
-    private lateinit var btnActionActivate: Button
+    private lateinit var btnActionActivate: MaterialButton
     private lateinit var pnlActivate: View
     private lateinit var pnlStatus: View
 

@@ -38,7 +38,7 @@
                 android:layout_margin="12dp"
                 android:text="@string/in_a_browser" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btCopyUrl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,14 +69,14 @@
                 android:layout_margin="12dp"
                 android:text="@string/use_qr_code" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btScanQr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
                 android:text="@string/menu_scan" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btShareQr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                 android:layout_margin="12dp"
                 android:text="@string/get_bridges_email" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

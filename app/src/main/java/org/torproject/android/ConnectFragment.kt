@@ -21,6 +21,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
+import com.google.android.material.button.MaterialButton
+
 import net.freehaven.tor.control.TorControlCommands
 
 import org.torproject.android.core.NetworkUtils.isNetworkAvailable
@@ -40,7 +42,7 @@ class ConnectFragment : Fragment(), ConnectionHelperCallbacks,
     private lateinit var tvTitle: TextView
     private lateinit var tvSubtitle: TextView
     private lateinit var tvConfigure: TextView
-    private lateinit var btnStartVpn: Button
+    private lateinit var btnStartVpn: MaterialButton
     private lateinit var ivOnion: ImageView
     private lateinit var ivOnionShadow: ImageView
     lateinit var progressBar: ProgressBar
