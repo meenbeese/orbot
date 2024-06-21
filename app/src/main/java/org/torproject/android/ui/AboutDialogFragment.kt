@@ -1,6 +1,5 @@
 package org.torproject.android.ui
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.text.Html
@@ -11,22 +10,16 @@ import androidx.fragment.app.DialogFragment
 
 import org.torproject.android.R
 import org.torproject.android.BuildConfig
-import org.torproject.android.core.DiskUtils
+import org.torproject.android.core.DiskUtils.readFileFromAssets
 import org.torproject.android.service.OrbotService
 
 import java.io.IOException
 
 import IPtProxy.IPtProxy
 
-class AboutDialogFragment : DialogFragment() {
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-    companion object {
-        const val TAG = "AboutDialogFragment"
-        const val VERSION = "${BuildConfig.VERSION_NAME} (Tor ${OrbotService.BINARY_TOR_VERSION})"
-        private const val BUNDLE_KEY_TV_ABOUT_TEXT = "about_tv_txt"
-        private const val ABOUT_LICENSE_EQUALSIGN =
-            "==============================================================================="
-    }
+class AboutDialogFragment : DialogFragment() {
 
     private lateinit var tvAbout: TextView
 
@@ -36,7 +29,7 @@ class AboutDialogFragment : DialogFragment() {
         val versionName = view?.findViewById<TextView>(R.id.versionName)
         versionName?.text = VERSION
 
-        tvAbout = view?.findViewById(R.id.aboutother) as TextView
+        tvAbout = view?.findViewById(R.id.aboutOther)!!
 
         val tvObfs4 = view.findViewById<TextView>(R.id.tvObfs4)
         tvObfs4.text = getString(R.string.obfs4_url, IPtProxy.lyrebirdVersion())
@@ -53,17 +46,17 @@ class AboutDialogFragment : DialogFragment() {
 
         if (buildAboutText) {
             try {
-                var aboutText = DiskUtils.readFileFromAssets("LICENSE", requireContext())
-                aboutText =
-                    aboutText.replace(ABOUT_LICENSE_EQUALSIGN, "\n").replace("\n\n", "<br/><br/>")
-                        .replace("\n", "")
+                val aboutText = readFileFromAssets("LICENSE", requireContext())
+                    .replace(ABOUT_LICENSE_EQUALSIGN, "\n")
+                    .replace("\n\n", "<br/><br/>")
+                    .replace("\n", "")
                 tvAbout.text = Html.fromHtml(aboutText, Html.FROM_HTML_MODE_LEGACY)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
         }
 
-        return AlertDialog.Builder(context, R.style.OrbotDialogTheme)
+        return MaterialAlertDialogBuilder(requireContext(), R.style.OrbotDialogTheme)
             .setTitle(getString(R.string.button_about))
             .setView(view)
             .create()
@@ -72,5 +65,12 @@ class AboutDialogFragment : DialogFragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(BUNDLE_KEY_TV_ABOUT_TEXT, tvAbout.text.toString())
+    }
+
+    companion object {
+        const val TAG = "AboutDialogFragment"
+        const val VERSION = "${BuildConfig.VERSION_NAME} (Tor ${OrbotService.BINARY_TOR_VERSION})"
+        private const val BUNDLE_KEY_TV_ABOUT_TEXT = "about_tv_txt"
+        private const val ABOUT_LICENSE_EQUALSIGN = "==============================================================================="
     }
 }

@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15px"
+            android:paddingTop="10dp"
             android:text="@string/version"
             android:textColor="@color/bright_green"
             android:textStyle="bold" />
@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15px"
+            android:paddingTop="10dp"
             android:text="@string/project_home"
             android:textColor="@color/bright_green"
             android:textStyle="bold" />
@@ -65,7 +65,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15px"
+            android:paddingTop="10dp"
             android:text="@string/third_party_software"
             android:textColor="@color/bright_green"
             android:textStyle="bold" />
@@ -108,13 +108,13 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15px"
+            android:paddingTop="10dp"
             android:text="@string/license"
             android:textColor="@color/bright_green"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/aboutother"
+            android:id="@+id/aboutOther"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:autoLink="web"
