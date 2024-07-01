@@ -17,6 +17,8 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
 
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -121,11 +123,12 @@ class ConnectFragment : Fragment(), ConnectionHelperCallbacks,
     private fun startTorAndVpnDelay(@Suppress("SameParameterValue") ms: Long) =
         Handler(Looper.getMainLooper()).postDelayed({ startTorAndVpn() }, ms)
 
-
     fun startTorAndVpn() {
         val vpnIntent = VpnService.prepare(requireActivity())?.putNotSystem()
         if (vpnIntent != null && (!Prefs.isPowerUserMode())) {
-            startActivityForResult(vpnIntent, OrbotActivity.REQUEST_CODE_VPN)
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                onActivityResult(OrbotActivity.REQUEST_CODE_VPN, result)
+            }.launch(vpnIntent)
         } else {
             // todo we need to add a power user mode for users to start the VPN without tor
             Prefs.putUseVpn(!Prefs.isPowerUserMode())
@@ -136,29 +139,33 @@ class ConnectFragment : Fragment(), ConnectionHelperCallbacks,
     }
 
     fun refreshMenuList(context: Context) {
-        val listItems =
-            arrayListOf(OrbotMenuAction(R.string.btn_change_exit, 0) { openExitNodeDialog() },
-                OrbotMenuAction(R.string.btn_refresh, R.drawable.ic_refresh) { sendNewnymSignal() },
-                OrbotMenuAction(R.string.btn_tor_off, R.drawable.ic_power) { stopTorAndVpn() })
+        val listItems = arrayListOf(
+            OrbotMenuAction(R.string.btn_change_exit, 0) { openExitNodeDialog() },
+            OrbotMenuAction(R.string.btn_refresh, R.drawable.ic_refresh) { sendNewnymSignal() },
+            OrbotMenuAction(R.string.btn_tor_off, R.drawable.ic_power) { stopTorAndVpn() })
         if (!Prefs.isPowerUserMode()) listItems.add(0,
             OrbotMenuAction(R.string.btn_choose_apps, R.drawable.ic_choose_apps) {
-                startActivityForResult(
-                    Intent(requireActivity(), AppManagerActivity::class.java),
-                    OrbotActivity.REQUEST_VPN_APP_SELECT
-                )
+                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                    onActivityResult(OrbotActivity.REQUEST_VPN_APP_SELECT, result)
+                }.launch(Intent(requireActivity(), AppManagerActivity::class.java))
             })
         lvConnectedActions.adapter = OrbotMenuActionAdapter(context, listItems)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == OrbotActivity.REQUEST_CODE_VPN && resultCode == AppCompatActivity.RESULT_OK) {
-            startTorAndVpn()
-        } else if (requestCode == OrbotActivity.REQUEST_CODE_SETTINGS && resultCode == AppCompatActivity.RESULT_OK) {
-            // todo respond to language change extra data here...
-        } else if (requestCode == OrbotActivity.REQUEST_VPN_APP_SELECT && resultCode == AppCompatActivity.RESULT_OK) {
-            sendIntentToService(OrbotConstants.ACTION_RESTART_VPN) // is this enough todo?
-            refreshMenuList(requireContext())
+    private fun onActivityResult(requestCode: Int, result: ActivityResult) {
+        if (result.resultCode == AppCompatActivity.RESULT_OK) {
+            when (requestCode) {
+                OrbotActivity.REQUEST_CODE_VPN -> {
+                    startTorAndVpn()
+                }
+                OrbotActivity.REQUEST_CODE_SETTINGS -> {
+                    // todo respond to language change extra data here...
+                }
+                OrbotActivity.REQUEST_VPN_APP_SELECT -> {
+                    sendIntentToService(OrbotConstants.ACTION_RESTART_VPN) // is this enough todo?
+                    refreshMenuList(requireContext())
+                }
+            }
         }
     }
 
