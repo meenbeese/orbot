@@ -12,10 +12,11 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.torproject.android.R;
 import org.torproject.android.core.DiskUtils;
@@ -120,7 +121,7 @@ public class ClientAuthBackupDialogFragment extends DialogFragment {
         String domain = getArguments().getString(ClientAuthActivity.BUNDLE_KEY_DOMAIN);
         String hash = getArguments().getString(ClientAuthActivity.BUNDLE_KEY_HASH);
         String backup = v3BackupUtils.createV3AuthBackup(domain, hash, outputFile);
-        Toast.makeText(getContext(), backup != null ? R.string.backup_saved_at_external_storage : R.string.error, Toast.LENGTH_LONG).show();
+        Snackbar.make(requireView(), backup != null ? R.string.backup_saved_at_external_storage : R.string.error, Snackbar.LENGTH_LONG).show();
         dismiss();
     }
 

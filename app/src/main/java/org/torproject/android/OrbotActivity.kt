@@ -10,14 +10,17 @@ import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Bundle
-import android.widget.*
+
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.scottyab.rootbeer.RootBeer
+
 import org.torproject.android.core.LocaleHelper
 import org.torproject.android.core.putNotSystem
 import org.torproject.android.core.ui.BaseActivity
@@ -105,15 +108,14 @@ class OrbotActivity : BaseActivity() {
             val rootBeer = RootBeer(this)
             if (rootBeer.isRooted) {
                 //we found indication of root
-                val toast = Toast.makeText(
-                    applicationContext, getString(R.string.root_warning), Toast.LENGTH_LONG
+                val snackbar = Snackbar.make(
+                    bottomNavigationView, getString(R.string.root_warning), Snackbar.LENGTH_LONG
                 )
-                toast.show()
+                snackbar.show()
             } else {
                 //we didn't find indication of root
             }
         }
-
     }
 
     override fun onBackPressed() {

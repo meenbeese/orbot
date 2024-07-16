@@ -11,13 +11,15 @@ import android.os.Handler;
 import android.provider.OpenableColumns;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.torproject.android.R;
 import org.torproject.android.core.DiskUtils;
@@ -80,7 +82,7 @@ public class ClientAuthActivity extends AppCompatActivity {
                 String filename = cursor.getString(nameIndex);
                 cursor.close();
                 if (!filename.endsWith(CLIENT_AUTH_FILE_EXTENSION)) {
-                    Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show();
+                    Snackbar.make(new View(this), R.string.error, Snackbar.LENGTH_LONG).show();
                     return;
                 }
                 String authText = DiskUtils.readFileFromInputStream(getContentResolver(), uri);

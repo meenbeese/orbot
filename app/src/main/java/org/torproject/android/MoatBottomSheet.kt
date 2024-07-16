@@ -1,6 +1,7 @@
 package org.torproject.android
 
 import IPtProxy.IPtProxy
+
 import android.app.Activity
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -14,17 +15,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.material.snackbar.Snackbar
+
 import org.json.JSONException
 import org.json.JSONObject
 import org.torproject.android.service.OrbotService
 import org.torproject.android.service.util.Prefs
 import org.torproject.android.ui.onboarding.ProxiedHurlStack
+
 import java.io.File
 
 class MoatBottomSheet(private val callbacks: ConnectionHelperCallbacks) :
@@ -193,7 +198,6 @@ class MoatBottomSheet(private val callbacks: ConnectionHelperCallbacks) :
         Prefs.putConnectionPathway(Prefs.PATHWAY_CUSTOM)
         Prefs.setBridgesList(bridges)
         Prefs.putBridgesEnabled(true)
-        // Toast.makeText(requireContext(), R.string.bridges_obtained_connecting, Toast.LENGTH_LONG).show()
         callbacks.tryConnecting()
         closeAllSheets()
     }
@@ -202,7 +206,7 @@ class MoatBottomSheet(private val callbacks: ConnectionHelperCallbacks) :
         etSolution.text.clear()
         etSolution.isEnabled = true
         mBtnAction.isEnabled = true
-        Toast.makeText(requireContext(), R.string.incorrect_solution, Toast.LENGTH_LONG).show()
+        Snackbar.make(requireView(), R.string.incorrect_solution, Snackbar.LENGTH_LONG).show()
     }
 
     companion object {

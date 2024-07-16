@@ -27,7 +27,9 @@ import android.os.Message;
 import android.os.ParcelFileDescriptor;
 import android.system.OsConstants;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.pcap4j.packet.IllegalRawDataException;
 import org.pcap4j.packet.IpPacket;
@@ -150,8 +152,9 @@ public class OrbotVpnManager implements Handler.Callback, OrbotConstants {
 
     @Override
     public boolean handleMessage(Message message) {
+        View mView = new View(mService);
         if (message != null) {
-            Toast.makeText(mService, message.what, Toast.LENGTH_SHORT).show();
+            Snackbar.make(mView, message.what, Snackbar.LENGTH_SHORT).show();
         }
         return true;
     }

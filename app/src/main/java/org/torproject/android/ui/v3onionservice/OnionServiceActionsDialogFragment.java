@@ -7,11 +7,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.torproject.android.R;
 import org.torproject.android.core.ClipboardUtils;
@@ -61,7 +62,7 @@ public class OnionServiceActionsDialogFragment extends DialogFragment {
     private void doCopy(Bundle arguments, Context context) {
         String onion = arguments.getString(OnionServiceActivity.BUNDLE_KEY_DOMAIN);
         if (onion == null)
-            Toast.makeText(context, R.string.please_restart_Orbot_to_enable_the_changes, Toast.LENGTH_LONG).show();
+            Snackbar.make(requireView(), R.string.please_restart_Orbot_to_enable_the_changes, Snackbar.LENGTH_LONG).show();
         else
             ClipboardUtils.copyToClipboard("onion", onion, getString(R.string.done), context);
     }
@@ -70,7 +71,7 @@ public class OnionServiceActionsDialogFragment extends DialogFragment {
         String filename = "onion_service" + arguments.getString(OnionServiceActivity.BUNDLE_KEY_PORT) + ".zip";
         String relativePath = arguments.getString(OnionServiceActivity.BUNDLE_KEY_PATH);
         if (arguments.getString(OnionServiceActivity.BUNDLE_KEY_DOMAIN) == null) {
-            Toast.makeText(context, R.string.please_restart_Orbot_to_enable_the_changes, Toast.LENGTH_LONG).show();
+            Snackbar.make(requireView(), R.string.please_restart_Orbot_to_enable_the_changes, Snackbar.LENGTH_LONG).show();
             return;
         }
         Intent createFileIntent = DiskUtils.createWriteFileIntent(filename, "application/zip");
@@ -91,7 +92,7 @@ public class OnionServiceActionsDialogFragment extends DialogFragment {
         String relativePath = getArguments().getString(OnionServiceActivity.BUNDLE_KEY_PATH);
         V3BackupUtils v3BackupUtils = new V3BackupUtils(getContext());
         String backup = v3BackupUtils.createV3ZipBackup(relativePath, outputFile);
-        Toast.makeText(getContext(), backup != null ? R.string.backup_saved_at_external_storage : R.string.error, Toast.LENGTH_LONG).show();
+        Snackbar.make(requireView(), backup != null ? R.string.backup_saved_at_external_storage : R.string.error, Snackbar.LENGTH_LONG).show();
         dismiss();
     }
 

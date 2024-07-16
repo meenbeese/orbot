@@ -7,7 +7,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
-import android.widget.Toast;
+import android.view.View;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -129,17 +131,17 @@ public class V3BackupUtils {
 
             configFile.delete();
             if (v3Path.renameTo(new File(v3BasePath, "/v3" + port))) {
-                Toast.makeText(mContext, R.string.backup_restored, Toast.LENGTH_LONG).show();
+                Snackbar.make(new View(mContext), R.string.backup_restored, Snackbar.LENGTH_LONG).show();
             } else {
                 // collision, clean up files
                 for (File file: v3Path.listFiles())
                     file.delete();
                 v3Path.delete();
-                Toast.makeText(mContext, mContext.getString(R.string.backup_port_exist, ("" + port)), Toast.LENGTH_LONG).show();
+                Snackbar.make(new View(mContext), mContext.getString(R.string.backup_port_exist, ("" + port)), Snackbar.LENGTH_LONG).show();
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
-            Toast.makeText(mContext, R.string.error, Toast.LENGTH_LONG).show();
+            Snackbar.make(new View(mContext), R.string.error, Snackbar.LENGTH_LONG).show();
         }
     }
 
@@ -160,20 +162,20 @@ public class V3BackupUtils {
         if (new ZipUtilities(null, zipUri, mResolver).unzip(v3Path.getAbsolutePath()))
             extractConfigFromUnzippedBackupV3(backupName);
         else
-            Toast.makeText(mContext, R.string.error, Toast.LENGTH_LONG).show();
+            Snackbar.make(new View(mContext), R.string.error, Snackbar.LENGTH_LONG).show();
     }
 
     public void restoreClientAuthBackup(String authFileContents) {
         ContentValues fields = new ContentValues();
         String[] split = authFileContents.split(":");
         if (split.length != 4) {
-            Toast.makeText(mContext, R.string.error, Toast.LENGTH_LONG).show();
+            Snackbar.make(new View(mContext), R.string.error, Snackbar.LENGTH_LONG).show();
             return;
         }
         fields.put(ClientAuthContentProvider.   V3ClientAuth.DOMAIN, split[0]);
         fields.put(ClientAuthContentProvider.V3ClientAuth.HASH, split[3]);
         mResolver.insert(ClientAuthContentProvider.CONTENT_URI, fields);
-        Toast.makeText(mContext, R.string.backup_restored, Toast.LENGTH_LONG).show();
+        Snackbar.make(new View(mContext), R.string.backup_restored, Snackbar.LENGTH_LONG).show();
     }
 
 }

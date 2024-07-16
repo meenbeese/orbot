@@ -34,7 +34,7 @@ import android.os.Looper;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
 
 import net.freehaven.tor.control.TorControlCommands;
 import net.freehaven.tor.control.TorControlConnection;
@@ -75,6 +75,8 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import com.google.android.material.snackbar.Snackbar;
 
 @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
 public class OrbotService extends VpnService implements OrbotConstants {
@@ -390,13 +392,13 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 Prefs.addSnowflakeServed();
                 if (!Prefs.showSnowflakeProxyMessage()) return;
                 var message = String.format(getString(R.string.snowflake_proxy_client_connected_msg), ONION_EMOJI, ONION_EMOJI);
-                new Handler(getMainLooper()).post(() -> Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show());
+                new Handler(getMainLooper()).post(() -> Snackbar.make(new View(getApplicationContext()), message, Snackbar.LENGTH_LONG).show());
             });
             logNotice(getString(R.string.log_notice_snowflake_proxy_enabled));
 
             if (Prefs.showSnowflakeProxyMessage()) {
                 var message = getString(R.string.log_notice_snowflake_proxy_enabled);
-                new Handler(getMainLooper()).post(() -> Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show());
+                new Handler(getMainLooper()).post(() -> Snackbar.make(new View(getApplicationContext()), message, Snackbar.LENGTH_LONG).show());
             }
 
         }
@@ -466,7 +468,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
 
             if (Prefs.showSnowflakeProxyMessage()) {
                 var message = getString(R.string.log_notice_snowflake_proxy_disabled);
-                new Handler(getMainLooper()).post(() -> Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show());
+                new Handler(getMainLooper()).post(() -> Snackbar.make(new View(getApplicationContext()), message, Snackbar.LENGTH_LONG).show());
             }
 
         }
@@ -1522,7 +1524,7 @@ public class OrbotService extends VpnService implements OrbotConstants {
                 case LOCAL_ACTION_NOTIFICATION_START -> startTor();
                 case ACTION_ERROR -> {
                     if (showTorServiceErrorMsg) {
-                        Toast.makeText(context, getString(R.string.orbot_config_invalid), Toast.LENGTH_LONG).show();
+                        Snackbar.make(new View(context), getString(R.string.orbot_config_invalid), Snackbar.LENGTH_LONG).show();
                         showTorServiceErrorMsg = false;
                     }
                     stopTor();

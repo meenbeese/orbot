@@ -8,9 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 import org.torproject.android.OrbotBottomSheetDialogFragment
 import org.torproject.android.R
@@ -31,7 +31,7 @@ class LogBottomSheet : OrbotBottomSheetDialogFragment() {
             val clipboard = context?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip: ClipData = ClipData.newPlainText("log", tvLog.text)
             clipboard.setPrimaryClip(clip)
-            Toast.makeText(v.context, R.string.log_copied, Toast.LENGTH_LONG).show()
+            Snackbar.make(requireView(), R.string.log_copied, Snackbar.LENGTH_LONG).show()
         }
         return v
     }

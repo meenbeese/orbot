@@ -43,6 +43,7 @@ dependencies {
 
     implementation(
             libs.android_shell,
+            libs.android_material,
             libs.androidx_core,
             libs.androidx_localbroadcast,
             libs.pcap_core,

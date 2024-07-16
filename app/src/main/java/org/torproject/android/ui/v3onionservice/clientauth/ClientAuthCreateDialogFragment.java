@@ -10,10 +10,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.torproject.android.R;
 
@@ -68,7 +69,7 @@ public class ClientAuthCreateDialogFragment extends DialogFragment {
         fields.put(ClientAuthContentProvider.V3ClientAuth.HASH, hash);
         ContentResolver cr = context.getContentResolver();
         cr.insert(ClientAuthContentProvider.CONTENT_URI, fields);
-        Toast.makeText(context, R.string.please_restart_Orbot_to_enable_the_changes, Toast.LENGTH_LONG).show();
+        Snackbar.make(new View(context), R.string.please_restart_Orbot_to_enable_the_changes, Snackbar.LENGTH_LONG).show();
     }
 
     private String sanitizeOnionDomainTextField() {

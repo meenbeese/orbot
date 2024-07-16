@@ -9,9 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.SwitchCompat;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.torproject.android.R;
 
@@ -42,7 +43,7 @@ public class ClientAuthListAdapter extends CursorAdapter {
             ContentValues fields = new ContentValues();
             fields.put(ClientAuthContentProvider.V3ClientAuth.ENABLED, isChecked);
             resolver.update(ClientAuthContentProvider.CONTENT_URI, fields, where, null);
-            Toast.makeText(context, R.string.please_restart_Orbot_to_enable_the_changes, Toast.LENGTH_LONG).show();
+            Snackbar.make(view, R.string.please_restart_Orbot_to_enable_the_changes, Snackbar.LENGTH_LONG).show();
         });
     }
 }

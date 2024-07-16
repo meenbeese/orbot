@@ -11,11 +11,12 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.torproject.android.R;
 
@@ -91,7 +92,7 @@ public class OnionServiceCreateDialogFragment extends DialogFragment {
         fields.put(OnionServiceContentProvider.OnionService.CREATED_BY_USER, 1);
         ContentResolver cr = context.getContentResolver();
         cr.insert(OnionServiceContentProvider.CONTENT_URI, fields);
-        Toast.makeText(context, R.string.please_restart_Orbot_to_enable_the_changes, Toast.LENGTH_SHORT).show();
+        Snackbar.make(requireView(), R.string.please_restart_Orbot_to_enable_the_changes, Snackbar.LENGTH_SHORT).show();
         ((OnionServiceActivity) requireActivity()).showBatteryOptimizationsMessageIfAppropriate();
     }
 

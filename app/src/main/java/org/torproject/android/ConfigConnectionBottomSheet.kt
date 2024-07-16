@@ -1,6 +1,7 @@
 package org.torproject.android
 
 import IPtProxy.IPtProxy
+
 import android.content.Context
 import android.os.Bundle
 import android.telephony.TelephonyManager
@@ -11,13 +12,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CompoundButton
 import android.widget.RadioButton
-import android.widget.Toast
+
 import androidx.appcompat.content.res.AppCompatResources
+
+import com.google.android.material.snackbar.Snackbar
+
 import org.torproject.android.circumvention.Bridges
 import org.torproject.android.circumvention.CircumventionApiManager
 import org.torproject.android.circumvention.SettingsRequest
 import org.torproject.android.service.OrbotService
 import org.torproject.android.service.util.Prefs
+
 import java.io.File
 import java.net.Authenticator
 import java.net.PasswordAuthentication
@@ -242,7 +247,7 @@ class ConfigConnectionBottomSheet() :
         }, {
             // TODO what happens to the app in this case?!
             Log.e("ConfigConnectionBottomSheet", "Couldn't hit circumvention API... $it")
-            Toast.makeText(requireContext(), "Ask Tor was not available", Toast.LENGTH_LONG).show()
+            Snackbar.make(requireView(), "Ask Tor was not available", Snackbar.LENGTH_LONG).show()
         })
     }
 
