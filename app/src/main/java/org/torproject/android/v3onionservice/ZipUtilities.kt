@@ -1,14 +1,14 @@
-package org.torproject.android.ui.v3onionservice
+package org.torproject.android.v3onionservice
 
 import android.content.ContentResolver
 import android.net.Uri
+
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
-import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 import java.util.zip.ZipOutputStream
@@ -19,72 +19,51 @@ class ZipUtilities(
     private val contentResolver: ContentResolver
 ) {
     fun zip(): Boolean {
-        try {
-            var origin: BufferedInputStream
-            val pdf = checkNotNull(
-                contentResolver.openFileDescriptor(
-                    zipFile, "w"
-                )
-            )
-            val dest = FileOutputStream(pdf.fileDescriptor)
-            val out = ZipOutputStream(BufferedOutputStream(dest))
-            val data = ByteArray(BUFFER)
-            checkNotNull(files)
-            for (file in files) {
-                val fi = FileInputStream(file)
-                origin = BufferedInputStream(fi, BUFFER)
-                val entry = ZipEntry(file.substring(file.lastIndexOf("/") + 1))
-                out.putNextEntry(entry)
-                var count: Int
-                while ((origin.read(data, 0, BUFFER).also { count = it }) != -1) {
-                    out.write(data, 0, count)
+        return try {
+            checkNotNull(contentResolver.openFileDescriptor(zipFile, "w")).use { pdf ->
+                FileOutputStream(pdf.fileDescriptor).use { dest ->
+                    ZipOutputStream(BufferedOutputStream(dest)).use { out ->
+                        val data = ByteArray(BUFFER)
+                        checkNotNull(files)
+                        for (file in files) {
+                            FileInputStream(file).use { fi ->
+                                BufferedInputStream(fi, BUFFER).use { origin ->
+                                    val entry = ZipEntry(file.substring(file.lastIndexOf("/") + 1))
+                                    out.putNextEntry(entry)
+                                    var count: Int
+                                    while (origin.read(data, 0, BUFFER).also { count = it } != -1) {
+                                        out.write(data, 0, count)
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-                origin.close()
             }
-            out.close()
-            dest.close()
-            pdf.close()
+            true
         } catch (e: IOException) {
             e.printStackTrace()
-            return false
+            false
         }
-        return true
-    }
-
-    fun unzipLegacy(outputPath: String, zipFile: File?): Boolean {
-        try {
-            val fis = FileInputStream((zipFile))
-            val zis = ZipInputStream(BufferedInputStream(fis))
-            val returnVal = extractFromZipInputStream(outputPath, zis)
-            fis.close()
-            return returnVal
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return false
     }
 
     fun unzip(outputPath: String): Boolean {
-        val `is`: InputStream?
-        try {
-            `is` = contentResolver.openInputStream(zipFile)
-            val zis = ZipInputStream(BufferedInputStream(`is`))
-            val returnVal = extractFromZipInputStream(outputPath, zis)
-            checkNotNull(`is`)
-            `is`.close()
-            return returnVal
+        return try {
+            contentResolver.openInputStream(zipFile)?.use { inputStream ->
+                val zis = ZipInputStream(BufferedInputStream(inputStream))
+                extractFromZipInputStream(outputPath, zis)
+            } ?: false
         } catch (e: IOException) {
             e.printStackTrace()
-            return false
+            false
         }
     }
 
     private fun extractFromZipInputStream(outputPath: String, zis: ZipInputStream): Boolean {
         val outputDir = File(outputPath)
-        try {
+        return try {
             var ze: ZipEntry
             val buffer = ByteArray(1024)
-            var count: Int
 
             outputDir.mkdirs()
 
@@ -109,24 +88,24 @@ class ZipUtilities(
                     continue
                 }
 
-                val fout = FileOutputStream("$outputPath/$filename")
-
-                while ((zis.read(buffer).also { count = it }) != -1) {
-                    fout.write(buffer, 0, count)
+                FileOutputStream("$outputPath/$filename").use { fout ->
+                    var count: Int
+                    while (zis.read(buffer).also { count = it } != -1) {
+                        fout.write(buffer, 0, count)
+                    }
                 }
 
-                fout.close()
                 zis.closeEntry()
             }
 
-            zis.close()
+            true
         } catch (e: IOException) {
             e.printStackTrace()
-            return false
+            false
+        } finally {
+            zis.close()
         }
-        return true
     }
-
 
     companion object {
         private const val BUFFER = 2048
