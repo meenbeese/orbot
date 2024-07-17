@@ -7,8 +7,15 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
+
 import androidx.annotation.XmlRes
-import androidx.preference.*
+import androidx.preference.CheckBoxPreference
+import androidx.preference.EditTextPreference
+import androidx.preference.ListPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
+import androidx.preference.PreferenceFragmentCompat
+
 import org.torproject.android.core.Languages
 import org.torproject.android.core.R
 import org.torproject.android.service.util.Prefs
@@ -53,41 +60,33 @@ class SettingsPreferencesFragment : PreferenceFragmentCompat() {
 
         val prefFlagSecure = findPreference<CheckBoxPreference>("pref_flag_secure")
         prefFlagSecure?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
-
             Prefs.setSecureWindow(newValue as Boolean)
             (activity as BaseActivity).resetSecureFlags()
 
             true
         }
-
-
-
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-
         setPreferencesFromResource(R.xml.preferences, rootKey)
         initPrefs()
     }
 
     private fun setNoPersonalizedLearningOnEditTextPreferences() {
         val preferenceScreen = preferenceScreen
-        val categoryCount = preferenceScreen.preferenceCount
-        for (i in 0 until categoryCount) {
-            var p = preferenceScreen.getPreference(i)
-            if (p is PreferenceCategory) {
-                val pc = p
-                val preferenceCount = pc.preferenceCount
-                for (j in 0 until preferenceCount) {
-                    p = pc.getPreference(j)
-                    if (p is EditTextPreference) {
-                        p.setOnBindEditTextListener {
-                            it.imeOptions = it.imeOptions or EditorInfo.IME_FLAG_NO_PERSONALIZED_LEARNING
-                        }
-                    }
+        (0 until preferenceScreen.preferenceCount)
+            .map { preferenceScreen.getPreference(it) }
+            .filterIsInstance<PreferenceCategory>()
+            .flatMap { category ->
+                (0 until category.preferenceCount)
+                    .map { category.getPreference(it) }
+                    .filterIsInstance<EditTextPreference>()
+            }
+            .forEach { editTextPreference ->
+                editTextPreference.setOnBindEditTextListener {
+                    it.imeOptions = it.imeOptions or EditorInfo.IME_FLAG_NO_PERSONALIZED_LEARNING
                 }
             }
-        }
     }
 
     companion object {
@@ -95,8 +94,8 @@ class SettingsPreferencesFragment : PreferenceFragmentCompat() {
 
         @JvmStatic
         fun createIntent(context: Context?, @XmlRes xmlPrefId: Int): Intent =
-                Intent(context, SettingsPreferencesFragment::class.java).apply {
-                    putExtra(BUNDLE_KEY_PREFERENCES_XML, xmlPrefId)
-                }
+            Intent(context, SettingsPreferencesFragment::class.java).apply {
+                putExtra(BUNDLE_KEY_PREFERENCES_XML, xmlPrefId)
+            }
     }
 }

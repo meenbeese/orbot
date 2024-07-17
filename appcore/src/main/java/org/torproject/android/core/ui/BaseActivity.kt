@@ -1,8 +1,10 @@
 package org.torproject.android.core.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
+
+import androidx.appcompat.app.AppCompatActivity
+
 import org.torproject.android.service.util.Prefs
 
 open class BaseActivity : AppCompatActivity() {
@@ -18,10 +20,13 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     open fun resetSecureFlags() {
-        if (Prefs.isSecureWindow())
-            window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
-        else
+        if (Prefs.isSecureWindow()) {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE
+            )
+        } else {
             window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
-
+        }
     }
 }
