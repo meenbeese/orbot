@@ -119,16 +119,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="132dp"
-        android:backgroundTint="@color/orbot_btn_enabled_purple"
         android:text="@string/save"
         android:textColor="@android:color/white"
         android:background="@drawable/btn_shape_round"
         android:paddingLeft="@dimen/button_horizontal_large_margin"
         android:paddingRight="@dimen/button_horizontal_large_margin"
+        app:backgroundTint="@color/orbot_btn_enabled_purple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvCancel"
         app:layout_constraintTop_toBottomOf="@id/mainGuideline"
         app:layout_goneMarginBottom="20dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MoreFragment">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".MoreFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <ListView
@@ -25,9 +26,9 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/orbion"
             android:layout_margin="12dp"
-            />
+            app:srcCompat="@drawable/orbion" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvVersion"
         android:layout_width="wrap_content"

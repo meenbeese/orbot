@@ -6,14 +6,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/new_background">
+    app:backgroundTint="@color/new_background">
+
     <com.google.android.material.progressindicator.LinearProgressIndicator
         tools:visibility="visible"
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/ivStatus"
         android:id="@+id/progressBar"
-        style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+        style="@style/Widget.Material3.LinearProgressIndicator"
         tools:progress="33"
         android:progressTint="@color/progress_bar_purple"
         android:layout_width="match_parent"
@@ -25,7 +26,7 @@
         android:layout_width="148dp"
         android:layout_height="166dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/toroff"
+        app:srcCompat="@drawable/toroff"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:src="@drawable/orbieshadow"
+        app:srcCompat="@drawable/orbieshadow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivStatus"
@@ -76,7 +77,7 @@
     <com.google.android.material.button.MaterialButton
         tools:enabled="false"
         android:background="@drawable/btn_shape_round"
-        android:backgroundTint="@color/orbot_btn_enabled_purple"
+        app:backgroundTint="@color/orbot_btn_enabled_purple"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSubtitle"
@@ -91,7 +92,7 @@
         android:paddingTop="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/activity_horizontal_margin" />
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvConfigure"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
