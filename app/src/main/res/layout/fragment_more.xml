@@ -22,13 +22,13 @@
         android:layout_gravity="bottom|center"
         android:orientation="horizontal"
         >
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:src="@drawable/orbion"
             android:layout_margin="12dp"
             />
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvVersion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -16,14 +16,14 @@
         android:paddingEnd="10dp"
         android:orientation="vertical">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/hs_port"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="15sp"
             tools:text="80" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             tools:text="43"
             android:textSize="15sp"
             android:id="@+id/onion_port"
@@ -39,7 +39,7 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/hs_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             android:textSize="24sp"
             tools:text="My Service" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/hs_onion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.SwitchCompat
+    <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/hs_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

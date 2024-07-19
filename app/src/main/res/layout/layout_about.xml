@@ -14,7 +14,7 @@
         android:paddingLeft="?dialogPreferredPadding"
         android:paddingRight="?dialogPreferredPadding">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:autoLink="web"
@@ -22,7 +22,7 @@
             android:textColor="@android:color/white"
             android:textColorLink="@android:color/white" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingTop="15px"
@@ -30,14 +30,14 @@
             android:textColor="@color/bright_green"
             android:textStyle="bold" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/versionName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textColor="@android:color/white" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingTop="15px"
@@ -45,7 +45,7 @@
             android:textColor="@color/bright_green"
             android:textStyle="bold" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:autoLink="web"
@@ -54,7 +54,7 @@
             android:textColorLink="@android:color/white" />
 
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:autoLink="web"
@@ -62,7 +62,7 @@
             android:textColor="@android:color/white"
             android:textColorLink="@android:color/white" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingTop="15px"
@@ -70,7 +70,7 @@
             android:textColor="@color/bright_green"
             android:textStyle="bold" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:autoLink="web"
@@ -78,7 +78,7 @@
             android:textColor="@android:color/white"
             android:textColorLink="@android:color/white" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvObfs4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             android:textColorLink="@android:color/white" />
 
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvSnowflake"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
             android:textColor="@android:color/white"
             android:textColorLink="@android:color/white" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:autoLink="web"
@@ -105,7 +105,7 @@
             android:textColor="@android:color/white"
             android:textColorLink="@android:color/white" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingTop="15px"
@@ -113,7 +113,7 @@
             android:textColor="@color/bright_green"
             android:textStyle="bold" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/aboutother"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

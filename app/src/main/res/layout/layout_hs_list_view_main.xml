@@ -15,7 +15,7 @@
     tools:showIn="@layout/activity_hosted_services">
 
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
@@ -28,14 +28,14 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:orientation="horizontal">
 
-        <RadioButton
+        <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioUserServices"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonClick"
             android:text="@string/user_services" />
 
-        <RadioButton
+        <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioAppServices"
             android:layout_width="140dp"
             android:layout_height="wrap_content"

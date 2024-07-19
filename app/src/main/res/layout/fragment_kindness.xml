@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/button_horizontal_large_margin">
@@ -29,7 +28,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/ivHeart"
                     android:layout_width="140sp"
                     android:layout_height="140dp"
@@ -40,7 +39,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -50,13 +49,12 @@
                     android:text="@string/volunteer_mode_title"
                     android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
                     android:textColor="@android:color/white"
-
                     android:textStyle="normal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ivHeart" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvSubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -71,7 +69,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnActionActivate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -113,7 +111,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginBottom="120dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/ivHeader"
                     android:layout_width="140sp"
                     android:layout_height="140sp"
@@ -122,7 +120,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -148,15 +146,14 @@
                     android:layout_margin="10dp">
 
 
-                    <ImageView
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_heart"
                         android:paddingTop="20dp"
-
                         app:layout_constraintStart_toStartOf="parent" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/swVolunteerHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -168,7 +165,7 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent" />
 
-                    <androidx.appcompat.widget.SwitchCompat
+                    <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/swVolunteerMode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -177,14 +174,14 @@
                         android:textSize="24dp"
                         android:padding="@dimen/activity_horizontal_margin" />
 
-                    <ImageView
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_settings_gear"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/swVolunteerMode" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/swVolunteerAdjust"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -213,7 +210,7 @@
                     android:layout_margin="10dp"
                     android:id="@+id/volunteer_display_weekly">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/volunteer_mode_weekly_label"
@@ -223,7 +220,7 @@
                         android:fontFamily="sans-serif-medium"
                         android:textAllCaps="true" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:id="@+id/tvWeeklyTotal"
@@ -245,7 +242,7 @@
                     android:background="@color/panel_widget_background"
                     android:layout_margin="10dp">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/volunteer_mode_alltime_label"
@@ -255,7 +252,7 @@
                         android:textAllCaps="true"
                         android:fontFamily="sans-serif-medium" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:id="@+id/tvAlltimeTotal"

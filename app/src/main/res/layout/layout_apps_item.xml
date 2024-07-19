@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/itemRow">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:visibility="visible"
         android:id="@+id/tvHeader"
         android:layout_marginStart="8dp"
@@ -16,7 +16,7 @@
         android:textStyle="bold"
         android:layout_height="wrap_content"/>
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_marginTop="-4dp"
         android:layout_marginBottom="2dp"
         tools:visibility="visible"
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp">
 
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/itemcheck"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -43,7 +43,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginEnd="@dimen/activity_horizontal_margin" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:layout_marginStart="4dp"
             android:id="@+id/itemicon"
             android:layout_width="48dp"
@@ -52,7 +52,7 @@
             tools:src="@drawable/ic_heart"
             app:layout_constraintStart_toEndOf="@id/itemcheck" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:textColor="@android:color/white"
             android:id="@+id/itemtext"
             android:layout_width="280dp"

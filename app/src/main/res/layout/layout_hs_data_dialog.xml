@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:padding="?dialogPreferredPadding">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/name"
@@ -18,7 +18,7 @@
         android:ems="10"
         android:inputType="text" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/local_port"
@@ -33,7 +33,7 @@
         android:inputType="number"
         android:maxLength="5" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/onion_port"

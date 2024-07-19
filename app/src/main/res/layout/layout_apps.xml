@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:duplicateParentState="true">
 
-    <ProgressBar
+    <com.google.android.material.progressindicator.CircularProgressIndicator
         android:indeterminateTint="@color/progress_bar_purple"
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"

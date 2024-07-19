@@ -16,7 +16,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/orbotLogHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
             app:layout_constraintTop_toBottomOf="@+id/orbotLogHeader"
             android:paddingBottom="@dimen/button_horizontal_large_margin">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/orbotLog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

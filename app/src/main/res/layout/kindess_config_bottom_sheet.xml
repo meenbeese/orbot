@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:textColor="@android:color/white"
         android:text="@string/kindess_config_detail"
         android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
         android:background="@color/panel_widget_background"
         android:layout_margin="10dp"
         >
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:text="@string/option_only_on_wifi"
@@ -47,7 +47,7 @@
             android:textColor="@android:color/white"
 
             />
-        <androidx.appcompat.widget.SwitchCompat
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/swKindnessConfigWifi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
         android:background="@color/panel_widget_background"
         android:layout_margin="10dp">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:text="@string/option_only_when_charging"
@@ -80,7 +80,7 @@
             android:textColor="@android:color/white"
 
             />
-        <androidx.appcompat.widget.SwitchCompat
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/swKindnessConfigCharging"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
         app:layout_constraintGuide_percent="0.63" />
 
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainGuideline" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
