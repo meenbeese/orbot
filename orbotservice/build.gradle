@@ -42,7 +42,6 @@ dependencies {
     api libs.tor_android
 
     implementation(
-            libs.android_shell,
             libs.androidx_core,
             libs.androidx_localbroadcast,
             libs.pcap_core,
