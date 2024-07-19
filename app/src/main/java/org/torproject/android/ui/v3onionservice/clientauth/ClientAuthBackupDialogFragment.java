@@ -1,7 +1,6 @@
 package org.torproject.android.ui.v3onionservice.clientauth;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,7 +14,10 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.torproject.android.R;
 import org.torproject.android.core.DiskUtils;
@@ -42,7 +44,7 @@ public class ClientAuthBackupDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog ad = new AlertDialog.Builder(getContext())
+        AlertDialog ad = new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.v3_backup_key)
                 .setMessage(R.string.v3_backup_key_warning)
                 .setPositiveButton(R.string.confirm, null)
@@ -88,14 +90,11 @@ public class ClientAuthBackupDialogFragment extends DialogFragment {
         outState.putString(BUNDLE_KEY_FILENAME, Objects.requireNonNull(etFilename.getText()).toString());
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
         fileNameTextWatcher.afterTextChanged(etFilename.getEditableText());
     }
-
-
 
     private void doBackup() {
         String filename = Objects.requireNonNull(etFilename.getText()).toString().trim();

@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import org.torproject.android.R;
 
 public class OnionServiceCreateDialogFragment extends DialogFragment {
@@ -39,7 +41,7 @@ public class OnionServiceCreateDialogFragment extends DialogFragment {
         etLocalPort = dialogView.findViewById(R.id.hsLocalPort);
         etOnionPort = dialogView.findViewById(R.id.hsOnionPort);
 
-        AlertDialog alertDialog = new AlertDialog.Builder(requireActivity())
+        AlertDialog alertDialog = new MaterialAlertDialogBuilder(requireActivity())
                 .setTitle(R.string.hidden_services)
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel())
                 .setPositiveButton(R.string.save, (dialog, which) -> doSave(requireActivity()))

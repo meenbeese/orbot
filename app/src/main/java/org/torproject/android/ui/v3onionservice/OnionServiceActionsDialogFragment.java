@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import org.torproject.android.R;
 import org.torproject.android.core.ClipboardUtils;
 import org.torproject.android.core.DiskUtils;
@@ -30,7 +32,7 @@ public class OnionServiceActionsDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle arguments = getArguments();
-        AlertDialog ad = new AlertDialog.Builder(requireActivity())
+        AlertDialog ad = new MaterialAlertDialogBuilder(requireActivity())
                 .setItems(new CharSequence[]{
                         getString(R.string.copy_address_to_clipboard),
                         Html.fromHtml(getString(R.string.backup_service), Html.FROM_HTML_MODE_LEGACY),

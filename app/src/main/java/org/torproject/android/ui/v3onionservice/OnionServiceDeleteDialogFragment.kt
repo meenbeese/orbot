@@ -5,8 +5,9 @@ import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 import org.torproject.android.R
 import org.torproject.android.core.DiskUtils.recursivelyDeleteDirectory
@@ -20,7 +21,7 @@ class OnionServiceDeleteDialogFragment internal constructor(arguments: Bundle?) 
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return AlertDialog.Builder(requireContext())
+        return MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.confirm_service_deletion)
             .setPositiveButton(android.R.string.ok) { _: DialogInterface?, _: Int -> doDelete(arguments, requireContext()) }
             .setNegativeButton(android.R.string.cancel) { dialog: DialogInterface, _: Int -> dialog.cancel() }

@@ -1,6 +1,7 @@
 package org.torproject.android
 
 import IPtProxy.IPtProxy
+
 import android.content.Context
 import android.os.Bundle
 import android.telephony.TelephonyManager
@@ -8,18 +9,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.CompoundButton
-import android.widget.RadioButton
 import android.widget.Toast
+
 import androidx.appcompat.content.res.AppCompatResources
+
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.radiobutton.MaterialRadioButton
+
 import org.torproject.android.circumvention.Bridges
 import org.torproject.android.circumvention.CircumventionApiManager
 import org.torproject.android.circumvention.SettingsRequest
 import org.torproject.android.service.OrbotService
 import org.torproject.android.service.util.Prefs
+
 import java.io.File
 import java.net.Authenticator
 import java.net.PasswordAuthentication
@@ -32,7 +35,6 @@ class ConfigConnectionBottomSheet : OrbotBottomSheetDialogFragment() {
     private lateinit var rbDirect: MaterialRadioButton
     private lateinit var rbSnowflake: MaterialRadioButton
 
-    //  private lateinit var rbSnowflakeAmp: RadioButton
     private lateinit var rbRequestBridge: MaterialRadioButton
     private lateinit var rbCustom: MaterialRadioButton
 
@@ -40,7 +42,7 @@ class ConfigConnectionBottomSheet : OrbotBottomSheetDialogFragment() {
     private lateinit var btnAskTor: MaterialButton
 
     companion object {
-        public fun newInstance(callbacks: ConnectionHelperCallbacks): ConfigConnectionBottomSheet {
+        fun newInstance(callbacks: ConnectionHelperCallbacks): ConfigConnectionBottomSheet {
             return ConfigConnectionBottomSheet().apply {
                 this.callbacks = callbacks
             }
@@ -54,13 +56,11 @@ class ConfigConnectionBottomSheet : OrbotBottomSheetDialogFragment() {
 
         rbDirect = v.findViewById(R.id.rbDirect)
         rbSnowflake = v.findViewById(R.id.rbSnowflake)
-        //    rbSnowflakeAmp = v.findViewById(R.id.rbSnowflakeAmp)
         rbRequestBridge = v.findViewById(R.id.rbRequest)
         rbCustom = v.findViewById(R.id.rbCustom)
 
         val tvDirectSubtitle = v.findViewById<View>(R.id.tvDirectSubtitle)
         val tvSnowflakeSubtitle = v.findViewById<View>(R.id.tvSnowflakeSubtitle)
-        //   val tvSnowflakeAmpSubtitle = v.findViewById<View>(R.id.tvSnowflakeAmpSubtitle)
         val tvRequestSubtitle = v.findViewById<View>(R.id.tvRequestSubtitle)
         val tvCustomSubtitle = v.findViewById<View>(R.id.tvCustomSubtitle)
 
@@ -82,38 +82,27 @@ class ConfigConnectionBottomSheet : OrbotBottomSheetDialogFragment() {
         }
 
         // setup containers so radio buttons can be checked if labels are clicked on
-        //   v.findViewById<View>(R.id.smartContainer).setOnClickListener {rbSmart.isChecked = true}
         v.findViewById<View>(R.id.directContainer).setOnClickListener { rbDirect.isChecked = true }
-        v.findViewById<View>(R.id.snowflakeContainer)
-            .setOnClickListener { rbSnowflake.isChecked = true }
-        //  v.findViewById<View>(R.id.snowflakeAmpContainer).setOnClickListener {rbSnowflakeAmp.isChecked = true}
-        v.findViewById<View>(R.id.requestContainer)
-            .setOnClickListener { rbRequestBridge.isChecked = true }
+        v.findViewById<View>(R.id.snowflakeContainer).setOnClickListener { rbSnowflake.isChecked = true }
+        v.findViewById<View>(R.id.requestContainer).setOnClickListener { rbRequestBridge.isChecked = true }
         v.findViewById<View>(R.id.customContainer).setOnClickListener { rbCustom.isChecked = true }
         v.findViewById<View>(R.id.tvCancel).setOnClickListener { dismiss() }
 
         rbDirect.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                nestedRadioButtonKludgeFunction(buttonView as RadioButton, radios)
+                nestedRadioButtonKludgeFunction(buttonView as MaterialRadioButton, radios)
                 radioSubtitleMap[buttonView]?.let { onlyShowActiveSubtitle(it, allSubtitles) }
             }
         }
         rbSnowflake.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                nestedRadioButtonKludgeFunction(buttonView as RadioButton, radios)
+                nestedRadioButtonKludgeFunction(buttonView as MaterialRadioButton, radios)
                 radioSubtitleMap[buttonView]?.let { onlyShowActiveSubtitle(it, allSubtitles) }
             }
         }
-        /**
-        rbSnowflakeAmp.setOnCheckedChangeListener { buttonView, isChecked ->
-        if (isChecked) {
-        nestedRadioButtonKludgeFunction(buttonView as RadioButton, radios)
-        radioSubtitleMap[buttonView]?.let { onlyShowActiveSubtitle(it, allSubtitles) }
-        }
-        }**/
         rbRequestBridge.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                nestedRadioButtonKludgeFunction(buttonView as RadioButton, radios)
+                nestedRadioButtonKludgeFunction(buttonView as MaterialRadioButton, radios)
                 radioSubtitleMap[buttonView]?.let { onlyShowActiveSubtitle(it, allSubtitles) }
                 btnAction.text = getString(R.string.next)
             } else {
@@ -122,7 +111,7 @@ class ConfigConnectionBottomSheet : OrbotBottomSheetDialogFragment() {
         }
         rbCustom.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                nestedRadioButtonKludgeFunction(buttonView as RadioButton, radios)
+                nestedRadioButtonKludgeFunction(buttonView as MaterialRadioButton, radios)
                 radioSubtitleMap[buttonView]?.let { onlyShowActiveSubtitle(it, allSubtitles) }
                 btnAction.text = getString(R.string.next)
             } else {
@@ -149,10 +138,6 @@ class ConfigConnectionBottomSheet : OrbotBottomSheetDialogFragment() {
                 Prefs.putConnectionPathway(Prefs.PATHWAY_SNOWFLAKE)
                 closeAndConnect()
             }
-            /**else if (rbSnowflakeAmp.isChecked) {
-            Prefs.putConnectionPathway(Prefs.PATHWAY_SNOWFLAKE_AMP)
-            closeAndConnect()
-            } **/
             else if (rbCustom.isChecked) {
                 CustomBridgeBottomSheet(object : ConnectionHelperCallbacks {
                     override fun tryConnecting() {
@@ -172,7 +157,7 @@ class ConfigConnectionBottomSheet : OrbotBottomSheetDialogFragment() {
     }
 
     // it's 2022 and android makes you do ungodly things for mere radio button functionality
-    private fun nestedRadioButtonKludgeFunction(rb: RadioButton, all: List<RadioButton>) =
+    private fun nestedRadioButtonKludgeFunction(rb: MaterialRadioButton, all: List<MaterialRadioButton>) =
         all.forEach { if (it != rb) it.isChecked = false }
 
     private fun onlyShowActiveSubtitle(showMe: View, all: List<View>) = all.forEach {
@@ -184,7 +169,6 @@ class ConfigConnectionBottomSheet : OrbotBottomSheetDialogFragment() {
         val pref = Prefs.getConnectionPathway()
         if (pref.equals(Prefs.PATHWAY_CUSTOM)) rbCustom.isChecked = true
         if (pref.equals(Prefs.PATHWAY_SNOWFLAKE)) rbSnowflake.isChecked = true
-        // if (pref.equals(Prefs.PATHWAY_SNOWFLAKE_AMP)) rbSnowflakeAmp.isChecked = true
         if (pref.equals(Prefs.PATHWAY_DIRECT)) rbDirect.isChecked = true
     }
 

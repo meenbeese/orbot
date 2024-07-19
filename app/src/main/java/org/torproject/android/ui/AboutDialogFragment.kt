@@ -1,6 +1,5 @@
 package org.torproject.android.ui
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.text.Html
@@ -17,6 +16,7 @@ import java.io.IOException
 
 import IPtProxy.IPtProxy
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textview.MaterialTextView
 
 class AboutDialogFragment : DialogFragment() {
@@ -64,7 +64,7 @@ class AboutDialogFragment : DialogFragment() {
             }
         }
 
-        return AlertDialog.Builder(context, R.style.OrbotDialogTheme)
+        return MaterialAlertDialogBuilder(requireContext(), R.style.OrbotDialogTheme)
             .setTitle(getString(R.string.button_about))
             .setView(view)
             .create()

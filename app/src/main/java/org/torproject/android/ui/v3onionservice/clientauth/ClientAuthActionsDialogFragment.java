@@ -1,12 +1,14 @@
 package org.torproject.android.ui.v3onionservice.clientauth;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Html;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.torproject.android.R;
 
@@ -22,7 +24,7 @@ public class ClientAuthActionsDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog ad = new AlertDialog.Builder(getActivity())
+        AlertDialog ad = new MaterialAlertDialogBuilder(requireActivity())
                 .setTitle(R.string.v3_client_auth_activity_title)
                 .setItems(new CharSequence[]{
                         Html.fromHtml(getString(R.string.v3_backup_key), Html.FROM_HTML_MODE_LEGACY),
