@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.os.Bundle
 import android.text.Html
 import android.view.View
-import android.widget.TextView
 
 import androidx.fragment.app.DialogFragment
 
@@ -18,6 +17,8 @@ import java.io.IOException
 
 import IPtProxy.IPtProxy
 
+import com.google.android.material.textview.MaterialTextView
+
 class AboutDialogFragment : DialogFragment() {
 
     companion object {
@@ -28,20 +29,20 @@ class AboutDialogFragment : DialogFragment() {
             "==============================================================================="
     }
 
-    private lateinit var tvAbout: TextView
+    private lateinit var tvAbout: MaterialTextView
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view: View? = activity?.layoutInflater?.inflate(R.layout.layout_about, null)
 
-        val versionName = view?.findViewById<TextView>(R.id.versionName)
+        val versionName = view?.findViewById<MaterialTextView>(R.id.versionName)
         versionName?.text = VERSION
 
-        tvAbout = view?.findViewById(R.id.aboutother) as TextView
+        tvAbout = view?.findViewById(R.id.aboutother)!!
 
-        val tvObfs4 = view.findViewById<TextView>(R.id.tvObfs4)
+        val tvObfs4 = view.findViewById<MaterialTextView>(R.id.tvObfs4)
         tvObfs4.text = getString(R.string.obfs4_url, IPtProxy.lyrebirdVersion())
 
-        val tvSnowflake = view.findViewById<TextView>(R.id.tvSnowflake)
+        val tvSnowflake = view.findViewById<MaterialTextView>(R.id.tvSnowflake)
         tvSnowflake.text = getString(R.string.snowflake_url, IPtProxy.snowflakeVersion())
 
         var buildAboutText = true

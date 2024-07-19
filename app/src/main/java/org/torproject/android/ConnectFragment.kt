@@ -20,6 +20,10 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.progressindicator.LinearProgressIndicator
+import com.google.android.material.textview.MaterialTextView
 
 import net.freehaven.tor.control.TorControlCommands
 
@@ -37,13 +41,13 @@ class ConnectFragment : Fragment(), ConnectionHelperCallbacks,
     ExitNodeDialogFragment.ExitNodeSelectedCallback {
 
     // main screen UI
-    private lateinit var tvTitle: TextView
-    private lateinit var tvSubtitle: TextView
-    private lateinit var tvConfigure: TextView
-    private lateinit var btnStartVpn: Button
-    private lateinit var ivOnion: ImageView
-    private lateinit var ivOnionShadow: ImageView
-    lateinit var progressBar: ProgressBar
+    private lateinit var tvTitle: MaterialTextView
+    private lateinit var tvSubtitle: MaterialTextView
+    private lateinit var tvConfigure: MaterialTextView
+    private lateinit var btnStartVpn: MaterialButton
+    private lateinit var ivOnion: ShapeableImageView
+    private lateinit var ivOnionShadow: ShapeableImageView
+    lateinit var progressBar: LinearProgressIndicator
     private lateinit var lvConnectedActions: ListView
 
     private var lastStatus: String? = ""

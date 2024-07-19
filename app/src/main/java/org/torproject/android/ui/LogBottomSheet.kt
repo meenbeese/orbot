@@ -7,17 +7,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textview.MaterialTextView
 
 import org.torproject.android.OrbotBottomSheetDialogFragment
 import org.torproject.android.R
 
 class LogBottomSheet : OrbotBottomSheetDialogFragment() {
 
-    private lateinit var tvLog: TextView
+    private lateinit var tvLog: MaterialTextView
     private var buffer = StringBuffer()
 
     override fun onCreateView(

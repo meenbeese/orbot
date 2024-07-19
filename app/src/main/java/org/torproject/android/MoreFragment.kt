@@ -8,9 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.textview.MaterialTextView
 import org.torproject.android.OrbotActivity.Companion.REQUEST_CODE_SETTINGS
 import org.torproject.android.OrbotActivity.Companion.REQUEST_VPN_APP_SELECT
 import org.torproject.android.core.putNotSystem
@@ -27,7 +27,7 @@ class MoreFragment : Fragment() {
     private var httpPort = -1
     private var socksPort = -1
 
-    private lateinit var tvStatus: TextView
+    private lateinit var tvStatus: MaterialTextView
 
     override fun onAttach(activity: Activity) {
         super.onAttach(activity)

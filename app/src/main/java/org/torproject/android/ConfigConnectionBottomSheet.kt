@@ -13,6 +13,8 @@ import android.widget.CompoundButton
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.radiobutton.MaterialRadioButton
 import org.torproject.android.circumvention.Bridges
 import org.torproject.android.circumvention.CircumventionApiManager
 import org.torproject.android.circumvention.SettingsRequest
@@ -23,20 +25,19 @@ import java.net.Authenticator
 import java.net.PasswordAuthentication
 import java.util.*
 
-class ConfigConnectionBottomSheet() :
-    OrbotBottomSheetDialogFragment() {
+class ConfigConnectionBottomSheet : OrbotBottomSheetDialogFragment() {
 
     private var callbacks: ConnectionHelperCallbacks? = null
 
-    private lateinit var rbDirect: RadioButton
-    private lateinit var rbSnowflake: RadioButton
+    private lateinit var rbDirect: MaterialRadioButton
+    private lateinit var rbSnowflake: MaterialRadioButton
 
     //  private lateinit var rbSnowflakeAmp: RadioButton
-    private lateinit var rbRequestBridge: RadioButton
-    private lateinit var rbCustom: RadioButton
+    private lateinit var rbRequestBridge: MaterialRadioButton
+    private lateinit var rbCustom: MaterialRadioButton
 
-    private lateinit var btnAction: Button
-    private lateinit var btnAskTor: Button
+    private lateinit var btnAction: MaterialButton
+    private lateinit var btnAskTor: MaterialButton
 
     companion object {
         public fun newInstance(callbacks: ConnectionHelperCallbacks): ConfigConnectionBottomSheet {
