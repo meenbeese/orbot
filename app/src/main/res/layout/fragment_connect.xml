@@ -77,12 +77,9 @@
     <com.google.android.material.button.MaterialButton
         tools:enabled="false"
         android:background="@drawable/btn_shape_round"
-        app:backgroundTint="@color/orbot_btn_enabled_purple"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle"
         android:maxLines="3"
         android:text="@string/btn_start_vpn"
+        android:textColor="@color/panel_background_main"
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,7 +87,11 @@
         android:paddingLeft="@dimen/button_horizontal_large_margin"
         android:paddingRight="@dimen/button_horizontal_large_margin"
         android:paddingTop="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_horizontal_margin" />
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        app:backgroundTint="@color/orbot_btn_enabled_purple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvConfigure"

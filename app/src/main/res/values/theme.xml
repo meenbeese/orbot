@@ -3,6 +3,8 @@
 <resources>
     <style name="DefaultTheme" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/new_background_secondary</item>
+        <item name="colorSecondary">@color/bright_green</item>
+        <item name="android:statusBarColor">@color/new_background</item>
     </style>
 
     <style name="NavigationGroupMenuHeaders">
@@ -14,10 +16,9 @@
         <item name="android:windowIsFloating">false</item>
         <item name="colorPrimary">@color/new_background_secondary</item>
         <item name="colorPrimaryDark">@color/new_background_secondary</item>
-
     </style>
 
-    <style name="OrbotDialogTheme" parent="Theme.Material3.Light.Dialog.Alert">
+    <style name="OrbotDialogTheme" parent="Theme.Material3.Dark.Dialog.Alert">
         <item name="android:background">@color/new_background_secondary</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">bold</item>

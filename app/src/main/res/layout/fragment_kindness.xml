@@ -100,9 +100,10 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="true"
+            android:clickable="true"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:clickable="true">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -133,7 +134,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ivHeader" />
 
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/rowVolunteerMode"
                     android:layout_width="match_parent"
@@ -144,7 +144,6 @@
                     android:padding="@dimen/activity_horizontal_margin"
                     android:background="@color/panel_widget_background"
                     android:layout_margin="10dp">
-
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="wrap_content"
@@ -158,9 +157,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/volunteer_mode"
-                        android:textSize="24dp"
+                        android:textSize="24sp"
                         android:paddingTop="@dimen/activity_horizontal_margin"
-                        android:layout_marginLeft="32dp"
+                        android:layout_marginStart="32dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -171,7 +170,7 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:showText="false"
-                        android:textSize="24dp"
+                        android:textSize="24sp"
                         android:padding="@dimen/activity_horizontal_margin" />
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -186,15 +185,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
-                        android:layout_marginLeft="32dp"
+                        android:layout_marginStart="32dp"
                         android:layout_marginBottom="@dimen/button_horizontal_large_margin"
                         android:text="@string/menu_settings"
-                        android:textSize="24dp"
+                        android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/swVolunteerHeader" />
-
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -215,7 +213,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/volunteer_mode_weekly_label"
                         android:textColor="@color/progress_bar_purple"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:padding="@dimen/activity_horizontal_margin"
                         android:fontFamily="sans-serif-medium"
                         android:textAllCaps="true" />
@@ -225,7 +223,7 @@
                         android:layout_height="match_parent"
                         android:id="@+id/tvWeeklyTotal"
                         android:text="#"
-                        android:textSize="24dp"
+                        android:textSize="24sp"
                         android:padding="@dimen/activity_horizontal_margin"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:fontFamily="sans-serif-medium" />
@@ -247,7 +245,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/volunteer_mode_alltime_label"
                         android:textColor="@color/progress_bar_purple"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:padding="@dimen/activity_horizontal_margin"
                         android:textAllCaps="true"
                         android:fontFamily="sans-serif-medium" />
@@ -257,7 +255,7 @@
                         android:layout_height="match_parent"
                         android:id="@+id/tvAlltimeTotal"
                         android:text="#"
-                        android:textSize="24dp"
+                        android:textSize="24sp"
                         android:padding="@dimen/activity_horizontal_margin"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:fontFamily="sans-serif-medium" />

@@ -14,7 +14,6 @@
     tools:context="org.torproject.android.ui.v3onionservice.OnionServiceActivity"
     tools:showIn="@layout/activity_hosted_services">
 
-
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,7 +21,7 @@
         android:text="@string/service_type" />
 
     <RadioGroup
-        android:paddingLeft="-5dp"
+        android:paddingStart="-5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"

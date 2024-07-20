@@ -3,7 +3,7 @@
 
     <style name="DefaultTheme.AppBarOverlay" parent="ThemeOverlay.Material3.Dark.ActionBar" />
 
-    <style name="DefaultTheme.PopupOverlay" parent="ThemeOverlay.Material3.Light" />
+    <style name="DefaultTheme.PopupOverlay" parent="ThemeOverlay.Material3.Dark" />
 
     <style name="BottomSheetTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@android:color/white</item>
