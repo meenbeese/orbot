@@ -76,6 +76,7 @@ class OrbotActivity : BaseActivity() {
         logBottomSheet = LogBottomSheet()
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.itemActiveIndicatorColor = getColorStateList(R.color.navbar_pill_background)
 
         val navController = findNavController(R.id.nav_fragment)
         bottomNavigationView.setupWithNavController(navController)

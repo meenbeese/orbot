@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/new_background"
     android:paddingStart="10dp"
-    android:paddingEnd="10dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:paddingEnd="10dp">
 
     <View
         android:id="@+id/handle"
@@ -18,14 +18,23 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.textview.MaterialTextView
+        style="@style/BottomSheetHeader"
+        android:id="@+id/tvConfigHeader"
+        android:text="@string/menu_settings"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:textColor="@android:color/white"
         android:text="@string/kindess_config_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/tvCustomBridgeSubHeader"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="32dp"
-        android:id="@+id/tvCustomBridgeSubHeader"/>
+        app:layout_constraintTop_toBottomOf="@id/tvConfigHeader" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rowKindnessConfigWifi"
@@ -36,17 +45,19 @@
         app:layout_constraintTop_toBottomOf="@+id/tvCustomBridgeSubHeader"
         android:padding="@dimen/activity_horizontal_margin"
         android:background="@color/panel_widget_background"
-        android:layout_margin="10dp"
-        >
+        android:layout_margin="10dp">
+
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="220dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/option_only_on_wifi"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:paddingTop="@dimen/activity_horizontal_margin"
             android:textColor="@android:color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/swKindnessConfigWifi"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            />
         <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/swKindnessConfigWifi"
             android:layout_width="wrap_content"
@@ -56,7 +67,8 @@
             android:textSize="24sp"
             android:padding="@dimen/activity_horizontal_margin"
             android:textColor="@android:color/white"
-            />
+            app:layout_constraintStart_toEndOf="@+id/tvCustomBridgeSubHeader"
+            app:layout_constraintTop_toTopOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -64,22 +76,21 @@
         android:id="@+id/rowKindnessConfigPower"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rowKindnessConfigWifi"
         android:padding="@dimen/activity_horizontal_margin"
         android:background="@color/panel_widget_background"
-        android:layout_margin="10dp">
+        android:layout_margin="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rowKindnessConfigWifi">
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="220dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/option_only_when_charging"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:paddingTop="@dimen/activity_horizontal_margin"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/white" />
 
-            />
         <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/swKindnessConfigCharging"
             android:layout_width="wrap_content"
@@ -88,9 +99,7 @@
             app:showText="false"
             android:textSize="24sp"
             android:padding="@dimen/activity_horizontal_margin"
-            android:textColor="@android:color/white"
-
-            />
+            android:textColor="@android:color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -99,17 +108,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.63" />
-
+        app:layout_constraintGuide_percent="0.85" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="28dp"
         android:text="@android:string/cancel"
         android:textColor="@android:color/white"
         android:textStyle="bold"
+        android:paddingLeft="@dimen/button_horizontal_large_margin"
+        android:paddingRight="@dimen/button_horizontal_large_margin"
         app:layout_constraintEnd_toStartOf="@id/btnAction"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainGuideline" />
@@ -118,16 +128,16 @@
         android:id="@+id/btnAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="16dp"
         android:text="@string/save"
         android:textColor="@android:color/white"
         android:background="@drawable/btn_shape_round"
         android:paddingLeft="@dimen/button_horizontal_large_margin"
         android:paddingRight="@dimen/button_horizontal_large_margin"
         app:backgroundTint="@color/orbot_btn_enabled_purple"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvCancel"
+        app:layout_constraintEnd_toEndOf="@id/tvCancel"
+        app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainGuideline"
-        app:layout_goneMarginBottom="20dp" />
+        app:layout_constraintHorizontal_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

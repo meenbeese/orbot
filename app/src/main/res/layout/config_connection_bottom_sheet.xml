@@ -239,7 +239,6 @@
         android:textStyle="bold"
         android:paddingLeft="@dimen/button_horizontal_large_margin"
         android:paddingRight="@dimen/button_horizontal_large_margin"
-
         app:layout_constraintEnd_toStartOf="@id/btnAction"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainGuideline" />

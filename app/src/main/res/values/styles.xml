@@ -31,4 +31,12 @@
     <style name="BottomSheetRadio" parent="android:Widget.CompoundButton.RadioButton">
         <item name="buttonTint">@color/menu_header</item>
     </style>
+    
+    <style name="BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@android:color/black</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:iconTint">@android:color/white</item>
+    </style>
 </resources>
