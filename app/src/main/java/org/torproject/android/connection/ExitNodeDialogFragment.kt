@@ -3,22 +3,26 @@ package org.torproject.android.connection
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
+
 import androidx.fragment.app.DialogFragment
+
 import org.torproject.android.R
 import org.torproject.android.service.util.Prefs
 import org.torproject.android.service.util.Utils
+
 import java.text.Collator
-import java.util.*
+import java.util.Locale
+import java.util.TreeMap
 
 class ExitNodeDialogFragment(private val callback: ExitNodeSelectedCallback) : DialogFragment() {
-
 
     interface ExitNodeSelectedCallback {
         fun onExitNodeSelected(countryCode: String, displayCountryName: String)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val currentExit = Prefs.getExitNodes().replace("\\{", "").replace("\\}", "")
+        val currentExit = Prefs.getExitNodes().replace("{", "").replace("}", "")
         val sortedCountries = TreeMap<String, Locale>(Collator.getInstance())
         COUNTRY_CODES.forEach {
             val locale = Locale("", it)
@@ -28,32 +32,21 @@ class ExitNodeDialogFragment(private val callback: ExitNodeSelectedCallback) : D
         val globe = getString(R.string.globe)
 
         val array = arrayOfNulls<String>(COUNTRY_CODES.size + 1)
-        array[0] = "$globe " + getString(R.string.vpn_default_world)
+        array[0] = "$globe ${getString(R.string.vpn_default_world)}"
+
         sortedCountries.keys.forEachIndexed { index, displayCountry ->
-            array[index + 1] =
-                Utils.convertCountryCodeToFlagEmoji(sortedCountries[displayCountry]!!.country) +
-                        " " + displayCountry
+            val countryCode = sortedCountries[displayCountry]?.country ?: ""
+            val checkmark = if (countryCode == currentExit) "✔ " else ""
+            array[index + 1] = "$checkmark${Utils.convertCountryCodeToFlagEmoji(countryCode)} $displayCountry"
         }
 
-        return AlertDialog.Builder(context)
+        return AlertDialog.Builder(requireContext())
             .setNegativeButton(android.R.string.cancel) { d, _ -> d.dismiss() }
             .setTitle(R.string.btn_change_exit)
             .setItems(array) { _, pos ->
-                var country = ""
-                when (pos) {
-                    0 -> {} // global
-                    else -> {
-                        var i = 1
-                        for (code in sortedCountries.keys) {
-                            if (i == pos) {
-                                country = sortedCountries[code]!!.country
-                                break
-                            }
-                            i++
-                        }
-                    }
-                }
-                callback.onExitNodeSelected(country, array[pos]!!)
+                val country = if (pos == 0) "" else sortedCountries.values.elementAtOrNull(pos - 1)?.country ?: ""
+                callback.onExitNodeSelected(country, array[pos] ?: "")
+                Log.d(TAG, "Country Code: $country, Display Country: ${array[pos]?.drop(5)}")
             }
             .create()
     }
@@ -83,8 +76,8 @@ class ExitNodeDialogFragment(private val callback: ExitNodeSelectedCallback) : D
             "RO",
             "RU",
             "SG",
-            "SK"
+            "SK",
         )
-
+        const val TAG = "ExitNodeDialogFragment"
     }
 }
