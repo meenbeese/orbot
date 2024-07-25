@@ -124,7 +124,7 @@ public class CustomBridgesActivity extends AppCompatActivity implements TextWatc
         IntentResult scanResult = IntentIntegrator.parseActivityResult(request, response, data);
 
         if (scanResult != null) {
-            String results = scanResult.getContents();
+            String results = scanResult.contents;
 
             if (!TextUtils.isEmpty(results)) {
                 try {

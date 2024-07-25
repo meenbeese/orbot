@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply from: "../commons.gradle"
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     defaultConfig {
@@ -15,8 +16,13 @@ android {
         }
     }
     namespace 'com.google.zxing.integration.android'
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
 }
 
 dependencies {
+    implementation 'androidx.core:core-ktx:1.13.1'
     libs.androidx_appcompat
 }
