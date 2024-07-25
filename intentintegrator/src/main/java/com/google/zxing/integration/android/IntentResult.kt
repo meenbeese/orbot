@@ -13,44 +13,62 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.google.zxing.integration.android
 
 /**
- *
  * Encapsulates the result of a barcode scan invoked through [IntentIntegrator].
  *
  * @author Sean Owen
  */
-class IntentResult @JvmOverloads internal constructor(
-  /**
+data class IntentResult(
+    internal val contents: String? = null,
+    internal val formatName: String? = null,
+    internal val rawBytes: ByteArray? = null,
+    internal val orientation: Int? = null,
+    internal val errorCorrectionLevel: String? = null
+) {
+    /**
      * @return raw content of barcode
      */
-  @JvmField val contents: String? = null,
-  /**
-     * @return name of format, like "QR_CODE", "UPC_A". See `BarcodeFormat` for more format names.
+    fun getContents(): String? {
+        return contents
+    }
+
+    /**
+     * @return name of format, like "QR_CODE", "UPC_A". See [BarcodeFormat] for more format names.
      */
-    val formatName: String? = null,
-  /**
+    fun getFormatName(): String? {
+        return formatName
+    }
+
+    /**
      * @return raw bytes of the barcode content, if applicable, or null otherwise
      */
-    val rawBytes: ByteArray? = null,
-  /**
+    fun getRawBytes(): ByteArray? {
+        return rawBytes
+    }
+
+    /**
      * @return rotation of the image, in degrees, which resulted in a successful scan. May be null.
      */
-    val orientation: Int? = null,
-  /**
+    fun getOrientation(): Int? {
+        return orientation
+    }
+
+    /**
      * @return name of the error correction level used in the barcode, if applicable
      */
-    val errorCorrectionLevel: String? = null
-) {
+    fun getErrorCorrectionLevel(): String? {
+        return errorCorrectionLevel
+    }
+
     override fun toString(): String {
         val rawBytesLength = rawBytes?.size ?: 0
-        val dialogText = """Format: $formatName
-Contents: $contents
-Raw bytes: ($rawBytesLength bytes)
-Orientation: $orientation
-EC level: $errorCorrectionLevel
-"""
-        return dialogText
+        return "Format: $formatName\n" +
+                "Contents: $contents\n" +
+                "Raw bytes: ($rawBytesLength bytes)\n" +
+                "Orientation: $orientation\n" +
+                "EC level: $errorCorrectionLevel\n"
     }
 }

@@ -636,7 +636,7 @@ public class TeeveeMainActivity extends Activity implements OrbotConstants, OnLo
         if (scanResult != null) {
             // handle scan result
 
-            String results = scanResult.contents;
+            String results = scanResult.getContents();
 
             if (results != null && results.length() > 0) {
                 try {
