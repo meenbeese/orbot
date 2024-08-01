@@ -289,4 +289,5 @@
     <string name="root_warning">روبوت پیازی تشخیص داده دستگاهتان روت شده که می تواند موجب مشکلات امنیتی شود.</string>
     <string name="pref_detect_root_summary">هشدار در آغاز در صورت به کار افتاده بودن اجازه‌های ریشه روی این افزاره</string>
     <string name="pref_detect_root_title">تشخیص ریشه</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

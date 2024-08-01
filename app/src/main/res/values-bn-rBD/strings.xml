@@ -52,4 +52,5 @@
     <string name="menu_header_features">বৈশিষ্ট্যসমূহ</string>
     <string name="drawer_open">খুলো</string>
     <string name="drawer_close">বন্ধ করুন</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

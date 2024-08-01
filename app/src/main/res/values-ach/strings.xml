@@ -10,4 +10,5 @@
     <!--Transparent Proxy screen-->
     <string name="app_name">Orbot</string>
     <string name="connection_custom">Custom</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

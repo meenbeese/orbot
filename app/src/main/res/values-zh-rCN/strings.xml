@@ -292,4 +292,5 @@
     <string name="root_warning">Orbot 检测到您的设备已取得 Root 权限，这可能会导致安全问题。</string>
     <string name="pref_detect_root_summary">如果此设备已启用 Root 权限，则启动时发出警告</string>
     <string name="pref_detect_root_title">Root 检测</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

@@ -287,4 +287,5 @@
     <string name="many_ways">ישנן דרכים רבות להגיע ל־Tor. חלקן עשויות לעבוד טוב יותר מאחרות עבורך.</string>
     <string name="in_a_browser">בדפדפן, יש לבקר ב־%s וללחוץ על קבלת גשרים &gt; אני רוצה רק גשרים!</string>
     <string name="configure_header">הגדרת חיבור ה־Tor שלך</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

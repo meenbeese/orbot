@@ -32,4 +32,5 @@
     <string name="menu_new_identity">New Identity</string>
     <string name="menu_exit">Exit</string>
     <string name="connection_custom">Custom</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

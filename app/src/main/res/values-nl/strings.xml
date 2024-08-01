@@ -177,4 +177,5 @@
     <string name="pref_open_proxy_on_all_interfaces_summary">Sta Wi-Fi peers, verbonden apparaten en alle anderen die verbinden kunnen maken met jouw IP-adres toe om verbinding te maken met Tor</string>
     <string name="pref_open_proxy_on_all_interfaces_title">Open proxy op alle interfaces</string>
     <string name="pref_http_dialog">HTTP port configuratie</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

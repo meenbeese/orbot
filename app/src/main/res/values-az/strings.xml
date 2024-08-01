@@ -287,4 +287,5 @@
     <string name="kindess_config_detail">Cihazınızın digər Tor istifadəçiləri üçün Snowflake proksisi kimi necə və nə vaxt çıxış edə biləcəyini konfiqurasiya edin.</string>
     <string name="pref_flag_secure_summary">Digər proqramların Orbotun skrinşotlarını çəkməsinə mane olun</string>
     <string name="many_ways">Tor-a çatmağın bir çox yolu var. Bəziləri sizin üçün digərlərindən daha yaxşı işləyə bilər.</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

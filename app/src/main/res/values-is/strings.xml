@@ -289,4 +289,5 @@
     <string name="kindess_config_detail">Stilltu hvernig og hvenær tækið þitt getur unnið sem Snowflake-milliþjónn fyrir aðra Tor-notendur.</string>
     <string name="pref_detect_root_summary">Aðvara í ræsingu ef rótarheimildir eru virkar á þessu tæki</string>
     <string name="pref_detect_root_title">Skynja rótarheimildir</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

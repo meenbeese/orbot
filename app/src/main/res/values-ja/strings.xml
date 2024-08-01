@@ -289,4 +289,5 @@
     <string name="root_warning">Orbotは、端末が安全問題の原因になり得るroot化状態であると検知しました。</string>
     <string name="pref_detect_root_title">Root検知</string>
     <string name="pref_detect_root_summary">この端末でroot権限が有効になっている場合、起動時に警告</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

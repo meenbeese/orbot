@@ -96,4 +96,5 @@
     <string name="get_bridges_email">Email</string>
     <string name="deny">Nafi</string>
     <string name="connect">Sambung</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

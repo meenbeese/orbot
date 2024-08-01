@@ -289,4 +289,5 @@
     <string name="pref_isolate_port_summary">Utilizar um circuito diferente para cada porta de destino</string>
     <string name="pref_detect_root_summary">Avisar no arranque se permissões de root estão ativadas neste dispositivo</string>
     <string name="pref_detect_root_title">Deteção de Root</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

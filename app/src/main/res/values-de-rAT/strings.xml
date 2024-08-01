@@ -18,4 +18,5 @@
     <string name="license">Lizenz:</string>
     <string name="drawer_close">Schließen</string>
     <string name="app_name">Orbot</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

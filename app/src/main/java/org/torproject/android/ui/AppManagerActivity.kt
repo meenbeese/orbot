@@ -88,6 +88,19 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         reloadApps()
     }
 
+    override fun onClick(v: View) {
+        val cbox = when (v) {
+            is CheckBox -> v
+            else -> v.tag as? CheckBox ?: (v.tag as? ListEntry)?.box
+        }
+
+        cbox?.let {
+            val app = it.tag as TorifiedApp
+            app.isTorified = !app.isTorified
+            it.isChecked = app.isTorified
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
         val inflater = menuInflater
@@ -106,33 +119,32 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         return super.onOptionsItemSelected(item)
     }
 
-    private fun reloadApps() {
-        scope.launch {
-            withContext(Dispatchers.Main) {
-                progressBar?.visibility = View.VISIBLE
-                loadApps()
-                listAppsAll?.adapter = adapterAppsAll
-                progressBar?.visibility = View.GONE
-            }
-        }
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         job.cancel()
+    }
+
+    private fun reloadApps() {
+        scope.launch {
+            progressBar?.visibility = View.VISIBLE
+            loadApps()
+            listAppsAll?.adapter = adapterAppsAll
+            progressBar?.visibility = View.GONE
+        }
     }
 
     private var allApps: List<TorifiedApp>? = null
     private var suggestedApps: List<TorifiedApp>? = null
     private var uiList: MutableList<TorifiedAppWrapper> = ArrayList()
 
-    private fun loadApps() {
-        allApps = allApps ?: getApps(this@AppManagerActivity, mPrefs, null, alSuggested)
-        TorifiedApp.sortAppsForTorifiedAndAbc(allApps)
-        suggestedApps = suggestedApps ?: getApps(this@AppManagerActivity, mPrefs, alSuggested, null)
-        populateUiList()
-        adapterAppsAll = createAdapter(uiList)
-        listAppsAll?.adapter = adapterAppsAll
+    private suspend fun loadApps() {
+        withContext(Dispatchers.Default) {
+            allApps = allApps ?: getApps(this@AppManagerActivity, mPrefs, null, alSuggested)
+            TorifiedApp.sortAppsForTorifiedAndAbc(allApps)
+            suggestedApps = suggestedApps ?: getApps(this@AppManagerActivity, mPrefs, alSuggested, null)
+            populateUiList()
+            adapterAppsAll = createAdapter(uiList)
+        }
     }
 
     private fun populateUiList() {
@@ -248,19 +260,6 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         }
 
         setResult(RESULT_OK, response)
-    }
-
-    override fun onClick(v: View) {
-        val cbox = when (v) {
-            is CheckBox -> v
-            else -> v.tag as? CheckBox ?: (v.tag as? ListEntry)?.box
-        }
-
-        cbox?.let {
-            val app = it.tag as TorifiedApp
-            app.isTorified = !app.isTorified
-            it.isChecked = app.isTorified
-        }
     }
 
     private class ListEntry {

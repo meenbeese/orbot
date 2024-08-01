@@ -45,4 +45,5 @@
     <string name="set_locale_title">भाषा</string>
     <string name="drawer_open">उघडा</string>
     <string name="drawer_close">बंद करा</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

@@ -287,4 +287,5 @@
     <string name="root_warning">Orbot on tuvastanud, et teie seade on juurdunud, mis võib põhjustada turvaprobleeme.</string>
     <string name="btn_copy_log">Logi kopeerimine</string>
     <string name="connection_snowflake">Snowflake</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

@@ -158,4 +158,5 @@
     <string name="menu_header_features">Карактеристики</string>
     <string name="connect">Поврзи</string>
     <string name="drawer_open">Отвори</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

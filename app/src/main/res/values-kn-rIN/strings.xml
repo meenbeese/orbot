@@ -43,4 +43,5 @@
     <string name="save">ಸೇವ್</string>
     <string name="menu_new_identity">New Identity</string>
     <string name="btn_refresh">ರಿಫ್ರೆಶ್</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

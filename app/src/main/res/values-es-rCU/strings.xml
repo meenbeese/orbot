@@ -281,4 +281,5 @@
     <string name="if_your_mobile_network_actively_blocks_tor_you_can_use_a_tor_bridge_to_access_the_network_another_way_to_get_bridges_is_to_send_an_email_to_bridges_torproject_org_please_note_that_you_must_send_the_email_using_an_address_from_one_of_the_following_email_providers_riseup_gmail_or_yahoo_">Si tu red móvil bloquea Tor, puedes usar un \'Servidor Bridge\' como alternativa. Seleccione una de las opciones para configurar y probar…</string>
     <string name="v3_import_auth_private">Importar .auth_private</string>
     <string name="copy_address_to_clipboard">Copiar dirección al portapapeles</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

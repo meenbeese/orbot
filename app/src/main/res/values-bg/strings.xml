@@ -289,4 +289,5 @@
     <string name="root_warning">Orbot е установил, достъп до суперпотребителя, което снижава сигурността на устройството.</string>
     <string name="pref_detect_root_title">Наличие на суперпотребител</string>
     <string name="pref_detect_root_summary">Предупреждаване за наличие на достъп до правата на суперпотребителя</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

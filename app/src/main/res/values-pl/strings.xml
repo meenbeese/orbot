@@ -289,4 +289,5 @@
     <string name="btn_copy_log">Skopiuj dziennik</string>
     <string name="pref_detect_root_title">Wykrywanie roota</string>
     <string name="pref_detect_root_summary">Ostrzegaj przy uruchomieniu, jeśli na tym urządzeniu włączone są uprawnienia roota</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

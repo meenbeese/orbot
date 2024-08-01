@@ -231,4 +231,5 @@
     <string name="done">Wedi\'i wneud!</string>
     <string name="v3_key_hash">x25519 Allwedd Breifat yn Sylfaen32</string>
     <string name="configure_header">Ffurfweddu eich Cysylltiad Tor</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

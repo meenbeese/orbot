@@ -287,4 +287,5 @@
     <string name="snowflake_subtitle">Povezuje se prek Torovih prostovoljcev. Zaobide nekaj Torovih preprek.</string>
     <string name="get_a_bridge">Most it Tora (Obfs4)</string>
     <string name="get_a_bridge_subtitle">Prikrije vaš promet. Zaobide nekaj Torovih preprek.</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

@@ -287,4 +287,5 @@
     <string name="many_ways">Det finnes mange måter å nå Tor på. Noen fungerer kanskje bedre enn andre for deg.</string>
     <string name="v3_key_hash">x25519 Privat nøkkel i Base32</string>
     <string name="configure_header">Konfigurere Tor-tilkoblingen</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

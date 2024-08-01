@@ -167,4 +167,5 @@
     <string name="action_use">Alkalmaz</string>
     <string name="license">Licensz:</string>
     <string name="connected_title">Csatlakozva</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

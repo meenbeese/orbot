@@ -10,4 +10,5 @@
     <!--Transparent Proxy screen-->
     <string name="get_bridges_email">ઈમેલ</string>
     <string name="menu_settings">સેટિંગ્સ</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

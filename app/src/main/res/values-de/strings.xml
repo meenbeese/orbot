@@ -289,4 +289,5 @@
     <string name="many_ways">Es gibt viele Wege, Tor zu erreichen. Manche funktionieren vielleicht besser als andere für dich.</string>
     <string name="pref_detect_root_summary">Beim Start warnen, wenn Root-Berechtigungen auf diesem Gerät aktiviert sind</string>
     <string name="pref_detect_root_title">Root Erkennung</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

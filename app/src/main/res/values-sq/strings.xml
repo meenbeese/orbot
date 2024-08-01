@@ -289,4 +289,5 @@
     <string name="pref_reduced_connection_padding">“Padding” e reduktuar lidhjeje</string>
     <string name="pref_detect_root_summary">Sinjalizo, gjatë nisjes, nëse në këtë pajisje janë të aktivizuara leje si rrënjë</string>
     <string name="pref_detect_root_title">Pikasje Rrënje</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

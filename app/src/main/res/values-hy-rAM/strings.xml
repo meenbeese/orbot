@@ -155,4 +155,5 @@
     <string name="pref_disable_ipv4">Կարողազրկել IPv4 միացումները</string>
     <string name="snowflake_proxy_msg_title">Ցուցադրել միացման ծանոցումը</string>
     <string name="volunteer_mode_subtitle">Օգնեք այլոց միանալ</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

@@ -287,4 +287,5 @@
 \npateicoties tev.</string>
     <string name="many_ways">Ir vairāki veidi, kā sasniegt Tor. Daži no tiem jums var darboties labāk nekā citi.</string>
     <string name="configure_header">Tor savienojuma konfigurēšana</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

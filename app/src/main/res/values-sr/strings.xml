@@ -153,4 +153,5 @@
     <string name="confirm">Potvrdi</string>
     <string name="connection_direct">Директни</string>
     <string name="connection_custom">Custom</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

@@ -289,4 +289,5 @@
     <string name="root_warning">Orbot обнаружил root-доступ на вашем устройстве, что снижает его защищённость.</string>
     <string name="pref_detect_root_title">Обнаружение root</string>
     <string name="pref_detect_root_summary">Предупреждать при запуске, если на устройстве включены права root-доступа</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

@@ -287,4 +287,5 @@
     <string name="btn_start_vpn">वीपीएन शुरू करें</string>
     <string name="refresh_captcha">कैप्चा रीफ्रेश करें</string>
     <string name="strict_nodes_description">सभी सर्किटों के निर्माण के लिए बहिष्कृत नोड्स सेटिंग्स को एक आवश्यकता के रूप में मानें। यदि आपकी बहिष्कृत नोड्स सेटिंग्स के साथ कोई सर्किट उत्पन्न नहीं हो पाता है तो यह कार्यक्षमता को तोड़ सकता है।</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

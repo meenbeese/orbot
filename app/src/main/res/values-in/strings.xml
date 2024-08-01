@@ -292,4 +292,5 @@
     <string name="pref_flag_secure_title">Keamanan Layar</string>
     <string name="pref_detect_root_summary">Peringatkan pada pemulaian jika perizinan root diaktifkan di perangkat ini</string>
     <string name="pref_detect_root_title">Deteksi Root</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

@@ -229,4 +229,5 @@
     <string name="drawer_close">Luk</string>
     <string name="connect">Forbinde</string>
     <string name="next">Næste</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>

@@ -292,4 +292,5 @@
     <string name="root_warning">Orbot ha detectado que tu dispositivo está rooteado, lo que puede causar problemas de seguridad.</string>
     <string name="pref_detect_root_summary">Advertir al inicio si los permisos de root están habilitados en este dispositivo</string>
     <string name="pref_detect_root_title">Detección de root</string>
+    <string name="search_for_apps">Search for apps</string>
 </resources>
