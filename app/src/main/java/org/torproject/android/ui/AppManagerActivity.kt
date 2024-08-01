@@ -13,8 +13,8 @@ import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.CheckBox
 import android.widget.GridView
@@ -24,9 +24,9 @@ import android.widget.ProgressBar
 import android.widget.TextView
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -80,6 +80,14 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
             }
             override fun afterTextChanged(s: Editable?) {}
         })
+
+        val searchBarLayout = findViewById<TextInputLayout>(R.id.searchBarLayout)
+        searchBarLayout.setEndIconOnClickListener {
+            searchBar?.text?.clear()
+            searchBar?.clearFocus()
+            hideKeyboard()
+            reloadApps()
+        }
     }
 
     override fun onResume() {
@@ -122,6 +130,11 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     override fun onDestroy() {
         super.onDestroy()
         job.cancel()
+    }
+
+    private fun hideKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(searchBar?.windowToken, 0)
     }
 
     private fun reloadApps() {
