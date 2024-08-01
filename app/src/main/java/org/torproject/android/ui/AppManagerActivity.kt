@@ -127,13 +127,9 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     private var uiList: MutableList<TorifiedAppWrapper> = ArrayList()
 
     private fun loadApps() {
-        if (allApps == null) {
-            allApps = getApps(this@AppManagerActivity, mPrefs, null, alSuggested)
-        }
+        allApps = allApps ?: getApps(this@AppManagerActivity, mPrefs, null, alSuggested)
         TorifiedApp.sortAppsForTorifiedAndAbc(allApps)
-        if (suggestedApps == null) {
-            suggestedApps = getApps(this@AppManagerActivity, mPrefs, alSuggested, null)
-        }
+        suggestedApps = suggestedApps ?: getApps(this@AppManagerActivity, mPrefs, alSuggested, null)
         populateUiList()
         adapterAppsAll = createAdapter(uiList)
         listAppsAll?.adapter = adapterAppsAll
@@ -145,23 +141,18 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
             val headerSuggested = TorifiedAppWrapper()
             headerSuggested.header = getString(R.string.apps_suggested_title)
             uiList.add(headerSuggested)
+
             val subheaderSuggested = TorifiedAppWrapper()
             subheaderSuggested.subheader = getString(R.string.app_suggested_subtitle)
             uiList.add(subheaderSuggested)
-            suggestedApps!!.forEach { app ->
-                val taw = TorifiedAppWrapper()
-                taw.app = app
-                uiList.add(taw)
-            }
+
+            suggestedApps?.mapTo(uiList) { TorifiedAppWrapper().apply { app = it } }
+
             val headerAllApps = TorifiedAppWrapper()
             headerAllApps.header = getString(R.string.apps_other_apps)
             uiList.add(headerAllApps)
         }
-        allApps!!.forEach { app ->
-            val taw = TorifiedAppWrapper()
-            taw.app = app
-            uiList.add(taw)
-        }
+        allApps?.mapTo(uiList) { TorifiedAppWrapper().apply { app = it } }
     }
 
     private fun createAdapter(list: List<TorifiedAppWrapper>): ArrayAdapter<TorifiedAppWrapper> {
@@ -240,34 +231,35 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     private fun saveAppSettings() {
         val tordApps = StringBuilder()
         val response = Intent()
-        for (tApp in allApps!!) {
-            if (tApp.isTorified) {
-                tordApps.append(tApp.packageName)
-                tordApps.append("|")
+
+        val saveTorifiedApps: (List<TorifiedApp>?) -> Unit = { apps ->
+            apps?.filter { it.isTorified }?.forEach { tApp ->
+                tordApps.append(tApp.packageName).append("|")
                 response.putExtra(tApp.packageName, true)
             }
         }
-        for (tApp in suggestedApps!!) {
-            if (tApp.isTorified) {
-                tordApps.append(tApp.packageName)
-                tordApps.append("|")
-                response.putExtra(tApp.packageName, true)
-            }
+
+        saveTorifiedApps(allApps)
+        saveTorifiedApps(suggestedApps)
+
+        mPrefs?.edit()?.apply {
+            putString(OrbotConstants.PREFS_KEY_TORIFIED, tordApps.toString())
+            apply()
         }
-        val edit = mPrefs!!.edit()
-        edit.putString(OrbotConstants.PREFS_KEY_TORIFIED, tordApps.toString())
-        edit.apply()
+
         setResult(RESULT_OK, response)
     }
 
     override fun onClick(v: View) {
-        var cbox: CheckBox? = null
-        if (v is CheckBox) cbox = v else if (v.tag is CheckBox) cbox =
-            v.tag as CheckBox else if (v.tag is ListEntry) cbox = (v.tag as ListEntry).box
-        if (cbox != null) {
-            val app = cbox.tag as TorifiedApp
+        val cbox = when (v) {
+            is CheckBox -> v
+            else -> v.tag as? CheckBox ?: (v.tag as? ListEntry)?.box
+        }
+
+        cbox?.let {
+            val app = it.tag as TorifiedApp
             app.isTorified = !app.isTorified
-            cbox.isChecked = app.isTorified
+            it.isChecked = app.isTorified
         }
     }
 
