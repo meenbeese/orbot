@@ -57,6 +57,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     private var progressBar: ProgressBar? = null
     private var alSuggested: List<String>? = null
     private var searchBar: TextInputEditText? = null
+    private var cachedAppListHash: Int = 0
 
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.Main + job)
@@ -137,12 +138,20 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         imm.hideSoftInputFromWindow(searchBar?.windowToken, 0)
     }
 
+    private fun calculateAppListHash(apps: List<TorifiedApp>?): Int {
+        return apps?.sumOf { it.packageName.hashCode() }!!
+    }
+
     private fun reloadApps() {
         scope.launch {
-            progressBar?.visibility = View.VISIBLE
-            loadApps()
-            listAppsAll?.adapter = adapterAppsAll
-            progressBar?.visibility = View.GONE
+            val currentAppListHash = calculateAppListHash(getApps(this@AppManagerActivity, mPrefs, null, alSuggested))
+            if (currentAppListHash != cachedAppListHash) {
+                progressBar?.visibility = View.VISIBLE
+                loadAppsAsync()
+                cachedAppListHash = currentAppListHash
+                listAppsAll?.adapter = adapterAppsAll
+                progressBar?.visibility = View.GONE
+            }
         }
     }
 
@@ -150,7 +159,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     private var suggestedApps: List<TorifiedApp>? = null
     private var uiList: MutableList<TorifiedAppWrapper> = ArrayList()
 
-    private suspend fun loadApps() {
+    private suspend fun loadAppsAsync() {
         withContext(Dispatchers.Default) {
             allApps = allApps ?: getApps(this@AppManagerActivity, mPrefs, null, alSuggested)
             TorifiedApp.sortAppsForTorifiedAndAbc(allApps)
