@@ -8,6 +8,8 @@ import android.content.SharedPreferences
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -23,6 +25,8 @@ import android.widget.TextView
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+
+import com.google.android.material.textfield.TextInputEditText
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -52,6 +56,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     private var adapterAppsAll: ListAdapter? = null
     private var progressBar: ProgressBar? = null
     private var alSuggested: List<String>? = null
+    private var searchBar: TextInputEditText? = null
 
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.Main + job)
@@ -63,9 +68,18 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         listAppsAll = findViewById(R.id.applistview)
         progressBar = findViewById(R.id.progressBar)
+        searchBar = findViewById(R.id.searchBar)
 
         // Need a better way to manage this list
         alSuggested = OrbotConstants.VPN_SUGGESTED_APPS
+
+        searchBar?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterApps(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
     override fun onResume() {
@@ -94,12 +108,12 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
 
     private fun reloadApps() {
         scope.launch {
-            progressBar?.visibility = View.VISIBLE
-            withContext(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
+                progressBar?.visibility = View.VISIBLE
                 loadApps()
+                listAppsAll?.adapter = adapterAppsAll
+                progressBar?.visibility = View.GONE
             }
-            listAppsAll?.adapter = adapterAppsAll
-            progressBar?.visibility = View.GONE
         }
     }
 
@@ -110,15 +124,23 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
 
     private var allApps: List<TorifiedApp>? = null
     private var suggestedApps: List<TorifiedApp>? = null
-    var uiList: MutableList<TorifiedAppWrapper> = ArrayList()
+    private var uiList: MutableList<TorifiedAppWrapper> = ArrayList()
 
     private fun loadApps() {
-        if (allApps == null) allApps = getApps(this@AppManagerActivity, mPrefs, null, alSuggested)
+        if (allApps == null) {
+            allApps = getApps(this@AppManagerActivity, mPrefs, null, alSuggested)
+        }
         TorifiedApp.sortAppsForTorifiedAndAbc(allApps)
-        if (suggestedApps == null) suggestedApps =
-            getApps(this@AppManagerActivity, mPrefs, alSuggested, null)
-        val inflater = layoutInflater
-        // only show suggested apps, text, etc and other apps header if there are any suggested apps installed...
+        if (suggestedApps == null) {
+            suggestedApps = getApps(this@AppManagerActivity, mPrefs, alSuggested, null)
+        }
+        populateUiList()
+        adapterAppsAll = createAdapter(uiList)
+        listAppsAll?.adapter = adapterAppsAll
+    }
+
+    private fun populateUiList() {
+        uiList.clear()
         if (suggestedApps!!.isNotEmpty()) {
             val headerSuggested = TorifiedAppWrapper()
             headerSuggested.header = getString(R.string.apps_suggested_title)
@@ -126,7 +148,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
             val subheaderSuggested = TorifiedAppWrapper()
             subheaderSuggested.subheader = getString(R.string.app_suggested_subtitle)
             uiList.add(subheaderSuggested)
-            for (app in suggestedApps!!) {
+            suggestedApps!!.forEach { app ->
                 val taw = TorifiedAppWrapper()
                 taw.app = app
                 uiList.add(taw)
@@ -135,22 +157,25 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
             headerAllApps.header = getString(R.string.apps_other_apps)
             uiList.add(headerAllApps)
         }
-        for (app in allApps!!) {
+        allApps!!.forEach { app ->
             val taw = TorifiedAppWrapper()
             taw.app = app
             uiList.add(taw)
         }
-        adapterAppsAll = object : ArrayAdapter<TorifiedAppWrapper?>(
+    }
+
+    private fun createAdapter(list: List<TorifiedAppWrapper>): ArrayAdapter<TorifiedAppWrapper> {
+        return object : ArrayAdapter<TorifiedAppWrapper>(
             this,
             R.layout.layout_apps_item,
             R.id.itemtext,
-            uiList as List<TorifiedAppWrapper?>
+            list
         ) {
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 var convertView = convertView
                 var entry: ListEntry? = null
                 if (convertView == null) convertView =
-                    inflater.inflate(R.layout.layout_apps_item, parent, false) else entry =
+                    layoutInflater.inflate(R.layout.layout_apps_item, parent, false) else entry =
                     convertView.tag as ListEntry
                 if (entry == null) {
                     // Inflate a new view
@@ -163,7 +188,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
                     entry.subheader = convertView.findViewById(R.id.tvSubheader)
                     convertView.tag = entry
                 }
-                val taw = uiList[position]
+                val taw = list[position]
                 if (taw.header != null) {
                     entry.header!!.text = taw.header
                     entry.header!!.visibility = View.VISIBLE
@@ -199,24 +224,17 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
                         entry.box!!.setOnClickListener(this@AppManagerActivity)
                     }
                 }
-                convertView!!.onFocusChangeListener =
-                    OnFocusChangeListener { v: View, hasFocus: Boolean ->
-                        if (hasFocus) v.setBackgroundColor(
-                            ContextCompat.getColor(
-                                context, R.color.dark_purple
-                            )
-                        ) else {
-                            v.setBackgroundColor(
-                                ContextCompat.getColor(
-                                    context,
-                                    android.R.color.transparent
-                                )
-                            )
-                        }
-                    }
-                return convertView
+                return convertView!!
             }
         }
+    }
+
+    private fun filterApps(query: String) {
+        val filteredList = uiList.filter {
+            it.app?.name?.contains(query, ignoreCase = true) == true
+        }
+        adapterAppsAll = createAdapter(filteredList)
+        listAppsAll?.adapter = adapterAppsAll
     }
 
     private fun saveAppSettings() {
