@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply from: "../commons.gradle"
-apply from : '../dependencies.gradle'
 
 android {
     defaultConfig {
@@ -34,21 +33,21 @@ android {
 }
 
 dependencies {
-    api libs.guardian_jtorctl
+    api libs.guardian.jtorctl
 
     //use locally built ipt_proxy+go_tun2socks
     api project(':OrbotLib')
 
-    api libs.tor_android
+    api libs.tor.android
 
     implementation(
-            libs.android_shell,
-            libs.androidx_core,
-            libs.androidx_localbroadcast,
-            libs.pcap_core,
-            libs.pcap_factory,
-            libs.androidx_work,
-            libs.androidx_work_kotlin
+            libs.android.shell,
+            libs.androidx.core,
+            libs.androidx.localbroadcast,
+            libs.pcap.core,
+            libs.pcap.factory,
+            libs.androidx.work,
+            libs.androidx.work.kotlin
     )
 
     implementation files('../libs/geoip.jar')

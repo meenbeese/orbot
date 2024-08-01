@@ -1,4 +1,3 @@
-apply from: '../dependencies.gradle'
 apply from: '../commons-device.gradle'
 
 android {
@@ -42,17 +41,17 @@ dependencies {
             project(':appcore'),
             project(':intentintegrator'),
             project(':orbotservice'),
-            libs.android_material,
-            libs.android_snowfall,
-            libs.androidx_constraint,
-            libs.androidx_coordinator,
-            libs.androidx_leanback_core,
-            libs.androidx_leanback_paging,
-            libs.androidx_leanback_preferences,
-            libs.androidx_leanback_tab,
-            libs.androidx_palette,
-            libs.androidx_recyclerview,
-            libs.apl_appintro
+            libs.android.material,
+            libs.android.snowfall,
+            libs.androidx.constraint,
+            libs.androidx.coordinator,
+            libs.androidx.leanback.core,
+            libs.androidx.leanback.paging,
+            libs.androidx.leanback.preferences,
+            libs.androidx.leanback.tab,
+            libs.androidx.palette,
+            libs.androidx.recyclerview,
+            libs.apl.appintro
     )
-    androidTestImplementation libs.fastlane_screengrab
+    androidTestImplementation libs.fastlane.screengrab
 }

@@ -1,6 +1,5 @@
 apply from: "../commons-device.gradle"
 apply plugin: 'kotlin-android'
-apply from: '../dependencies.gradle'
 
 /* gets the version name from the latest Git tag, stripping the leading v off */
 def getVersionName = { ->
@@ -81,9 +80,9 @@ android {
                 project(':appcore'),
                 project(':intentintegrator'),
                 project(':orbotservice'),
-                libs.android_material,
-                libs.android_volley,
-                libs.androidx_localbroadcast,
+                libs.android.material,
+                libs.android.volley,
+                libs.androidx.localbroadcast,
 
                 //use locally built ipt_proxy+go_tun2socks
                 project(':OrbotLib')
@@ -92,7 +91,7 @@ android {
         implementation "com.squareup.retrofit2:retrofit:2.9.0"
         implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
-        androidTestImplementation libs.fastlane_screengrab
+        androidTestImplementation libs.fastlane.screengrab
 //        coreLibraryDesugaring 'com.android.tools:desugar_j dk_libs:1.1.5'
     }
     lint {
