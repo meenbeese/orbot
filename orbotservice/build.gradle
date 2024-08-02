@@ -33,22 +33,18 @@ android {
 }
 
 dependencies {
-    api libs.guardian.jtorctl
+    // Use locally built ipt_proxy+go_tun2socks
+    api(project(':OrbotLib'))
+    api(libs.guardian.jtorctl)
+    api(libs.tor.android)
 
-    //use locally built ipt_proxy+go_tun2socks
-    api project(':OrbotLib')
-
-    api libs.tor.android
-
-    implementation(
-            libs.android.shell,
-            libs.androidx.core,
-            libs.androidx.localbroadcast,
-            libs.pcap.core,
-            libs.pcap.factory,
-            libs.androidx.work,
-            libs.androidx.work.kotlin
-    )
+    implementation(libs.android.shell)
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.localbroadcast)
+    implementation(libs.pcap.core)
+    implementation(libs.pcap.factory)
+    implementation(libs.androidx.work)
+    implementation(libs.androidx.work.kotlin)
 
     implementation files('../libs/geoip.jar')
 }

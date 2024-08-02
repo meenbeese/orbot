@@ -11,13 +11,19 @@ androidx_leanback = "1.2.0-alpha01"
 androidx_leanback_paging = "1.1.0-alpha08"
 androidx_leanback_tab = "1.1.0-beta01"
 androidx_localbroadcast = "1.1.0"
-androidx_multidex = "2.0.1"
 androidx_palette = "1.0.0"
 androidx_recyclerview = "1.2.1"
 apl_appintro = "v4.2.3"
-bclogic_pulsator = "1.0.3"
+espresso_core = "3.6.1"
 fastlane_screengrab = "2.0.0"
 guardian_jtorctl = "0.4.5.7"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+kotlinStdlibJdk8 = "2.0.0"
+navigationUiKtx = "2.7.7"
+preference = "1.2.1"
+retrofit = "2.9.0"
+rootbeer = "0.1.0"
 tor_android = "0.4.8.12"
 pcap_core = "1.8.2"
 pcap_factory = "1.8.2"
@@ -28,6 +34,12 @@ android_material = { group = "com.google.android.material", name = "material", v
 android_shell = { group = "com.jaredrummler", name = "android-shell", version.ref = "android_shell" }
 android_snowfall = { group = "com.github.jetradarmobile", name = "android-snowfall", version.ref = "android_snowfall" }
 android_volley = { group = "com.android.volley", name = "volley", version.ref = "android_volley" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx_core" }
+androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso_core" }
+androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationUiKtx" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationUiKtx" }
+androidx-preference = { module = "androidx.preference:preference", version.ref = "preference" }
 androidx_appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx_appcompat" }
 androidx_constraint = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx_constraint" }
 androidx_coordinator = { group = "androidx.coordinatorlayout", name = "coordinatorlayout", version.ref = "androidx_coordinator" }
@@ -37,13 +49,17 @@ androidx_leanback_paging = { group = "androidx.leanback", name = "leanback-pagin
 androidx_leanback_preferences = { group = "androidx.leanback", name = "leanback-preference", version.ref = "androidx_leanback" }
 androidx_leanback_tab = { group = "androidx.leanback", name = "leanback-tab", version.ref = "androidx_leanback_tab" }
 androidx_localbroadcast = { group = "androidx.localbroadcastmanager", name = "localbroadcastmanager", version.ref = "androidx_localbroadcast" }
-androidx_multidex = { group = "androidx.multidex", name = "multidex", version.ref = "androidx_multidex" }
 androidx_palette = { group = "androidx.palette", name = "palette", version.ref = "androidx_palette" }
 androidx_recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "androidx_recyclerview" }
 apl_appintro = { group = "com.github.apl-devs", name = "appintro", version.ref = "apl_appintro" }
-bclogic_pulsator = { group = "pl.bclogic", name = "pulsator4droid", version.ref = "bclogic_pulsator" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 fastlane_screengrab = { group = "tools.fastlane", name = "screengrab", version.ref = "fastlane_screengrab" }
 guardian_jtorctl = { group = "info.guardianproject", name = "jtorctl", version.ref = "guardian_jtorctl" }
+junit = { module = "junit:junit", version.ref = "junit" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlinStdlibJdk8" }
+kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinStdlibJdk8" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+rootbeer-lib = { module = "com.scottyab:rootbeer-lib", version.ref = "rootbeer" }
 tor_android = { group = "info.guardianproject", name = "tor-android", version.ref = "tor_android" }
 pcap_core = { group = "org.pcap4j", name = "pcap4j-core", version.ref = "pcap_core" }
 pcap_factory = { group = "org.pcap4j", name = "pcap4j-packetfactory-static", version.ref = "pcap_factory" }

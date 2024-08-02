@@ -37,21 +37,19 @@ configurations {
 }
 
 dependencies {
-    implementation(
-            project(':appcore'),
-            project(':intentintegrator'),
-            project(':orbotservice'),
-            libs.android.material,
-            libs.android.snowfall,
-            libs.androidx.constraint,
-            libs.androidx.coordinator,
-            libs.androidx.leanback.core,
-            libs.androidx.leanback.paging,
-            libs.androidx.leanback.preferences,
-            libs.androidx.leanback.tab,
-            libs.androidx.palette,
-            libs.androidx.recyclerview,
-            libs.apl.appintro
-    )
+    implementation(project(':appcore'))
+    implementation(project(':intentintegrator'))
+    implementation(project(':orbotservice'))
+    implementation(libs.android.material)
+    implementation(libs.android.snowfall)
+    implementation(libs.androidx.constraint)
+    implementation(libs.androidx.coordinator)
+    implementation(libs.androidx.leanback.core)
+    implementation(libs.androidx.leanback.paging)
+    implementation(libs.androidx.leanback.preferences)
+    implementation(libs.androidx.leanback.tab)
+    implementation(libs.androidx.palette)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.apl.appintro)
     androidTestImplementation libs.fastlane.screengrab
 }

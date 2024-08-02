@@ -75,25 +75,6 @@ android {
         }
     }
 
-    dependencies {
-        implementation(
-                project(':appcore'),
-                project(':intentintegrator'),
-                project(':orbotservice'),
-                libs.android.material,
-                libs.android.volley,
-                libs.androidx.localbroadcast,
-
-                //use locally built ipt_proxy+go_tun2socks
-                project(':OrbotLib')
-        )
-
-        implementation "com.squareup.retrofit2:retrofit:2.9.0"
-        implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-
-        androidTestImplementation libs.fastlane.screengrab
-//        coreLibraryDesugaring 'com.android.tools:desugar_j dk_libs:1.1.5'
-    }
     lint {
         abortOnError false
         checkReleaseBuilds false
@@ -106,16 +87,33 @@ android {
     namespace 'org.torproject.android'
 }
 dependencies {
-    implementation "androidx.core:core-ktx:1.13.1"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    // Use locally built ipt_proxy+go_tun2socks
+    implementation(project(':OrbotLib'))
+    implementation(project(':appcore'))
+    implementation(project(':intentintegrator'))
+    implementation(project(':orbotservice'))
+
+    // Core
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.kotlin.stdlib.jdk8)
+
     // Kotlin
-    implementation "androidx.navigation:navigation-fragment-ktx:2.7.7"
-    implementation "androidx.navigation:navigation-ui-ktx:2.7.7"
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.android.material)
+    implementation(libs.android.volley)
+    implementation(libs.androidx.localbroadcast)
 
-    //root detection
-    implementation 'com.scottyab:rootbeer-lib:0.1.0'
+    // Root detection
+    implementation(libs.rootbeer.lib)
 
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    // Testing
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.fastlane.screengrab)
 }
