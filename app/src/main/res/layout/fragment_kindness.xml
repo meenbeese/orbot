@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivHeart"
-            android:clickable="true">
+            android:clickable="true"
+            android:focusable="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -104,7 +105,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:clickable="true">
+            android:clickable="true"
+            android:focusable="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -227,7 +229,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:id="@+id/tvWeeklyTotal"
-                        android:text="#"
+                        android:text=""
                         android:textSize="24sp"
                         android:padding="@dimen/activity_horizontal_margin"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -259,7 +261,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:id="@+id/tvAlltimeTotal"
-                        android:text="#"
+                        android:text=""
                         android:textSize="24sp"
                         android:padding="@dimen/activity_horizontal_margin"
                         app:layout_constraintEnd_toEndOf="parent"
