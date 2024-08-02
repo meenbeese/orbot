@@ -57,7 +57,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         super.onCreate(savedInstanceState)
         pMgr = packageManager
         this.setContentView(R.layout.layout_apps)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         listAppsAll = findViewById(R.id.applistview)
         progressBar = findViewById(R.id.progressBar)
 
@@ -117,10 +117,10 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
             if (suggestedApps!!.isNotEmpty()) {
                 add(TorifiedAppWrapper().apply { header = getString(R.string.apps_suggested_title) })
                 add(TorifiedAppWrapper().apply { subheader = getString(R.string.app_suggested_subtitle) })
-                suggestedApps!!.mapTo(this) { TorifiedAppWrapper().apply { app = it } }
+                suggestedApps?.mapTo(this) { TorifiedAppWrapper().apply { app = it } }
                 add(TorifiedAppWrapper().apply { header = getString(R.string.apps_other_apps) })
             }
-            allApps!!.mapTo(this) { TorifiedAppWrapper().apply { app = it } }
+            allApps?.mapTo(this) { TorifiedAppWrapper().apply { app = it } }
         }
 
         adapterAppsAll = object : ArrayAdapter<TorifiedAppWrapper?>(
@@ -272,13 +272,9 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
                         e.printStackTrace()
                     }
 
-                    try {
-                        name = pMgr.getApplicationLabel(aInfo).toString()
-                    } catch (e: Exception) {
-                        continue
-                    }
+                    name = pMgr.getApplicationLabel(aInfo).toString()
 
-                    if (!usesInternet()) continue
+                    if (!usesInternet()) return ArrayList()
 
                     isEnabled = aInfo.enabled
                     uid = aInfo.uid
