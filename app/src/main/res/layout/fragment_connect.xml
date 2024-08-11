@@ -82,6 +82,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvSubtitle"
         android:maxLines="3"
         android:text="@string/btn_start_vpn"
+        android:textColor="@android:color/white"
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
