@@ -8,7 +8,9 @@ import android.content.SharedPreferences
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.View.OnFocusChangeListener
@@ -21,8 +23,8 @@ import android.widget.ListAdapter
 import android.widget.ProgressBar
 import android.widget.TextView
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,7 +41,7 @@ import org.torproject.android.service.vpn.TorifiedApp
 import java.util.Arrays
 import java.util.StringTokenizer
 
-class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConstants {
+class AppManagerFragment : Fragment(), View.OnClickListener, OrbotConstants {
     inner class TorifiedAppWrapper {
         var header: String? = null
         var subheader: String? = null
@@ -56,37 +58,39 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.Main + job)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        pMgr = packageManager
-        this.setContentView(R.layout.layout_apps)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        listAppsAll = findViewById(R.id.applistview)
-        progressBar = findViewById(R.id.progressBar)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.layout_apps, container, false)
+        pMgr = activity?.packageManager
+        listAppsAll = view.findViewById(R.id.applistview)
+        progressBar = view.findViewById(R.id.progressBar)
 
         // Need a better way to manage this list
         alSuggested = OrbotConstants.VPN_SUGGESTED_APPS
+
+        return view
     }
 
     override fun onResume() {
         super.onResume()
-        mPrefs = Prefs.getSharedPrefs(applicationContext)
+        mPrefs = Prefs.getSharedPrefs(requireContext())
         reloadApps()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        super.onCreateOptionsMenu(menu)
-        val inflater = menuInflater
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.app_main, menu)
-        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_save_apps) {
             saveAppSettings()
-            finish()
+            activity?.finish()
         } else if (item.itemId == android.R.id.home) {
-            finish()
+            activity?.finish()
             return true
         }
         return super.onOptionsItemSelected(item)
@@ -113,10 +117,10 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     var uiList: MutableList<TorifiedAppWrapper> = ArrayList()
 
     private fun loadApps() {
-        if (allApps == null) allApps = getApps(this@AppManagerActivity, mPrefs, null, alSuggested)
+        if (allApps == null) allApps = getApps(requireContext(), mPrefs, null, alSuggested)
         TorifiedApp.sortAppsForTorifiedAndAbc(allApps)
         if (suggestedApps == null) suggestedApps =
-            getApps(this@AppManagerActivity, mPrefs, alSuggested, null)
+            getApps(requireContext(), mPrefs, alSuggested, null)
         val inflater = layoutInflater
         // only show suggested apps, text, etc and other apps header if there are any suggested apps installed...
         if (suggestedApps!!.isNotEmpty()) {
@@ -141,7 +145,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
             uiList.add(taw)
         }
         adapterAppsAll = object : ArrayAdapter<TorifiedAppWrapper?>(
-            this,
+            requireContext(),
             R.layout.layout_apps_item,
             R.id.itemtext,
             uiList as List<TorifiedAppWrapper?>
@@ -183,7 +187,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
                         try {
                             entry.icon!!.setImageDrawable(pMgr!!.getApplicationIcon(app!!.packageName))
                             entry.icon!!.tag = entry.box
-                            entry.icon!!.setOnClickListener(this@AppManagerActivity)
+                            entry.icon!!.setOnClickListener(this@AppManagerFragment)
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
@@ -191,24 +195,24 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
                     if (entry.text != null) {
                         entry.text!!.text = app!!.name
                         entry.text!!.tag = entry.box
-                        entry.text!!.setOnClickListener(this@AppManagerActivity)
+                        entry.text!!.setOnClickListener(this@AppManagerFragment)
                     }
                     if (entry.box != null) {
                         entry.box!!.isChecked = app!!.isTorified
                         entry.box!!.tag = app
-                        entry.box!!.setOnClickListener(this@AppManagerActivity)
+                        entry.box!!.setOnClickListener(this@AppManagerFragment)
                     }
                 }
                 convertView!!.onFocusChangeListener =
                     OnFocusChangeListener { v: View, hasFocus: Boolean ->
                         if (hasFocus) v.setBackgroundColor(
                             ContextCompat.getColor(
-                                context, R.color.dark_purple
+                                requireContext(), R.color.dark_purple
                             )
                         ) else {
                             v.setBackgroundColor(
                                 ContextCompat.getColor(
-                                    context,
+                                    requireContext(),
                                     android.R.color.transparent
                                 )
                             )
@@ -239,7 +243,8 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         val edit = mPrefs!!.edit()
         edit.putString(OrbotConstants.PREFS_KEY_TORIFIED, tordApps.toString())
         edit.apply()
-        setResult(RESULT_OK, response)
+
+        (activity as? AppManagerCallback)?.onAppSettingsSaved(response)
     }
 
     override fun onClick(v: View) {
@@ -251,6 +256,10 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
             app.isTorified = !app.isTorified
             cbox.isChecked = app.isTorified
         }
+    }
+
+    interface AppManagerCallback {
+        fun onAppSettingsSaved(intent: Intent)
     }
 
     private class ListEntry {

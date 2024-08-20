@@ -28,7 +28,7 @@ import org.torproject.android.core.putNotSystem
 import org.torproject.android.service.OrbotConstants
 import org.torproject.android.service.OrbotService
 import org.torproject.android.service.util.Prefs
-import org.torproject.android.ui.AppManagerActivity
+import org.torproject.android.ui.AppManagerFragment
 import org.torproject.android.ui.OrbotMenuAction
 import org.torproject.android.ui.OrbotMenuActionAdapter
 
@@ -136,17 +136,20 @@ class ConnectFragment : Fragment(), ConnectionHelperCallbacks,
     }
 
     fun refreshMenuList(context: Context) {
-        val listItems =
-            arrayListOf(OrbotMenuAction(R.string.btn_change_exit, 0) { openExitNodeDialog() },
-                OrbotMenuAction(R.string.btn_refresh, R.drawable.ic_refresh) { sendNewnymSignal() },
-                OrbotMenuAction(R.string.btn_tor_off, R.drawable.ic_power) { stopTorAndVpn() })
-        if (!Prefs.isPowerUserMode()) listItems.add(0,
-            OrbotMenuAction(R.string.btn_choose_apps, R.drawable.ic_choose_apps) {
-                startActivityForResult(
-                    Intent(requireActivity(), AppManagerActivity::class.java),
-                    OrbotActivity.REQUEST_VPN_APP_SELECT
-                )
+        val listItems = arrayListOf(
+            OrbotMenuAction(R.string.btn_change_exit, 0) { openExitNodeDialog() },
+            OrbotMenuAction(R.string.btn_refresh, R.drawable.ic_refresh) { sendNewnymSignal() },
+            OrbotMenuAction(R.string.btn_tor_off, R.drawable.ic_power) { stopTorAndVpn() }
+        )
+        if (!Prefs.isPowerUserMode()) {
+            listItems.add(0, OrbotMenuAction(R.string.btn_choose_apps, R.drawable.ic_choose_apps) {
+                val fragment = AppManagerFragment()
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.fragment_container, fragment)
+                    ?.addToBackStack(null)
+                    ?.commit()
             })
+        }
         lvConnectedActions.adapter = OrbotMenuActionAdapter(context, listItems)
     }
 

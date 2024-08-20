@@ -61,11 +61,6 @@
             android:theme="@style/OrbotActivityTheme" />
 
         <activity
-            android:theme="@style/OrbotActivityTheme"
-            android:name=".ui.AppManagerActivity"
-            android:label="@string/title_choose_apps"/>
-
-        <activity
             android:name=".ui.v3onionservice.OnionServiceActivity"
             android:label="@string/hidden_services">
             <meta-data

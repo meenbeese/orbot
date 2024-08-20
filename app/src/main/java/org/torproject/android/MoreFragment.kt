@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import org.torproject.android.OrbotActivity.Companion.REQUEST_CODE_SETTINGS
-import org.torproject.android.OrbotActivity.Companion.REQUEST_VPN_APP_SELECT
 import org.torproject.android.core.putNotSystem
 import org.torproject.android.core.ui.SettingsActivity
 import org.torproject.android.service.OrbotConstants
@@ -33,7 +32,6 @@ class MoreFragment : Fragment() {
         super.onAttach(activity)
         (activity as OrbotActivity).fragMore = this
     }
-
 
     fun setPorts(newHttpPort: Int, newSocksPort: Int) {
         httpPort = newHttpPort
@@ -81,11 +79,11 @@ class MoreFragment : Fragment() {
                     R.string.v3_client_auth_activity_title, R.drawable.ic_shield
                 ) { startActivity(Intent(requireActivity(), ClientAuthActivity::class.java)) },
                 OrbotMenuAction(R.string.btn_choose_apps, R.drawable.ic_choose_apps) {
-                    activity?.startActivityForResult(
-                        Intent(
-                            requireActivity(), AppManagerActivity::class.java
-                        ), REQUEST_VPN_APP_SELECT
-                    )
+                    val fragment = AppManagerFragment()
+                    activity?.supportFragmentManager?.beginTransaction()
+                        ?.replace(R.id.fragment_container, fragment)
+                        ?.addToBackStack(null)
+                        ?.commit()
                 },
                 OrbotMenuAction(R.string.menu_settings, R.drawable.ic_settings_gear) {
 
