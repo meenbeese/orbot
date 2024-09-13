@@ -10,7 +10,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -28,6 +27,8 @@ import androidx.appcompat.app.AppCompatActivity
 
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -145,21 +146,18 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     private fun reloadApps() {
         val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         val cachedAppListHash = sharedPreferences.getString("cachedAppListHash", null)?.toIntOrNull()
-        Log.d("AppManagerActivity", "Cached App List Hash: $cachedAppListHash")
 
         scope.launch {
             val currentAppListHash = calculateAppListHash(getApps(this@AppManagerActivity, mPrefs, null, alSuggested))
-            Log.d("AppManagerActivity", "Current App List Hash: $currentAppListHash")
 
             if (currentAppListHash != cachedAppListHash) {
-                Log.d("AppManagerActivity", "Hashes do not match. Reloading apps.")
                 progressBar?.visibility = View.VISIBLE
-                loadAppsAsync()
+                loadAppsAsync(false)
                 sharedPreferences.edit().putString("cachedAppListHash", currentAppListHash.toString()).apply()
                 listAppsAll?.adapter = adapterAppsAll
                 progressBar?.visibility = View.GONE
             } else {
-                Log.d("AppManagerActivity", "Hashes match. No need to reload apps.")
+                loadAppsAsync(true)
             }
         }
     }
@@ -168,14 +166,31 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     private var suggestedApps: List<TorifiedApp>? = null
     private var uiList: MutableList<TorifiedAppWrapper> = ArrayList()
 
-    private suspend fun loadAppsAsync() {
+    private suspend fun loadAppsAsync(fromCache: Boolean) {
         withContext(Dispatchers.Default) {
-            allApps = allApps ?: getApps(this@AppManagerActivity, mPrefs, null, alSuggested)
-            TorifiedApp.sortAppsForTorifiedAndAbc(allApps)
-            suggestedApps = suggestedApps ?: getApps(this@AppManagerActivity, mPrefs, alSuggested, null)
+            if (fromCache) {
+                val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                val allAppsJson = sharedPreferences.getString("allApps", null)
+                val suggestedAppsJson = sharedPreferences.getString("suggestedApps", null)
+                allApps = Gson().fromJson(allAppsJson, object : TypeToken<List<TorifiedApp>>() {}.type)
+                suggestedApps = Gson().fromJson(suggestedAppsJson, object : TypeToken<List<TorifiedApp>>() {}.type)
+            } else {
+                allApps = getApps(this@AppManagerActivity, mPrefs, null, alSuggested)
+                TorifiedApp.sortAppsForTorifiedAndAbc(allApps)
+                suggestedApps = getApps(this@AppManagerActivity, mPrefs, alSuggested, null)
+                saveAppsToPrefs(allApps, suggestedApps)
+            }
             populateUiList()
             adapterAppsAll = createAdapter(uiList)
         }
+    }
+
+    private fun saveAppsToPrefs(allApps: List<TorifiedApp>?, suggestedApps: List<TorifiedApp>?) {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("allApps", Gson().toJson(allApps))
+        editor.putString("suggestedApps", Gson().toJson(suggestedApps))
+        editor.apply()
     }
 
     private fun populateUiList() {
