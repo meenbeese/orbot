@@ -150,7 +150,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         val cachedAppListHash = sharedPreferences.getString("cachedAppListHash", null)?.toIntOrNull()
 
         scope.launch {
-            val currentAppListHash = calculateAppListHash(getApps(this@AppManagerActivity, mPrefs, null, alSuggested))
+            val currentAppListHash = calculateAppListHash(getApps(mPrefs, null, alSuggested))
 
             if (currentAppListHash != cachedAppListHash) {
                 progressBar?.visibility = View.VISIBLE
@@ -173,9 +173,9 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
                 allApps = Gson().fromJson(allAppsJson, object : TypeToken<List<TorifiedApp>>() {}.type)
                 suggestedApps = Gson().fromJson(suggestedAppsJson, object : TypeToken<List<TorifiedApp>>() {}.type)
             } else {
-                allApps = getApps(this@AppManagerActivity, mPrefs, null, alSuggested)
+                allApps = getApps(mPrefs, null, alSuggested)
                 TorifiedApp.sortAppsForTorifiedAndAbc(allApps)
-                suggestedApps = getApps(this@AppManagerActivity, mPrefs, alSuggested, null)
+                suggestedApps = getApps(mPrefs, alSuggested, null)
                 saveAppsToPrefs(allApps, suggestedApps)
             }
 
@@ -307,16 +307,14 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     }
 
     private fun getApps(
-        context: Context,
         prefs: SharedPreferences?,
         filterInclude: List<String>?,
         filterRemove: List<String>?
     ): ArrayList<TorifiedApp> {
-        val pMgr = context.packageManager
         val tordApps = prefs?.getString(OrbotConstants.PREFS_KEY_TORIFIED, "")?.split("|")?.sorted() ?: emptyList()
         val apps = ArrayList<TorifiedApp>()
 
-        pMgr.getInstalledApplications(0).forEach { aInfo ->
+        pMgr?.getInstalledApplications(0)?.forEach { aInfo ->
             if (!aInfo.enabled ||
                 OrbotConstants.BYPASS_VPN_PACKAGES.contains(aInfo.packageName) ||
                 BuildConfig.APPLICATION_ID == aInfo.packageName) return@forEach
@@ -326,7 +324,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
 
             val app = TorifiedApp().apply {
                 try {
-                    pMgr.getPackageInfo(aInfo.packageName, PackageManager.GET_PERMISSIONS)?.requestedPermissions?.let { perms ->
+                    pMgr?.getPackageInfo(aInfo.packageName, PackageManager.GET_PERMISSIONS)?.requestedPermissions?.let { perms ->
                         if (Manifest.permission.INTERNET in perms) setUsesInternet(true)
                     }
                 } catch (e: Exception) {
@@ -334,7 +332,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
                 }
 
                 try {
-                    name = pMgr.getApplicationLabel(aInfo).toString()
+                    name = pMgr?.getApplicationLabel(aInfo).toString()
                 } catch (e: Exception) {
                     return@forEach
                 }
@@ -343,7 +341,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
 
                 isEnabled = aInfo.enabled
                 uid = aInfo.uid
-                username = pMgr.getNameForUid(uid)
+                username = pMgr?.getNameForUid(uid)
                 procname = aInfo.processName
                 packageName = aInfo.packageName
                 isTorified = tordApps.contains(packageName)
