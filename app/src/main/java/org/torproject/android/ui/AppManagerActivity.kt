@@ -103,7 +103,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     override fun onClick(v: View) {
         val cbox = when (v) {
             is CheckBox -> v
-            else -> v.tag as? CheckBox ?: (v.tag as? ListEntry)?.box
+            else -> v.tag as? CheckBox
         }
 
         cbox?.let {
@@ -304,15 +304,6 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         }
 
         setResult(RESULT_OK, response)
-    }
-
-    private class ListEntry {
-        var box: CheckBox? = null
-        var text: TextView? = null // app name
-        var icon: ImageView? = null
-        var container: View? = null
-        var header: TextView? = null
-        var subheader: TextView? = null
     }
 
     private fun getApps(
