@@ -5,7 +5,6 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
@@ -319,16 +318,6 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         var subheader: TextView? = null
     }
 
-    /**
-     * @return true if the app is "enabled", not Orbot, and not in
-     * [.BYPASS_VPN_PACKAGES]
-     */
-    private fun includeAppInUi(applicationInfo: ApplicationInfo): Boolean {
-        return applicationInfo.enabled &&
-                !OrbotConstants.BYPASS_VPN_PACKAGES.contains(applicationInfo.packageName) &&
-                BuildConfig.APPLICATION_ID != applicationInfo.packageName
-    }
-
     private fun getApps(
         context: Context,
         prefs: SharedPreferences?,
@@ -340,7 +329,9 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         val apps = ArrayList<TorifiedApp>()
 
         pMgr.getInstalledApplications(0).forEach { aInfo ->
-            if (!includeAppInUi(aInfo)) return@forEach
+            if (!aInfo.enabled ||
+                OrbotConstants.BYPASS_VPN_PACKAGES.contains(aInfo.packageName) ||
+                BuildConfig.APPLICATION_ID == aInfo.packageName) return@forEach
 
             if (filterInclude != null && aInfo.packageName !in filterInclude) return@forEach
             if (filterRemove != null && aInfo.packageName in filterRemove) return@forEach
