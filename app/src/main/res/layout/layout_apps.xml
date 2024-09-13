@@ -18,9 +18,11 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_search"
-            android:contentDescription="@string/search_for_apps" />
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/search_for_apps"
+            app:srcCompat="@drawable/ic_search" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/searchBarLayout"

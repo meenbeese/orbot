@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/itemRow">
 
     <TextView
         android:visibility="visible"
         android:id="@+id/tvHeader"
         android:layout_marginStart="8dp"
-        tools:text="@string/apps_suggested_title"
         android:textColor="@color/text_purple"
         android:layout_width="wrap_content"
         android:textStyle="bold"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        tools:text="@string/apps_suggested_title" />
 
     <TextView
         android:layout_marginTop="-4dp"
@@ -39,9 +39,9 @@
             android:id="@+id/itemcheck"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:layout_marginStart="4dp"
@@ -49,8 +49,8 @@
             android:layout_width="48dp"
             android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_heart"
-            app:layout_constraintStart_toEndOf="@id/itemcheck" />
+            app:layout_constraintStart_toEndOf="@id/itemcheck"
+            tools:src="@drawable/ic_heart" />
 
         <TextView
             android:textColor="@android:color/white"
@@ -72,7 +72,6 @@
             tools:text="App Name Here that is really long"
             android:gravity="center_vertical"
             android:layout_marginStart="@dimen/activity_horizontal_margin" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
