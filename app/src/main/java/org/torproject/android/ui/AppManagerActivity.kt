@@ -198,7 +198,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
 
     private fun populateUiList() {
         uiList.clear()
-        if (suggestedApps!!.isNotEmpty()) {
+        if (!suggestedApps.isNullOrEmpty()) {
             val headerSuggested = TorifiedAppWrapper()
             headerSuggested.header = getString(R.string.apps_suggested_title)
             uiList.add(headerSuggested)
