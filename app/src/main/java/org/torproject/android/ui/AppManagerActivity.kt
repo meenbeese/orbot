@@ -42,9 +42,6 @@ import org.torproject.android.service.OrbotConstants
 import org.torproject.android.service.util.Prefs
 import org.torproject.android.service.vpn.TorifiedApp
 
-import java.util.Arrays
-import java.util.StringTokenizer
-
 class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConstants {
     inner class TorifiedAppWrapper {
         var header: String? = null
@@ -59,6 +56,10 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     private var progressBar: ProgressBar? = null
     private var alSuggested: List<String>? = null
     private var searchBar: TextInputEditText? = null
+
+    private var allApps: List<TorifiedApp>? = null
+    private var suggestedApps: List<TorifiedApp>? = null
+    private var uiList: MutableList<TorifiedAppWrapper> = ArrayList()
 
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.Main + job)
@@ -152,19 +153,15 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
 
             if (currentAppListHash != cachedAppListHash) {
                 progressBar?.visibility = View.VISIBLE
-                loadAppsAsync(false)
+                loadAppsAsync(fromCache = false)
                 sharedPreferences.edit().putString("cachedAppListHash", currentAppListHash.toString()).apply()
                 progressBar?.visibility = View.GONE
             } else {
-                loadAppsAsync(true)
+                loadAppsAsync(fromCache = true)
             }
             listAppsAll?.adapter = adapterAppsAll
         }
     }
-
-    private var allApps: List<TorifiedApp>? = null
-    private var suggestedApps: List<TorifiedApp>? = null
-    private var uiList: MutableList<TorifiedAppWrapper> = ArrayList()
 
     private suspend fun loadAppsAsync(fromCache: Boolean) {
         withContext(Dispatchers.Default) {
@@ -317,92 +314,61 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         var subheader: TextView? = null
     }
 
-    companion object {
-        /**
-         * @return true if the app is "enabled", not Orbot, and not in
-         * [.BYPASS_VPN_PACKAGES]
-         */
-        private fun includeAppInUi(applicationInfo: ApplicationInfo): Boolean {
-            if (!applicationInfo.enabled) return false
-            return if (OrbotConstants.BYPASS_VPN_PACKAGES.contains(applicationInfo.packageName)) false else BuildConfig.APPLICATION_ID != applicationInfo.packageName
-        }
+    /**
+     * @return true if the app is "enabled", not Orbot, and not in
+     * [.BYPASS_VPN_PACKAGES]
+     */
+    private fun includeAppInUi(applicationInfo: ApplicationInfo): Boolean {
+        return applicationInfo.enabled &&
+                !OrbotConstants.BYPASS_VPN_PACKAGES.contains(applicationInfo.packageName) &&
+                BuildConfig.APPLICATION_ID != applicationInfo.packageName
+    }
 
-        fun getApps(
-            context: Context,
-            prefs: SharedPreferences?,
-            filterInclude: List<String>?,
-            filterRemove: List<String>?
-        ): ArrayList<TorifiedApp> {
-            val pMgr = context.packageManager
-            val tordAppString = prefs!!.getString(OrbotConstants.PREFS_KEY_TORIFIED, "")
-            val tordApps: Array<String?>
-            val st = StringTokenizer(tordAppString, "|")
-            tordApps = arrayOfNulls(st.countTokens())
-            var tordIdx = 0
-            while (st.hasMoreTokens()) {
-                tordApps[tordIdx++] = st.nextToken()
-            }
-            Arrays.sort(tordApps)
-            val lAppInfo = pMgr.getInstalledApplications(0)
-            val itAppInfo: Iterator<ApplicationInfo> = lAppInfo.iterator()
-            val apps = ArrayList<TorifiedApp>()
-            while (itAppInfo.hasNext()) {
-                val aInfo = itAppInfo.next()
-                if (!includeAppInUi(aInfo)) continue
-                if (filterInclude != null) {
-                    var wasFound = false
-                    for (filterId in filterInclude) if (filterId == aInfo.packageName) {
-                        wasFound = true
-                        break
-                    }
-                    if (!wasFound) continue
-                }
-                if (filterRemove != null) {
-                    var wasFound = false
-                    for (filterId in filterRemove) if (filterId == aInfo.packageName) {
-                        wasFound = true
-                        break
-                    }
-                    if (wasFound) continue
-                }
-                val app = TorifiedApp()
+    private fun getApps(
+        context: Context,
+        prefs: SharedPreferences?,
+        filterInclude: List<String>?,
+        filterRemove: List<String>?
+    ): ArrayList<TorifiedApp> {
+        val pMgr = context.packageManager
+        val tordApps = prefs?.getString(OrbotConstants.PREFS_KEY_TORIFIED, "")?.split("|")?.sorted() ?: emptyList()
+        val apps = ArrayList<TorifiedApp>()
+
+        pMgr.getInstalledApplications(0).forEach { aInfo ->
+            if (!includeAppInUi(aInfo)) return@forEach
+
+            if (filterInclude != null && aInfo.packageName !in filterInclude) return@forEach
+            if (filterRemove != null && aInfo.packageName in filterRemove) return@forEach
+
+            val app = TorifiedApp().apply {
                 try {
-                    val pInfo = pMgr.getPackageInfo(aInfo.packageName, PackageManager.GET_PERMISSIONS)
-                    if (pInfo?.requestedPermissions != null) {
-                        for (permInfo in pInfo.requestedPermissions) {
-                            if (permInfo == Manifest.permission.INTERNET) {
-                                app.setUsesInternet(true)
-                            }
-                        }
+                    pMgr.getPackageInfo(aInfo.packageName, PackageManager.GET_PERMISSIONS)?.requestedPermissions?.let { perms ->
+                        if (Manifest.permission.INTERNET in perms) setUsesInternet(true)
                     }
                 } catch (e: Exception) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace()
                 }
 
                 try {
-                    app.name = pMgr.getApplicationLabel(aInfo).toString()
+                    name = pMgr.getApplicationLabel(aInfo).toString()
                 } catch (e: Exception) {
-                    // No name, we only show apps with names
-                    continue
+                    return@forEach
                 }
 
-                if (!app.usesInternet()) continue else {
-                    apps.add(app)
-                }
+                if (!usesInternet()) return@forEach
 
-                app.isEnabled = aInfo.enabled
-                app.uid = aInfo.uid
-                app.username = pMgr.getNameForUid(app.uid)
-                app.procname = aInfo.processName
-                app.packageName = aInfo.packageName
-
-                // Check if this application is allowed
-                app.isTorified = Arrays.binarySearch(tordApps, app.packageName) >= 0
+                isEnabled = aInfo.enabled
+                uid = aInfo.uid
+                username = pMgr.getNameForUid(uid)
+                procname = aInfo.processName
+                packageName = aInfo.packageName
+                isTorified = tordApps.binarySearch(packageName) >= 0
             }
-            apps.sort()
 
-            return apps
+            apps.add(app)
         }
+
+        apps.sort()
+        return apps
     }
 }
