@@ -9,20 +9,20 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.ArrayAdapter
 import android.widget.CheckBox
-import android.widget.GridView
 import android.widget.ImageView
-import android.widget.ListAdapter
 import android.widget.ProgressBar
 import android.widget.TextView
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -50,8 +50,8 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
 
     private var pMgr: PackageManager? = null
     private var mPrefs: SharedPreferences? = null
-    private var listAppsAll: GridView? = null
-    private var adapterAppsAll: ListAdapter? = null
+    private var recyclerView: RecyclerView? = null
+    private var adapterAppsAll: RecyclerView.Adapter<*>? = null
     private var progressBar: ProgressBar? = null
     private var alSuggested: List<String>? = null
     private var searchBar: TextInputEditText? = null
@@ -68,7 +68,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         pMgr = packageManager
         this.setContentView(R.layout.layout_apps)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        listAppsAll = findViewById(R.id.applistview)
+        recyclerView = findViewById(R.id.applistview)
         progressBar = findViewById(R.id.progressBar)
         searchBar = findViewById(R.id.searchBar)
 
@@ -90,6 +90,8 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
             hideKeyboard()
             reloadApps()
         }
+
+        recyclerView?.layoutManager = LinearLayoutManager(this)
     }
 
     override fun onResume() {
@@ -158,7 +160,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
             } else {
                 loadAppsAsync(fromCache = true)
             }
-            listAppsAll?.adapter = adapterAppsAll
+            recyclerView?.adapter = adapterAppsAll
         }
     }
 
@@ -214,69 +216,64 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         allApps?.mapTo(uiList) { TorifiedAppWrapper().apply { app = it } }
     }
 
-    private fun createAdapter(list: List<TorifiedAppWrapper>): ArrayAdapter<TorifiedAppWrapper> {
-        return object : ArrayAdapter<TorifiedAppWrapper>(
-            this,
-            R.layout.layout_apps_item,
-            R.id.itemtext,
-            list
-        ) {
-            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-                var convertView = convertView
-                var entry: ListEntry? = null
-                if (convertView == null) convertView =
-                    layoutInflater.inflate(R.layout.layout_apps_item, parent, false) else entry =
-                    convertView.tag as ListEntry
-                if (entry == null) {
-                    // Inflate a new view
-                    entry = ListEntry()
-                    entry.container = convertView!!.findViewById(R.id.appContainer)
-                    entry.icon = convertView.findViewById(R.id.itemicon)
-                    entry.box = convertView.findViewById(R.id.itemcheck)
-                    entry.text = convertView.findViewById(R.id.itemtext)
-                    entry.header = convertView.findViewById(R.id.tvHeader)
-                    entry.subheader = convertView.findViewById(R.id.tvSubheader)
-                    convertView.tag = entry
+    class AppViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val container: ViewGroup = view.findViewById(R.id.appContainer)
+        val icon: ImageView = view.findViewById(R.id.itemicon)
+        val box: CheckBox = view.findViewById(R.id.itemcheck)
+        val text: TextView = view.findViewById(R.id.itemtext)
+        val header: TextView = view.findViewById(R.id.tvHeader)
+        val subheader: TextView = view.findViewById(R.id.tvSubheader)
+    }
+
+    class AppAdapter(
+        private val list: List<TorifiedAppWrapper>,
+        private val pMgr: PackageManager,
+        private val onClickListener: View.OnClickListener
+    ) : RecyclerView.Adapter<AppViewHolder>() {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppViewHolder {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_apps_item, parent, false)
+            return AppViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
+            val taw = list[position]
+            if (taw.header != null) {
+                holder.header.text = taw.header
+                holder.header.visibility = View.VISIBLE
+                holder.subheader.visibility = View.GONE
+                holder.container.visibility = View.GONE
+            } else if (taw.subheader != null) {
+                holder.subheader.visibility = View.VISIBLE
+                holder.subheader.text = taw.subheader
+                holder.container.visibility = View.GONE
+                holder.header.visibility = View.GONE
+            } else {
+                val app = taw.app
+                holder.header.visibility = View.GONE
+                holder.subheader.visibility = View.GONE
+                holder.container.visibility = View.VISIBLE
+                try {
+                    holder.icon.setImageDrawable(pMgr.getApplicationIcon(app!!.packageName))
+                    holder.icon.tag = holder.box
+                    holder.icon.setOnClickListener(onClickListener)
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
-                val taw = list[position]
-                if (taw.header != null) {
-                    entry.header!!.text = taw.header
-                    entry.header!!.visibility = View.VISIBLE
-                    entry.subheader!!.visibility = View.GONE
-                    entry.container!!.visibility = View.GONE
-                } else if (taw.subheader != null) {
-                    entry.subheader!!.visibility = View.VISIBLE
-                    entry.subheader!!.text = taw.subheader
-                    entry.container!!.visibility = View.GONE
-                    entry.header!!.visibility = View.GONE
-                } else {
-                    val app = taw.app
-                    entry.header!!.visibility = View.GONE
-                    entry.subheader!!.visibility = View.GONE
-                    entry.container!!.visibility = View.VISIBLE
-                    if (entry.icon != null) {
-                        try {
-                            entry.icon!!.setImageDrawable(pMgr!!.getApplicationIcon(app!!.packageName))
-                            entry.icon!!.tag = entry.box
-                            entry.icon!!.setOnClickListener(this@AppManagerActivity)
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-                    }
-                    if (entry.text != null) {
-                        entry.text!!.text = app!!.name
-                        entry.text!!.tag = entry.box
-                        entry.text!!.setOnClickListener(this@AppManagerActivity)
-                    }
-                    if (entry.box != null) {
-                        entry.box!!.isChecked = app!!.isTorified
-                        entry.box!!.tag = app
-                        entry.box!!.setOnClickListener(this@AppManagerActivity)
-                    }
-                }
-                return convertView!!
+                holder.text.text = app!!.name
+                holder.text.tag = holder.box
+                holder.text.setOnClickListener(onClickListener)
+                holder.box.isChecked = app.isTorified
+                holder.box.tag = app
+                holder.box.setOnClickListener(onClickListener)
             }
         }
+
+        override fun getItemCount(): Int = list.size
+    }
+
+    private fun createAdapter(list: List<TorifiedAppWrapper>): RecyclerView.Adapter<AppViewHolder> {
+        return AppAdapter(list, pMgr!!, this)
     }
 
     private fun filterApps(query: String) {
@@ -284,7 +281,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
             it.app?.name?.contains(query, ignoreCase = true) == true
         }
         adapterAppsAll = createAdapter(filteredList)
-        listAppsAll?.adapter = adapterAppsAll
+        recyclerView?.adapter = adapterAppsAll
     }
 
     private fun saveAppSettings() {
