@@ -139,7 +139,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     }
 
     private fun calculateAppListHash(apps: List<TorifiedApp>?): Int {
-        return apps?.sumOf { it.packageName.hashCode() }!!
+        return apps?.sumOf { it.packageName.hashCode() } ?: -1
     }
 
     private fun reloadApps() {
