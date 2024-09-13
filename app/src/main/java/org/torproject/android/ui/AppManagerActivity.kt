@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -57,7 +58,6 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     private var progressBar: ProgressBar? = null
     private var alSuggested: List<String>? = null
     private var searchBar: TextInputEditText? = null
-    private var cachedAppListHash: Int = 0
 
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.Main + job)
@@ -143,14 +143,23 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
     }
 
     private fun reloadApps() {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val cachedAppListHash = sharedPreferences.getString("cachedAppListHash", null)?.toIntOrNull()
+        Log.d("AppManagerActivity", "Cached App List Hash: $cachedAppListHash")
+
         scope.launch {
             val currentAppListHash = calculateAppListHash(getApps(this@AppManagerActivity, mPrefs, null, alSuggested))
+            Log.d("AppManagerActivity", "Current App List Hash: $currentAppListHash")
+
             if (currentAppListHash != cachedAppListHash) {
+                Log.d("AppManagerActivity", "Hashes do not match. Reloading apps.")
                 progressBar?.visibility = View.VISIBLE
                 loadAppsAsync()
-                cachedAppListHash = currentAppListHash
+                sharedPreferences.edit().putString("cachedAppListHash", currentAppListHash.toString()).apply()
                 listAppsAll?.adapter = adapterAppsAll
                 progressBar?.visibility = View.GONE
+            } else {
+                Log.d("AppManagerActivity", "Hashes match. No need to reload apps.")
             }
         }
     }
