@@ -46,7 +46,6 @@
 
         <activity android:name=".OrbotActivity"
             android:excludeFromRecents="false"
-
             android:launchMode="singleInstance"
             android:theme="@style/OrbotActivityTheme"
             android:exported="true">
@@ -55,10 +54,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".core.ui.SettingsPreferencesFragment"
-            android:theme="@style/OrbotActivityTheme" />
 
         <activity
             android:theme="@style/OrbotActivityTheme"
