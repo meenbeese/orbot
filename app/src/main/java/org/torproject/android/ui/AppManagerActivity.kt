@@ -154,11 +154,11 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
                 progressBar?.visibility = View.VISIBLE
                 loadAppsAsync(false)
                 sharedPreferences.edit().putString("cachedAppListHash", currentAppListHash.toString()).apply()
-                listAppsAll?.adapter = adapterAppsAll
                 progressBar?.visibility = View.GONE
             } else {
                 loadAppsAsync(true)
             }
+            listAppsAll?.adapter = adapterAppsAll
         }
     }
 
