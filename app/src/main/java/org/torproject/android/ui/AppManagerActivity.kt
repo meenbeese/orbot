@@ -177,6 +177,11 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
                 suggestedApps = getApps(this@AppManagerActivity, mPrefs, alSuggested, null)
                 saveAppsToPrefs(allApps, suggestedApps)
             }
+
+            val tordApps = mPrefs?.getString(OrbotConstants.PREFS_KEY_TORIFIED, "")?.split("|")?.sorted() ?: emptyList()
+            allApps?.forEach { it.isTorified = tordApps.contains(it.packageName) }
+            suggestedApps?.forEach { it.isTorified = tordApps.contains(it.packageName) }
+
             populateUiList()
             adapterAppsAll = createAdapter(uiList)
         }
@@ -298,7 +303,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
         saveTorifiedApps(suggestedApps)
 
         mPrefs?.edit()?.apply {
-            putString(OrbotConstants.PREFS_KEY_TORIFIED, tordApps.toString())
+            putString(OrbotConstants.PREFS_KEY_TORIFIED, tordApps.toString().trimEnd('|'))
             apply()
         }
 
@@ -362,7 +367,7 @@ class AppManagerActivity : AppCompatActivity(), View.OnClickListener, OrbotConst
                 username = pMgr.getNameForUid(uid)
                 procname = aInfo.processName
                 packageName = aInfo.packageName
-                isTorified = tordApps.binarySearch(packageName) >= 0
+                isTorified = tordApps.contains(packageName)
             }
 
             apps.add(app)
