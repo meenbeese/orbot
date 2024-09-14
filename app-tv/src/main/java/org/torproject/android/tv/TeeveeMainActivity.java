@@ -44,12 +44,12 @@ import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.jetradarmobile.snowfall.SnowfallView;
 
 import net.freehaven.tor.control.TorControlCommands;
 import org.json.JSONArray;
+import org.torproject.android.core.IntentIntegrator;
+import org.torproject.android.core.IntentResult;
 import org.torproject.android.core.Languages;
 import org.torproject.android.core.LocaleHelper;
 import org.torproject.android.core.ui.Rotate3dAnimation;

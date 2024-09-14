@@ -21,14 +21,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
-
 import net.freehaven.tor.control.TorControlCommands;
 
 import org.json.JSONArray;
 import org.torproject.android.R;
 import org.torproject.android.core.ClipboardUtils;
+import org.torproject.android.core.IntentIntegrator;
+import org.torproject.android.core.IntentResult;
 import org.torproject.android.service.OrbotService;
 import org.torproject.android.service.util.Prefs;
 
