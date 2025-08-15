@@ -12,28 +12,21 @@ import org.junit.Test
 import tools.fastlane.screengrab.Screengrab
 
 class ScreenshotKindnessModeFragment : BaseScreenshotTest() {
-    @get:Rule
-    var mActivityScenarioRule = ActivityScenarioRule(OrbotActivity::class.java)
-
+    @get:Rule var mActivityScenarioRule = ActivityScenarioRule(OrbotActivity::class.java)
 
     @Test
     fun openKindnessModeFragment() {
         val label = getContext()?.getString(R.string.menu_kindness)
-        val bottomNavigationItemView = onView(
-            allOf(
-                withId(R.id.kindnessFragment), withContentDescription(label),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.bottom_navigation),
-                        0
-                    ),
-                    1
-                ),
-                isDisplayed()
+        val bottomNavigationItemView =
+            onView(
+                allOf(
+                    withId(R.id.kindnessFragment),
+                    withContentDescription(label),
+                    childAtPosition(childAtPosition(withId(R.id.bottom_navigation), 0), 1),
+                    isDisplayed(),
+                )
             )
-        )
         bottomNavigationItemView.perform(click())
         Screengrab.screenshot("C-kindness_mode_screen")
     }
-
 }

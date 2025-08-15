@@ -18,13 +18,11 @@ class SettingsActivity : BaseActivity() {
             .commit()
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             if (supportFragmentManager.backStackEntryCount > 1)
                 onBackPressedDispatcher.onBackPressed()
-            else
-                finish()
+            else finish()
             return true
         }
         return super.onOptionsItemSelected(item)

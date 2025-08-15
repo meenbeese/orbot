@@ -1,4 +1,5 @@
-/* Copyright (c) 2009, Nathan Freitas, Orbot / The Guardian Project - http://openideals.com/guardian */ /* See LICENSE for licensing information */
+/* Copyright (c) 2009, Nathan Freitas, Orbot / The Guardian Project - http://openideals.com/guardian */
+/* See LICENSE for licensing information */
 package org.torproject.android.ui.more
 
 import android.app.Activity.RESULT_OK
@@ -18,8 +19,8 @@ import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import org.torproject.android.R
 import org.torproject.android.localization.Languages
-import org.torproject.android.ui.core.BaseActivity
 import org.torproject.android.service.util.Prefs
+import org.torproject.android.ui.core.BaseActivity
 import org.torproject.android.ui.more.camo.CamoFragment
 
 class SettingsPreferenceFragment : PreferenceFragmentCompat() {
@@ -49,7 +50,6 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
                 false
             }
 
-
         // kludge for #992
         val categoryNodeConfig = findPreference<Preference>("category_node_config")
         categoryNodeConfig?.title =
@@ -66,7 +66,6 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
         val prefFlagSecure = findPreference<CheckBoxPreference>("pref_flag_secure")
         prefFlagSecure?.onPreferenceChangeListener =
             OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
-
                 Prefs.isSecureWindow = newValue as Boolean
                 (activity as BaseActivity).resetSecureFlags()
 
@@ -74,13 +73,14 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
             }
 
         val prefCamoDialog = findPreference<Preference>("pref_key_camo_dialog")
-        prefCamoDialog?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            activity?.supportFragmentManager?.commit {
-                addToBackStack(SettingsActivity.FRAGMENT_TAG)
-                replace(R.id.settings_container, CamoFragment())
+        prefCamoDialog?.onPreferenceClickListener =
+            Preference.OnPreferenceClickListener {
+                activity?.supportFragmentManager?.commit {
+                    addToBackStack(SettingsActivity.FRAGMENT_TAG)
+                    replace(R.id.settings_container, CamoFragment())
+                }
+                true
             }
-            true
-        }
 
         val prefOrbotAuthentication = findPreference<CheckBoxPreference>("pref_require_password")
         val prefPasswordNoBiometrics = findPreference<CheckBoxPreference>("pref_auth_no_biometrics")
@@ -96,15 +96,13 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
         }
     }
 
-
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
         initPrefs()
     }
 
     private fun setNoPersonalizedLearningOnEditTextPreferences() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
-            return
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
         val preferenceScreen = preferenceScreen
         val categoryCount = preferenceScreen.preferenceCount
         for (i in 0 until categoryCount) {

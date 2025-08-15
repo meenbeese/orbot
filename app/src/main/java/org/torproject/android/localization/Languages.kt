@@ -10,8 +10,8 @@ import java.util.*
 
 class Languages private constructor(activity: Activity) {
     /**
-     * Return an array of the names of all the supported languages, sorted to
-     * match what is returned by [Languages.supportedLocales].
+     * Return an array of the names of all the supported languages, sorted to match what is returned
+     * by [Languages.supportedLocales].
      *
      * @return
      */
@@ -27,53 +27,102 @@ class Languages private constructor(activity: Activity) {
     companion object {
         private var defaultLocale: Locale? = null
         val TIBETAN = Locale("bo")
-        val localesToTest = arrayOf(
-            Locale.ENGLISH, Locale.FRENCH, Locale.GERMAN,
-            Locale.ITALIAN, Locale.JAPANESE, Locale.KOREAN,
-            Locale.TRADITIONAL_CHINESE, Locale.SIMPLIFIED_CHINESE,
-            TIBETAN, Locale("af"), Locale("am"),
-            Locale("ar"), Locale("ay"), Locale("az"),
-            Locale("bg"), Locale("be"), Locale("bn", "BD"),
-            Locale("bn", "IN"),
-            Locale("bn"), Locale("ca"), Locale("cs"),
-            Locale("da"), Locale("el"), Locale("es"),
-            Locale("es", "MX"),
-            Locale("es", "CU"),
-
-            Locale("es", "AR"),
-            Locale("en", "GB"),
-            Locale("eo"),
-            Locale("et"), Locale("eu"), Locale("fa"),
-            Locale("fr"),
-            Locale("fi"), Locale("gl"),
-            Locale("gu"),
-            Locale("guc"),
-            Locale("gum"),
-            Locale("nah"),
-            Locale("hi"),
-            Locale("hr"), Locale("hu"), Locale("hy", "AM"),
-            Locale("ia"),
-            Locale("in"), Locale("hy"), Locale("in"),
-            Locale("is"), Locale("it"), Locale("iw"),
-            Locale("ka"), Locale("kk"), Locale("km"),
-            Locale("kn"), Locale("ky"), Locale("lo"),
-            Locale("lt"), Locale("lv"), Locale("mk"),
-            Locale("ml"), Locale("mn"), Locale("mr"),
-            Locale("ms"), Locale("my"), Locale("nb"),
-            Locale("ne"), Locale("nl"),
-            Locale("pa"),
-            Locale("pbb"),
-
-            Locale("pl"),
-            Locale("pt", "BR"),
-            Locale("pt"), Locale("rm"), Locale("ro"),
-            Locale("ru"), Locale("si", "LK"), Locale("sk"),
-            Locale("sl"), Locale("sn"), Locale("sq"), Locale("sr"),
-            Locale("sv"), Locale("sw"), Locale("ta"),
-            Locale("te"), Locale("th"), Locale("tl"),
-            Locale("tr"), Locale("uk"), Locale("ur"),
-            Locale("uz"), Locale("vi"), Locale("zu")
-        )
+        val localesToTest =
+            arrayOf(
+                Locale.ENGLISH,
+                Locale.FRENCH,
+                Locale.GERMAN,
+                Locale.ITALIAN,
+                Locale.JAPANESE,
+                Locale.KOREAN,
+                Locale.TRADITIONAL_CHINESE,
+                Locale.SIMPLIFIED_CHINESE,
+                TIBETAN,
+                Locale("af"),
+                Locale("am"),
+                Locale("ar"),
+                Locale("ay"),
+                Locale("az"),
+                Locale("bg"),
+                Locale("be"),
+                Locale("bn", "BD"),
+                Locale("bn", "IN"),
+                Locale("bn"),
+                Locale("ca"),
+                Locale("cs"),
+                Locale("da"),
+                Locale("el"),
+                Locale("es"),
+                Locale("es", "MX"),
+                Locale("es", "CU"),
+                Locale("es", "AR"),
+                Locale("en", "GB"),
+                Locale("eo"),
+                Locale("et"),
+                Locale("eu"),
+                Locale("fa"),
+                Locale("fr"),
+                Locale("fi"),
+                Locale("gl"),
+                Locale("gu"),
+                Locale("guc"),
+                Locale("gum"),
+                Locale("nah"),
+                Locale("hi"),
+                Locale("hr"),
+                Locale("hu"),
+                Locale("hy", "AM"),
+                Locale("ia"),
+                Locale("in"),
+                Locale("hy"),
+                Locale("in"),
+                Locale("is"),
+                Locale("it"),
+                Locale("iw"),
+                Locale("ka"),
+                Locale("kk"),
+                Locale("km"),
+                Locale("kn"),
+                Locale("ky"),
+                Locale("lo"),
+                Locale("lt"),
+                Locale("lv"),
+                Locale("mk"),
+                Locale("ml"),
+                Locale("mn"),
+                Locale("mr"),
+                Locale("ms"),
+                Locale("my"),
+                Locale("nb"),
+                Locale("ne"),
+                Locale("nl"),
+                Locale("pa"),
+                Locale("pbb"),
+                Locale("pl"),
+                Locale("pt", "BR"),
+                Locale("pt"),
+                Locale("rm"),
+                Locale("ro"),
+                Locale("ru"),
+                Locale("si", "LK"),
+                Locale("sk"),
+                Locale("sl"),
+                Locale("sn"),
+                Locale("sq"),
+                Locale("sr"),
+                Locale("sv"),
+                Locale("sw"),
+                Locale("ta"),
+                Locale("te"),
+                Locale("th"),
+                Locale("tl"),
+                Locale("tr"),
+                Locale("uk"),
+                Locale("ur"),
+                Locale("uz"),
+                Locale("vi"),
+                Locale("zu"),
+            )
         private const val USE_SYSTEM_DEFAULT = ""
         private const val DEFAULT_STRING = "Use System Default"
         private var locale: Locale? = null
@@ -84,22 +133,18 @@ class Languages private constructor(activity: Activity) {
         private lateinit var nameMap: Map<String, String>
 
         /**
-         * Get the instance of [Languages] to work with, providing the
-         * [Activity] that is will be working as part of, as well as the
-         * `resId` that has the exact string "Use System Default",
-         * i.e. `R.string.use_system_default`.
+         * Get the instance of [Languages] to work with, providing the [Activity] that is will be
+         * working as part of, as well as the `resId` that has the exact string "Use System
+         * Default", i.e. `R.string.use_system_default`.
          *
+         * That string resource `resId` is also used to find the supported translations: if an
+         * included translation has a translated string that matches that `resId`, then that
+         * language will be included as a supported language.
          *
-         * That string resource `resId` is also used to find the supported
-         * translations: if an included translation has a translated string that
-         * matches that `resId`, then that language will be included as a
-         * supported language.
-         *
-         * @param clazz the [Class] of the default `Activity`,
-         * usually the main `Activity` from where the
-         * Settings is launched from.
-         * @param resId the string resource ID to for the string "Use System Default",
-         * e.g. `R.string.use_system_default`
+         * @param clazz the [Class] of the default `Activity`, usually the main `Activity` from
+         *   where the Settings is launched from.
+         * @param resId the string resource ID to for the string "Use System Default", e.g.
+         *   `R.string.use_system_default`
          * @return
          */
         @JvmStatic
@@ -109,7 +154,9 @@ class Languages private constructor(activity: Activity) {
                 Companion.clazz = clazz
                 Companion.resId = resId
             } else {
-                throw RuntimeException("Languages singleton was already initialized, duplicate call to Languages.setup()!")
+                throw RuntimeException(
+                    "Languages singleton was already initialized, duplicate call to Languages.setup()!"
+                )
             }
         }
 
@@ -132,7 +179,7 @@ class Languages private constructor(activity: Activity) {
         fun setLanguage(contextWrapper: ContextWrapper, language: String?, refresh: Boolean) {
             locale =
                 if (locale != null && TextUtils.equals(locale!!.language, language) && !refresh) {
-                    return  // already configured
+                    return // already configured
                 } else if (language == null || language === USE_SYSTEM_DEFAULT) {
                     defaultLocale
                 } else {
@@ -165,9 +212,11 @@ class Languages private constructor(activity: Activity) {
         val localeSet: MutableSet<Locale> = LinkedHashSet()
         for (locale in localesToTest) {
             resources = Resources(assets, ignored, config)
-            if (!TextUtils.equals(DEFAULT_STRING, resources.getString(resId))
-                || locale == Locale.ENGLISH
-            ) localeSet.add(locale)
+            if (
+                !TextUtils.equals(DEFAULT_STRING, resources.getString(resId)) ||
+                    locale == Locale.ENGLISH
+            )
+                localeSet.add(locale)
         }
         for (locale in localeSet) {
             if (locale == TIBETAN) {
@@ -189,9 +238,9 @@ class Languages private constructor(activity: Activity) {
                 tmpMap[locale.toString()] = "Español Cubano"
             } else {
                 tmpMap[locale.toString()] =
-                    locale.getDisplayLanguage(locale).capitalize() + " " + locale.getDisplayCountry(
-                        locale
-                    )
+                    locale.getDisplayLanguage(locale).capitalize() +
+                        " " +
+                        locale.getDisplayCountry(locale)
             }
         }
 

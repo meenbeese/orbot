@@ -10,14 +10,16 @@ class ClientAuthDatabase internal constructor(context: Context?) :
         db.execSQL(V3_AUTHS_CREATE_SQL)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-    }
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {}
 
     companion object {
         const val DATABASE_NAME: String = "v3_client_auths"
         private const val DATABASE_VERSION = 1
 
-        private const val V3_AUTHS_CREATE_SQL = "CREATE TABLE " + DATABASE_NAME + " (" +
+        private const val V3_AUTHS_CREATE_SQL =
+            "CREATE TABLE " +
+                DATABASE_NAME +
+                " (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "domain TEXT, " +
                 "hash TEXT, " +

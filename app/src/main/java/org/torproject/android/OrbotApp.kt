@@ -5,34 +5,35 @@ import android.content.res.Configuration
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
+import java.util.Locale
 import org.torproject.android.localization.Languages
 import org.torproject.android.localization.LocaleHelper
 import org.torproject.android.service.util.Prefs
 
-import java.util.Locale
-
 class OrbotApp : Application() {
-
 
     override fun onCreate() {
         super.onCreate()
 
-        ProcessLifecycleOwner.get().lifecycle.addObserver(object : DefaultLifecycleObserver {
-            override fun onStop(owner: LifecycleOwner) {
-                super.onStop(owner)
-                if (!isAuthenticationPromptOpenLegacyFlag)
-                    shouldRequestAuthentication = true
-            }
+        ProcessLifecycleOwner.get()
+            .lifecycle
+            .addObserver(
+                object : DefaultLifecycleObserver {
+                    override fun onStop(owner: LifecycleOwner) {
+                        super.onStop(owner)
+                        if (!isAuthenticationPromptOpenLegacyFlag)
+                            shouldRequestAuthentication = true
+                    }
+                }
+            )
 
-        })
-
-//      useful for finding unclosed sockets...
-//        StrictMode.setVmPolicy(
-//            VmPolicy.Builder()
-//                .detectLeakedClosableObjects()
-//                .penaltyLog()
-//                .build()
-//        )
+        //      useful for finding unclosed sockets...
+        //        StrictMode.setVmPolicy(
+        //            VmPolicy.Builder()
+        //                .detectLeakedClosableObjects()
+        //                .penaltyLog()
+        //                .build()
+        //        )
 
         Prefs.setContext(applicationContext)
         LocaleHelper.onAttach(applicationContext)
@@ -74,6 +75,7 @@ class OrbotApp : Application() {
         var shouldRequestAuthentication: Boolean = true
         // see https://github.com/guardianproject/orbot-android/issues/1340
         var isAuthenticationPromptOpenLegacyFlag: Boolean = false
+
         fun resetLockFlags() {
             shouldRequestAuthentication = true
             isAuthenticationPromptOpenLegacyFlag = false

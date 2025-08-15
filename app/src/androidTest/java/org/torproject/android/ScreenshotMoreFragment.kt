@@ -12,26 +12,21 @@ import org.junit.Test
 import tools.fastlane.screengrab.Screengrab
 
 class ScreenshotMoreFragment : BaseScreenshotTest() {
-    @get:Rule
-    var mActivityScenarioRule = ActivityScenarioRule(OrbotActivity::class.java)
+    @get:Rule var mActivityScenarioRule = ActivityScenarioRule(OrbotActivity::class.java)
 
     @Test
     fun openMoreFragment() {
 
         val label = getContext()?.getString(R.string.menu_more)
-        val bottomNavigationItemView = onView(
-            allOf(
-                withId(R.id.moreFragment), withContentDescription(label),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.bottom_navigation),
-                        0
-                    ),
-                    2
-                ),
-                isDisplayed()
+        val bottomNavigationItemView =
+            onView(
+                allOf(
+                    withId(R.id.moreFragment),
+                    withContentDescription(label),
+                    childAtPosition(childAtPosition(withId(R.id.bottom_navigation), 0), 2),
+                    isDisplayed(),
+                )
             )
-        )
         bottomNavigationItemView.perform(click())
         Screengrab.screenshot("D-more_screen")
     }

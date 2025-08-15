@@ -10,8 +10,7 @@ import org.torproject.android.ui.connect.ConnectFragment
 import tools.fastlane.screengrab.Screengrab
 
 class ScreenshotConnected : BaseScreenshotTest() {
-    @get:Rule
-    var mActivityScenarioRule = ActivityScenarioRule(OrbotActivity::class.java)
+    @get:Rule var mActivityScenarioRule = ActivityScenarioRule(OrbotActivity::class.java)
 
     @Before
     fun setup() {
@@ -22,7 +21,6 @@ class ScreenshotConnected : BaseScreenshotTest() {
         }
     }
 
-
     @Test
     fun screenshotConnected() {
         mActivityScenarioRule.scenario.onActivity { activity ->
@@ -31,5 +29,4 @@ class ScreenshotConnected : BaseScreenshotTest() {
             Screengrab.screenshot("A-orbot_connected")
         }
     }
-
 }

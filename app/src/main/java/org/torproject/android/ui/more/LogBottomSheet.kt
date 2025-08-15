@@ -19,7 +19,9 @@ class LogBottomSheet : OrbotBottomSheetDialogFragment() {
     private var buffer = StringBuffer()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         val v = inflater.inflate(R.layout.log_bottom_sheet, container, false)
         tvLog = v.findViewById(R.id.orbotLog)
@@ -40,5 +42,4 @@ class LogBottomSheet : OrbotBottomSheetDialogFragment() {
         }
         buffer.append("$logLine\n")
     }
-
 }

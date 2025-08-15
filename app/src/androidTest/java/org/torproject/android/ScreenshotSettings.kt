@@ -13,8 +13,7 @@ import tools.fastlane.screengrab.Screengrab
 
 @Suppress("DEPRECATION")
 class ScreenshotSettings : BaseScreenshotTest() {
-    @get:Rule
-    var mActivityScenarioRule = ActivityScenarioRule(SettingsActivity::class.java)
+    @get:Rule var mActivityScenarioRule = ActivityScenarioRule(SettingsActivity::class.java)
 
     @Before
     fun setupSettings() {
@@ -24,7 +23,8 @@ class ScreenshotSettings : BaseScreenshotTest() {
             // using !! to force test crash if preferences.xml is changed
 
             // hide some boring preferences
-            frag.findPreference<CheckBoxPreference>("pref_allow_background_starts")!!.isVisible = false
+            frag.findPreference<CheckBoxPreference>("pref_allow_background_starts")!!.isVisible =
+                false
             frag.findPreference<CheckBoxPreference>("pref_detect_root")!!.isVisible = false
             frag.findPreference<CheckBoxPreference>("pref_enable_rotation")!!.isVisible = false
 
@@ -44,5 +44,4 @@ class ScreenshotSettings : BaseScreenshotTest() {
             frag.findPreference<CheckBoxPreference>("pref_require_password")!!.isChecked = false
         }
     }
-
 }

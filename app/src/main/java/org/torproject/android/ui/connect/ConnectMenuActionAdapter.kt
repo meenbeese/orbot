@@ -15,18 +15,16 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.net.toUri
-import org.torproject.android.R
-import org.torproject.android.service.OrbotConstants
-import org.torproject.android.service.util.Prefs
-import org.torproject.android.service.util.EmojiUtils
-import org.torproject.android.ui.OrbotMenuAction
 import java.util.ArrayList
 import java.util.TreeMap
+import org.torproject.android.R
+import org.torproject.android.service.OrbotConstants
+import org.torproject.android.service.util.EmojiUtils
+import org.torproject.android.service.util.Prefs
+import org.torproject.android.ui.OrbotMenuAction
 
 class ConnectMenuActionAdapter(context: Context, list: ArrayList<OrbotMenuAction>) :
-    ArrayAdapter<OrbotMenuAction>(
-        context, R.layout.action_list_view, list
-    ) {
+    ArrayAdapter<OrbotMenuAction>(context, R.layout.action_list_view, list) {
 
     private val layoutInflater =
         context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -48,14 +46,13 @@ class ConnectMenuActionAdapter(context: Context, list: ArrayList<OrbotMenuAction
                         returnView.findViewById<TextView>(R.id.llBoxShortcutsText).visibility =
                             View.VISIBLE
                     }
-
                 }
 
                 0 -> {
                     imgView.visibility = View.GONE
                     val currentExit = Prefs.exitNodes?.replace("{", "")?.replace("}", "") ?: ""
-                    if (currentExit.length == 2) tvAction.text =
-                        EmojiUtils.convertCountryCodeToFlagEmoji(currentExit)
+                    if (currentExit.length == 2)
+                        tvAction.text = EmojiUtils.convertCountryCodeToFlagEmoji(currentExit)
                     else tvAction.text = context.getString(R.string.globe)
                     emojiContainer.visibility = View.VISIBLE
                 }
@@ -93,10 +90,11 @@ class ConnectMenuActionAdapter(context: Context, list: ArrayList<OrbotMenuAction
                         val iv = ImageView(context)
                         val applicationInfo = packageManager.getApplicationInfo(tordApp, 0)
                         iv.setImageDrawable(packageManager.getApplicationIcon(tordApp))
-                        val params = LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                        )
+                        val params =
+                            LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                            )
                         params.height = 80
                         params.width = 80
                         params.setMargins(1, 10, 1, 1)
@@ -107,9 +105,8 @@ class ConnectMenuActionAdapter(context: Context, list: ArrayList<OrbotMenuAction
                         }
                         icons[packageManager.getApplicationLabel(applicationInfo).toString()] = iv
                     } catch (e: PackageManager.NameNotFoundException) {
-                        //couldn't draw icon for the package name
+                        // couldn't draw icon for the package name
                         Log.d("Orbot", "error getting package info for: $tordApp")
-
                     }
                 }
             }
@@ -123,15 +120,14 @@ class ConnectMenuActionAdapter(context: Context, list: ArrayList<OrbotMenuAction
         return false
     }
 
-
     private fun checkTorStatusUrl(context: Context, pkg: String) {
-        val i = Intent().apply {
-            `package` = pkg
-            data = "https://check.torproject.org".toUri()
-            action = Intent.ACTION_VIEW
-        }
+        val i =
+            Intent().apply {
+                `package` = pkg
+                data = "https://check.torproject.org".toUri()
+                action = Intent.ACTION_VIEW
+            }
         val pm: PackageManager = context.packageManager
         if (i.resolveActivity(pm) != null) context.startActivity(i)
     }
-
 }

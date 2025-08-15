@@ -5,13 +5,10 @@ import android.content.Intent
 import android.os.PowerManager
 import android.provider.Settings
 import android.view.View
-
-import androidx.fragment.app.FragmentActivity
-
-import com.google.android.material.snackbar.Snackbar
-
-import org.torproject.android.R
 import androidx.core.net.toUri
+import androidx.fragment.app.FragmentActivity
+import com.google.android.material.snackbar.Snackbar
+import org.torproject.android.R
 
 object PermissionManager {
     private const val SNACK_BAR_DURATION = 5000
@@ -25,14 +22,16 @@ object PermissionManager {
             return
         }
 
-        Snackbar.make(view, R.string.consider_disable_battery_optimizations,
-            SNACK_BAR_DURATION).setAction(R.string.disable) {
-            val intent = Intent().apply {
-                action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
-                data = "package:$packageName".toUri()
+        Snackbar.make(view, R.string.consider_disable_battery_optimizations, SNACK_BAR_DURATION)
+            .setAction(R.string.disable) {
+                val intent =
+                    Intent().apply {
+                        action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+                        data = "package:$packageName".toUri()
+                    }
+                activity.startActivity(intent)
             }
-            activity.startActivity(intent)
-        }.show()
+            .show()
     }
 
     @JvmStatic
@@ -42,10 +41,11 @@ object PermissionManager {
             return
         }
 
-        Snackbar.make(view, R.string.consider_enable_battery_optimizations,
-            SNACK_BAR_DURATION).setAction(R.string.enable) {
-            val intent = Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
-            activity.startActivity(intent)
-        }.show()
+        Snackbar.make(view, R.string.consider_enable_battery_optimizations, SNACK_BAR_DURATION)
+            .setAction(R.string.enable) {
+                val intent = Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+                activity.startActivity(intent)
+            }
+            .show()
     }
 }

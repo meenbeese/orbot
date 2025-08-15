@@ -8,11 +8,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
-import org.torproject.android.ui.connect.CustomBridgeBottomSheet
 import org.torproject.android.R
-import org.torproject.android.service.util.sendIntentToService
 import org.torproject.android.service.OrbotConstants
 import org.torproject.android.service.util.Prefs
+import org.torproject.android.service.util.sendIntentToService
+import org.torproject.android.ui.connect.CustomBridgeBottomSheet
 
 class KindnessFragment : Fragment() {
 
@@ -24,7 +24,9 @@ class KindnessFragment : Fragment() {
     private lateinit var pnlStatus: View
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         val view = inflater.inflate(R.layout.fragment_kindness, container, false)
         tvAllTimeTotal = view.findViewById(R.id.tvAlltimeTotal)
@@ -44,12 +46,14 @@ class KindnessFragment : Fragment() {
         }
 
         view.findViewById<TextView>(R.id.swVolunteerAdjust).setOnClickListener {
-            KindnessConfigBottomSheet().show(requireActivity().supportFragmentManager, CustomBridgeBottomSheet.Companion.TAG)
+            KindnessConfigBottomSheet()
+                .show(
+                    requireActivity().supportFragmentManager,
+                    CustomBridgeBottomSheet.Companion.TAG,
+                )
         }
 
-        btnActionActivate.setOnClickListener {
-            swVolunteerMode.isChecked = true
-        }
+        btnActionActivate.setOnClickListener { swVolunteerMode.isChecked = true }
 
         showPanelStatus(Prefs.beSnowflakeProxy())
         return view

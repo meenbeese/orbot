@@ -38,47 +38,50 @@ class ConfigConnectionBottomSheet :
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         binding = ConfigConnectionBottomSheetBinding.inflate(inflater, container, false)
 
-        radios = arrayListOf(
-            binding.rbDirect,
-            binding.rbSnowflake,
-            binding.rbSnowflakeAmp,
-            binding.rbSnowflakeSqs,
-            binding.rbTelegram,
-            binding.rbObfs4,
-            binding.rbEmail,
-            binding.rbMeek,
-            binding.rbCustom
-        )
-        radioSubtitleMap = mapOf<CompoundButton, View>(
-            binding.rbDirect to binding.tvDirectSubtitle,
-            binding.rbSnowflake to binding.tvSnowflakeSubtitle,
-            binding.rbSnowflakeAmp to binding.tvSnowflakeAmpSubtitle,
-            binding.rbSnowflakeSqs to binding.tvSnowflakeSqsSubtitle,
-            binding.rbTelegram to binding.tvTelegramSubtitle,
-            binding.rbObfs4 to binding.tvObfs4Subtitle,
-            binding.rbEmail to binding.tvEmailSubtitle,
-            binding.rbMeek to binding.tvMeekSubtitle,
-            binding.rbCustom to binding.tvCustomSubtitle
-        )
-        allSubtitles = arrayListOf(
-            binding.tvDirectSubtitle,
-            binding.tvSnowflakeSubtitle,
-            binding.tvSnowflakeAmpSubtitle,
-            binding.tvSnowflakeSqsSubtitle,
-            binding.tvTelegramSubtitle,
-            binding.tvObfs4Subtitle,
-            binding.tvEmailSubtitle,
-            binding.tvMeekSubtitle,
-            binding.tvCustomSubtitle
-        )
+        radios =
+            arrayListOf(
+                binding.rbDirect,
+                binding.rbSnowflake,
+                binding.rbSnowflakeAmp,
+                binding.rbSnowflakeSqs,
+                binding.rbTelegram,
+                binding.rbObfs4,
+                binding.rbEmail,
+                binding.rbMeek,
+                binding.rbCustom,
+            )
+        radioSubtitleMap =
+            mapOf<CompoundButton, View>(
+                binding.rbDirect to binding.tvDirectSubtitle,
+                binding.rbSnowflake to binding.tvSnowflakeSubtitle,
+                binding.rbSnowflakeAmp to binding.tvSnowflakeAmpSubtitle,
+                binding.rbSnowflakeSqs to binding.tvSnowflakeSqsSubtitle,
+                binding.rbTelegram to binding.tvTelegramSubtitle,
+                binding.rbObfs4 to binding.tvObfs4Subtitle,
+                binding.rbEmail to binding.tvEmailSubtitle,
+                binding.rbMeek to binding.tvMeekSubtitle,
+                binding.rbCustom to binding.tvCustomSubtitle,
+            )
+        allSubtitles =
+            arrayListOf(
+                binding.tvDirectSubtitle,
+                binding.tvSnowflakeSubtitle,
+                binding.tvSnowflakeAmpSubtitle,
+                binding.tvSnowflakeSqsSubtitle,
+                binding.tvTelegramSubtitle,
+                binding.tvObfs4Subtitle,
+                binding.tvEmailSubtitle,
+                binding.tvMeekSubtitle,
+                binding.tvCustomSubtitle,
+            )
 
-        binding.btnAskTor.setOnClickListener {
-            askTor()
-        }
+        binding.btnAskTor.setOnClickListener { askTor() }
 
         // setup containers so radio buttons can be checked if labels are clicked on
         binding.directContainer.setOnClickListener { binding.rbDirect.isChecked = true }
@@ -141,15 +144,19 @@ class ConfigConnectionBottomSheet :
                 if (i.resolveActivity(pm) != null) {
                     startActivity(i)
                 }
-            }
-            else if (binding.rbMeek.isChecked) {
+            } else if (binding.rbMeek.isChecked) {
                 Prefs.transport = Transport.MEEK_AZURE
                 Prefs.smartConnect = false
                 closeAndConnect()
             }
 
-            if (binding.rbTelegram.isChecked || binding.rbEmail.isChecked || binding.rbCustom.isChecked) {
-                CustomBridgeBottomSheet().show(requireActivity().supportFragmentManager, CustomBridgeBottomSheet.TAG)
+            if (
+                binding.rbTelegram.isChecked ||
+                    binding.rbEmail.isChecked ||
+                    binding.rbCustom.isChecked
+            ) {
+                CustomBridgeBottomSheet()
+                    .show(requireActivity().supportFragmentManager, CustomBridgeBottomSheet.TAG)
             }
         }
 
@@ -169,15 +176,19 @@ class ConfigConnectionBottomSheet :
             }
         }
 
-        binding.btnAction.text = when (buttonView) {
-            binding.rbTelegram, binding.rbEmail, binding.rbCustom -> getString(R.string.next)
-            else -> getString(R.string.connect)
-        }
+        binding.btnAction.text =
+            when (buttonView) {
+                binding.rbTelegram,
+                binding.rbEmail,
+                binding.rbCustom -> getString(R.string.next)
+                else -> getString(R.string.connect)
+            }
     }
 
     private fun closeAndConnect() {
         closeAllSheets()
-        val navHostFragment = requireActivity().supportFragmentManager.fragments[0] as NavHostFragment
+        val navHostFragment =
+            requireActivity().supportFragmentManager.fragments[0] as NavHostFragment
         val connectFrag = navHostFragment.childFragmentManager.fragments.last() as ConnectFragment
         connectFrag.startTorAndVpn()
     }
@@ -190,7 +201,9 @@ class ConfigConnectionBottomSheet :
             Transport.SNOWFLAKE -> binding.rbSnowflake.isChecked = true
             Transport.SNOWFLAKE_AMP -> binding.rbSnowflakeAmp.isChecked = true
             Transport.SNOWFLAKE_SQS -> binding.rbSnowflakeSqs.isChecked = true
-            Transport.WEBTUNNEL -> TODO() // This should currently not happen, there's no default Webtunnel bridges advertised, yet.
+            Transport.WEBTUNNEL ->
+                TODO() // This should currently not happen, there's no default Webtunnel bridges
+                       // advertised, yet.
             Transport.CUSTOM -> binding.rbCustom.isChecked = true
         }
     }
@@ -208,7 +221,11 @@ class ConfigConnectionBottomSheet :
                     if (conf == null) {
                         updateAskTorBt()
 
-                        Toast.makeText(context, R.string.error_asking_tor_for_bridges, Toast.LENGTH_LONG)
+                        Toast.makeText(
+                                context,
+                                R.string.error_asking_tor_for_bridges,
+                                Toast.LENGTH_LONG,
+                            )
                             .show()
 
                         return@withContext
@@ -242,7 +259,9 @@ class ConfigConnectionBottomSheet :
                         Transport.SNOWFLAKE_SQS -> {
                             binding.rbSnowflakeSqs.isChecked = true
                         }
-                        Transport.WEBTUNNEL -> TODO() // This should currently not happen, there's no default Webtunnel bridges advertised, yet.
+                        Transport.WEBTUNNEL ->
+                            TODO() // This should currently not happen, there's no default Webtunnel
+                                   // bridges advertised, yet.
                         Transport.CUSTOM -> {
                             binding.rbCustom.isChecked = true
                         }
@@ -251,28 +270,31 @@ class ConfigConnectionBottomSheet :
                     delay(5 * 1000)
                     updateAskTorBt()
                 }
-            }
-            catch(e: Throwable) {
+            } catch (e: Throwable) {
                 withContext(Dispatchers.Main) {
                     updateAskTorBt()
 
-                    Toast.makeText(context,
-                        "${getString(R.string.error_asking_tor_for_bridges)}\n${e.localizedMessage}",
-                        Toast.LENGTH_LONG)
+                    Toast.makeText(
+                            context,
+                            "${getString(R.string.error_asking_tor_for_bridges)}\n${e.localizedMessage}",
+                            Toast.LENGTH_LONG,
+                        )
                         .show()
                 }
             }
         }
     }
 
-    private fun updateAskTorBt(text: CharSequence = getString(R.string.ask_tor), drawableId: Int? = null) {
+    private fun updateAskTorBt(
+        text: CharSequence = getString(R.string.ask_tor),
+        drawableId: Int? = null,
+    ) {
         val context = context ?: return
 
         if (drawableId != null) {
             val image = AppCompatResources.getDrawable(context, drawableId)
             binding.btnAskTor.setCompoundDrawablesWithIntrinsicBounds(image, null, null, null)
-        }
-        else {
+        } else {
             binding.btnAskTor.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
         }
 

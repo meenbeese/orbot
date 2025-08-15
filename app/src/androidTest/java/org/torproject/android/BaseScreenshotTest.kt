@@ -20,13 +20,11 @@ import org.junit.runner.RunWith
 import org.torproject.android.service.util.Prefs
 import tools.fastlane.screengrab.locale.LocaleTestRule
 
-
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 abstract class BaseScreenshotTest {
 
-    @Rule @JvmField
-    val localeTestRule = LocaleTestRule()
+    @Rule @JvmField val localeTestRule = LocaleTestRule()
 
     fun ViewInteraction.isGone() = getViewAssertion(ViewMatchers.Visibility.GONE)
 
@@ -34,21 +32,16 @@ abstract class BaseScreenshotTest {
 
     fun ViewInteraction.isInvisible() = getViewAssertion(ViewMatchers.Visibility.INVISIBLE)
 
-
     // all tests need this for OrbotService's notification
     @get:Rule
     var mGrantPermissionRule: GrantPermissionRule? =
-        GrantPermissionRule.grant(
-            "android.permission.POST_NOTIFICATIONS"
-        )
+        GrantPermissionRule.grant("android.permission.POST_NOTIFICATIONS")
 
     private fun getViewAssertion(visibility: ViewMatchers.Visibility): ViewAssertion? {
         return ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(visibility))
     }
 
-    open fun childAtPosition(
-        parentMatcher: Matcher<View>, position: Int
-    ): Matcher<View> {
+    open fun childAtPosition(parentMatcher: Matcher<View>, position: Int): Matcher<View> {
 
         return object : TypeSafeMatcher<View>() {
             override fun describeTo(description: Description) {
@@ -58,14 +51,15 @@ abstract class BaseScreenshotTest {
 
             public override fun matchesSafely(view: View): Boolean {
                 val parent = view.parent
-                return parent is ViewGroup && parentMatcher.matches(parent)
-                        && view == parent.getChildAt(position)
+                return parent is ViewGroup &&
+                    parentMatcher.matches(parent) &&
+                    view == parent.getChildAt(position)
             }
         }
     }
 
     @Before
-    fun setPrefs(){
+    fun setPrefs() {
         Prefs.setContext(getContext())
         Prefs.isSecureWindow = false
     }
@@ -73,5 +67,4 @@ abstract class BaseScreenshotTest {
     open fun getContext(): Context? {
         return InstrumentationRegistry.getInstrumentation().targetContext
     }
-
 }

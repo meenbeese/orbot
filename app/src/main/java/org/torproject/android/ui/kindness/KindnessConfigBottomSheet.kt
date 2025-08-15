@@ -15,7 +15,9 @@ class KindnessConfigBottomSheet : OrbotBottomSheetDialogFragment() {
     private lateinit var btnAction: Button
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         val v = inflater.inflate(R.layout.kindess_config_bottom_sheet, container, false)
         v.findViewById<View>(R.id.tvCancel).setOnClickListener { dismiss() }
@@ -25,7 +27,6 @@ class KindnessConfigBottomSheet : OrbotBottomSheetDialogFragment() {
         val configCharging = v.findViewById<SwitchCompat>(R.id.swKindnessConfigCharging)
 
         btnAction.setOnClickListener {
-
             Prefs.setBeSnowflakeProxyLimitWifi(configWifi.isChecked)
             Prefs.setBeSnowflakeProxyLimitCharging(configCharging.isChecked)
 

@@ -11,11 +11,11 @@ import android.text.style.StyleSpan
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
+import java.io.IOException
 import org.torproject.android.BuildConfig
 import org.torproject.android.R
-import org.torproject.android.service.util.DiskUtils
 import org.torproject.android.service.OrbotService
-import java.io.IOException
+import org.torproject.android.service.util.DiskUtils
 
 class AboutDialogFragment : DialogFragment() {
 
@@ -62,7 +62,7 @@ class AboutDialogFragment : DialogFragment() {
                     StyleSpan(Typeface.BOLD),
                     0,
                     aboutText.indexOf("\n"),
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
                 )
 
                 tvAbout.text = spannableAboutText

@@ -16,21 +16,22 @@ class OnionServiceDatabase internal constructor(context: Context?) :
         }
     }
 
-
     companion object {
         const val DATABASE_NAME: String = "onion_service"
         const val ONION_SERVICE_TABLE_NAME: String = "onion_services"
         private const val DATABASE_VERSION = 2
 
         private const val ONION_SERVICES_CREATE_SQL =
-            "CREATE TABLE " + ONION_SERVICE_TABLE_NAME + " (" +
-                    "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "name TEXT, " +
-                    "domain TEXT, " +
-                    "onion_port INTEGER, " +
-                    "created_by_user INTEGER DEFAULT 0, " +
-                    "enabled INTEGER DEFAULT 1, " +
-                    "port INTEGER, " +
-                    "filepath TEXT);"
+            "CREATE TABLE " +
+                ONION_SERVICE_TABLE_NAME +
+                " (" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "name TEXT, " +
+                "domain TEXT, " +
+                "onion_port INTEGER, " +
+                "created_by_user INTEGER DEFAULT 0, " +
+                "enabled INTEGER DEFAULT 1, " +
+                "port INTEGER, " +
+                "filepath TEXT);"
     }
 }

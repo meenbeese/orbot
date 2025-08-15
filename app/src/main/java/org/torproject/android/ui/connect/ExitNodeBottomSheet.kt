@@ -7,18 +7,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.NavHostFragment
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
+import java.text.Collator
+import java.util.Locale
+import java.util.TreeMap
 import org.torproject.android.R
 import org.torproject.android.service.util.EmojiUtils
 import org.torproject.android.service.util.Prefs
 import org.torproject.android.ui.OrbotBottomSheetDialogFragment
-
-import java.text.Collator
-import java.util.Locale
-import java.util.TreeMap
 
 class ExitNodeBottomSheet : OrbotBottomSheetDialogFragment() {
 
@@ -35,15 +32,12 @@ class ExitNodeBottomSheet : OrbotBottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         val view = inflater.inflate(R.layout.exit_node_bottom_sheet, container, false)
 
         // exitNodes returns {XY} for country but null for world
-        selectedCode = Prefs.exitNodes
-            ?.removePrefix("{")
-            ?.removeSuffix("}")
-            ?: ""
+        selectedCode = Prefs.exitNodes?.removePrefix("{")?.removeSuffix("}") ?: ""
         rvList = view.findViewById(R.id.rvExitNodes)
         rvList.layoutManager = LinearLayoutManager(context)
 
@@ -68,9 +62,8 @@ class ExitNodeBottomSheet : OrbotBottomSheetDialogFragment() {
         return view
     }
 
-    private inner class ExitNodeAdapter(
-        private val list: List<Pair<String, String>>,
-    ) : RecyclerView.Adapter<ExitNodeAdapter.ViewHolder>() {
+    private inner class ExitNodeAdapter(private val list: List<Pair<String, String>>) :
+        RecyclerView.Adapter<ExitNodeAdapter.ViewHolder>() {
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val text: TextView = view.findViewById(R.id.tvCountry)
@@ -78,8 +71,8 @@ class ExitNodeBottomSheet : OrbotBottomSheetDialogFragment() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_exit_node, parent, false)
+            val view =
+                LayoutInflater.from(parent.context).inflate(R.layout.item_exit_node, parent, false)
             return ViewHolder(view)
         }
 
@@ -93,8 +86,10 @@ class ExitNodeBottomSheet : OrbotBottomSheetDialogFragment() {
                 val prev = selectedCode
                 selectedCode = code
                 notifyItemChanged(list.indexOfFirst { it.first == prev })
-                val navHostFragment = requireActivity().supportFragmentManager.fragments[0] as NavHostFragment
-                val connectFrag = navHostFragment.childFragmentManager.fragments.last() as ConnectFragment
+                val navHostFragment =
+                    requireActivity().supportFragmentManager.fragments[0] as NavHostFragment
+                val connectFrag =
+                    navHostFragment.childFragmentManager.fragments.last() as ConnectFragment
                 notifyItemChanged(position)
                 connectFrag.onExitNodeSelected(code, displayName)
                 dismiss()
@@ -105,31 +100,32 @@ class ExitNodeBottomSheet : OrbotBottomSheetDialogFragment() {
     }
 
     companion object {
-        private val COUNTRY_CODES = arrayOf(
-            "DE",
-            "AT",
-            "SE",
-            "CH",
-            "IS",
-            "CA",
-            "US",
-            "ES",
-            "FR",
-            "BG",
-            "PL",
-            "AU",
-            "BR",
-            "CZ",
-            "DK",
-            "FI",
-            "GB",
-            "HU",
-            "NL",
-            "JP",
-            "RO",
-            "RU",
-            "SG",
-            "SK"
-        )
+        private val COUNTRY_CODES =
+            arrayOf(
+                "DE",
+                "AT",
+                "SE",
+                "CH",
+                "IS",
+                "CA",
+                "US",
+                "ES",
+                "FR",
+                "BG",
+                "PL",
+                "AU",
+                "BR",
+                "CZ",
+                "DK",
+                "FI",
+                "GB",
+                "HU",
+                "NL",
+                "JP",
+                "RO",
+                "RU",
+                "SG",
+                "SK",
+            )
     }
 }

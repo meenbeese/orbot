@@ -11,9 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import org.torproject.android.R
 import org.torproject.android.ui.OrbotMenuAction
 
-class MoreActionAdapter(
-    private val items: List<OrbotMenuAction>
-) : RecyclerView.Adapter<MoreActionAdapter.ViewHolder>() {
+class MoreActionAdapter(private val items: List<OrbotMenuAction>) :
+    RecyclerView.Adapter<MoreActionAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val icon: ImageView = view.findViewById(R.id.ivIcon)
@@ -22,8 +21,8 @@ class MoreActionAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_more_action, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_more_action, parent, false)
         return ViewHolder(view)
     }
 
@@ -31,8 +30,7 @@ class MoreActionAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        if (item.removeTint)
-            ImageViewCompat.setImageTintList(holder.icon, null)
+        if (item.removeTint) ImageViewCompat.setImageTintList(holder.icon, null)
         if (item.backgroundColor != null) {
             holder.card.setCardBackgroundColor(item.backgroundColor!!)
         }

@@ -21,9 +21,7 @@ class CamoConfirmationDialogFragment : DialogFragment() {
             .setIcon(args.getInt(BUNDLE_KEY_IMAGE_ID))
             .setTitle(getTitle(camoAppName))
             .setMessage(getMessage(camoAppName))
-            .setNegativeButton(android.R.string.cancel) { _, _ ->
-                dismiss()
-            }
+            .setNegativeButton(android.R.string.cancel) { _, _ -> dismiss() }
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 val activePackageName = mapping[camoAppName]
                 Prefs.setCamoAppPackage(activePackageName)
@@ -43,33 +41,23 @@ class CamoConfirmationDialogFragment : DialogFragment() {
     private fun getTitle(camoAppName: String): String {
         return if (camoAppName == getString(R.string.app_name))
             getString(R.string.camo_dialog_disable_title)
-        else getString(
-            R.string.camo_dialog_title,
-            camoAppName
-        )
+        else getString(R.string.camo_dialog_title, camoAppName)
     }
 
     private fun getMessage(camoAppName: String): String {
         return if (camoAppName == getString(R.string.app_name))
             getString(R.string.camo_dialog_disable_confirm_msg)
-        else getString(
-            R.string.camo_dialog_enable_confirm_msg,
-            camoAppName, camoAppName
-        )
+        else getString(R.string.camo_dialog_enable_confirm_msg, camoAppName, camoAppName)
     }
 
     companion object {
         const val BUNDLE_KEY_IMAGE_ID = "id"
         const val BUNDLE_KEY_NAME = "name"
         const val TAG = "CamoConfirmDialog"
-        fun newInstance(
-            drawableId: Int,
-            name: Int
-        ): CamoConfirmationDialogFragment = CamoConfirmationDialogFragment().apply {
-            arguments = bundleOf(
-                BUNDLE_KEY_IMAGE_ID to drawableId,
-                BUNDLE_KEY_NAME to name
-            )
-        }
+
+        fun newInstance(drawableId: Int, name: Int): CamoConfirmationDialogFragment =
+            CamoConfirmationDialogFragment().apply {
+                arguments = bundleOf(BUNDLE_KEY_IMAGE_ID to drawableId, BUNDLE_KEY_NAME to name)
+            }
     }
 }

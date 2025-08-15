@@ -12,7 +12,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsetsController
 import androidx.activity.addCallback
-
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -25,19 +24,17 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.scottyab.rootbeer.RootBeer
-
-import org.torproject.android.service.util.sendIntentToService
-import org.torproject.android.ui.core.BaseActivity
+import java.util.Locale
 import org.torproject.android.service.OrbotConstants
 import org.torproject.android.service.util.Prefs
+import org.torproject.android.service.util.sendIntentToService
 import org.torproject.android.service.util.showToast
-import org.torproject.android.ui.more.LogBottomSheet
 import org.torproject.android.ui.connect.ConnectViewModel
+import org.torproject.android.ui.core.BaseActivity
 import org.torproject.android.ui.core.DeviceAuthenticationPrompt
-import java.util.Locale
+import org.torproject.android.ui.more.LogBottomSheet
 
 class OrbotActivity : BaseActivity() {
 
@@ -72,20 +69,20 @@ class OrbotActivity : BaseActivity() {
         lastSelectedItemId = savedInstanceState?.getInt(KEY_SELECTED_TAB) ?: lastSelectedItemId
         previousReceivedTorStatus = savedInstanceState?.getString(KEY_TOR_STATUS)
 
-        // programmatically set title to "Orbot" since camo mode will overwrite it here from manifest
+        // programmatically set title to "Orbot" since camo mode will overwrite it here from
+        // manifest
         title = getString(R.string.app_name)
 
         try {
             createOrbot()
-
         } catch (re: RuntimeException) {
-            //catch this to avoid malicious launches as document Cure53 Audit: ORB-01-009 WP1/2: Orbot DoS via exported activity (High)
+            // catch this to avoid malicious launches as document Cure53 Audit: ORB-01-009 WP1/2:
+            // Orbot DoS via exported activity (High)
 
-            //clear malicious intent
+            // clear malicious intent
             intent = null
             finish()
         }
-
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -128,33 +125,40 @@ class OrbotActivity : BaseActivity() {
 
         bottomNavigationView.selectedItemId = lastSelectedItemId
 
-        val navOptionsLeftToRight = NavOptions.Builder().setEnterAnim(R.anim.slide_in_right)
-            .setExitAnim(R.anim.slide_out_left).setPopEnterAnim(R.anim.slide_in_right)
-            .setPopExitAnim(R.anim.slide_out_left).build()
+        val navOptionsLeftToRight =
+            NavOptions.Builder()
+                .setEnterAnim(R.anim.slide_in_right)
+                .setExitAnim(R.anim.slide_out_left)
+                .setPopEnterAnim(R.anim.slide_in_right)
+                .setPopExitAnim(R.anim.slide_out_left)
+                .build()
 
-        val navOptionsRightToLeft = NavOptions.Builder().setEnterAnim(R.anim.slide_in_left)
-            .setExitAnim(R.anim.slide_out_right).setPopEnterAnim(R.anim.slide_in_left)
-            .setPopExitAnim(R.anim.slide_out_right).build()
+        val navOptionsRightToLeft =
+            NavOptions.Builder()
+                .setEnterAnim(R.anim.slide_in_left)
+                .setExitAnim(R.anim.slide_out_right)
+                .setPopEnterAnim(R.anim.slide_in_left)
+                .setPopExitAnim(R.anim.slide_out_right)
+                .build()
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             if (item.itemId == lastSelectedItemId) {
                 return@setOnItemSelectedListener true
             }
 
-            val navOptions = if (item.itemId > lastSelectedItemId) {
-                navOptionsLeftToRight
-            } else {
-                navOptionsRightToLeft
-            }
+            val navOptions =
+                if (item.itemId > lastSelectedItemId) {
+                    navOptionsLeftToRight
+                } else {
+                    navOptionsRightToLeft
+                }
 
             when (item.itemId) {
-                R.id.connectFragment -> navController.navigate(
-                    R.id.connectFragment, null, navOptions
-                )
+                R.id.connectFragment ->
+                    navController.navigate(R.id.connectFragment, null, navOptions)
 
-                R.id.kindnessFragment -> navController.navigate(
-                    R.id.kindnessFragment, null, navOptions
-                )
+                R.id.kindnessFragment ->
+                    navController.navigate(R.id.kindnessFragment, null, navOptions)
 
                 R.id.moreFragment -> navController.navigate(R.id.moreFragment, null, navOptions)
             }
@@ -165,13 +169,16 @@ class OrbotActivity : BaseActivity() {
 
         with(LocalBroadcastManager.getInstance(this)) {
             registerReceiver(
-                orbotServiceBroadcastReceiver, IntentFilter(OrbotConstants.LOCAL_ACTION_STATUS)
+                orbotServiceBroadcastReceiver,
+                IntentFilter(OrbotConstants.LOCAL_ACTION_STATUS),
             )
             registerReceiver(
-                orbotServiceBroadcastReceiver, IntentFilter(OrbotConstants.LOCAL_ACTION_LOG)
+                orbotServiceBroadcastReceiver,
+                IntentFilter(OrbotConstants.LOCAL_ACTION_LOG),
             )
             registerReceiver(
-                orbotServiceBroadcastReceiver, IntentFilter(OrbotConstants.LOCAL_ACTION_PORTS)
+                orbotServiceBroadcastReceiver,
+                IntentFilter(OrbotConstants.LOCAL_ACTION_PORTS),
             )
         }
 
@@ -180,56 +187,51 @@ class OrbotActivity : BaseActivity() {
         Prefs.initWeeklyWorker()
 
         if (!rootDetectionShown && Prefs.detectRoot() && RootBeer(this).isRooted) {
-            //we found indication of root
+            // we found indication of root
             applicationContext.showToast(getString(R.string.root_warning))
 
             rootDetectionShown = true
         }
 
-        onBackPressedDispatcher.addCallback(this ) {
+        onBackPressedDispatcher.addCallback(this) {
             if (lastSelectedItemId != R.id.connectFragment) {
                 bottomNavigationView.selectedItemId = R.id.connectFragment
-            }
-            else finish()
+            } else finish()
         }
     }
 
     private fun requestNotificationPermission() {
         when (PackageManager.PERMISSION_GRANTED) {
-            ContextCompat.checkSelfPermission(
-                this, Manifest.permission.POST_NOTIFICATIONS
-            ) -> {
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) -> {
                 // You can use the API that requires the permission.
             }
 
             else -> {
                 // You can directly ask for the permission.
                 // The registered ActivityResultCallback gets the result of this request.
-                requestPermissionLauncher.launch(
-                    Manifest.permission.POST_NOTIFICATIONS
-                )
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
     }
 
     // Register the permissions callback, which handles the user's response to the
-// system permissions dialog. Save the return value, an instance of
-// ActivityResultLauncher. You can use either a val, as shown in this snippet,
-// or a lateinit var in your onAttach() or onCreate() method.
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            // Permission is granted. Continue the action or workflow in your
-            // app.
-        } else {
-            // Explain to the user that the feature is unavailable because the
-            // feature requires a permission that the user has denied. At the
-            // same time, respect the user's decision. Don't link to system
-            // settings in an effort to convince the user to change their
-            // decision.
+    // system permissions dialog. Save the return value, an instance of
+    // ActivityResultLauncher. You can use either a val, as shown in this snippet,
+    // or a lateinit var in your onAttach() or onCreate() method.
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean
+            ->
+            if (isGranted) {
+                // Permission is granted. Continue the action or workflow in your
+                // app.
+            } else {
+                // Explain to the user that the feature is unavailable because the
+                // feature requires a permission that the user has denied. At the
+                // same time, respect the user's decision. Don't link to system
+                // settings in an effort to convince the user to change their
+                // decision.
+            }
         }
-    }
 
     override fun onStart() {
         super.onStart()
@@ -263,83 +265,86 @@ class OrbotActivity : BaseActivity() {
         }
     }
 
-    private val orbotServiceBroadcastReceiver = object : BroadcastReceiver() {
-        @SuppressLint("SetTextI18n")
-        override fun onReceive(context: Context?, intent: Intent?) {
-            val status = intent?.getStringExtra(OrbotConstants.EXTRA_STATUS)
-            when (intent?.action) {
-                OrbotConstants.LOCAL_ACTION_STATUS -> {
-                    if (status != previousReceivedTorStatus) {
-                        connectViewModel.updateState(this@OrbotActivity, status)
-                        previousReceivedTorStatus = status
+    private val orbotServiceBroadcastReceiver =
+        object : BroadcastReceiver() {
+            @SuppressLint("SetTextI18n")
+            override fun onReceive(context: Context?, intent: Intent?) {
+                val status = intent?.getStringExtra(OrbotConstants.EXTRA_STATUS)
+                when (intent?.action) {
+                    OrbotConstants.LOCAL_ACTION_STATUS -> {
+                        if (status != previousReceivedTorStatus) {
+                            connectViewModel.updateState(this@OrbotActivity, status)
+                            previousReceivedTorStatus = status
+                        }
                     }
-                }
 
-                OrbotConstants.LOCAL_ACTION_LOG -> {
-                    intent.getStringExtra(OrbotConstants.LOCAL_EXTRA_BOOTSTRAP_PERCENT)?.let {
-                        connectViewModel.updateBootstrapPercent(it.toIntOrNull() ?: 0)
+                    OrbotConstants.LOCAL_ACTION_LOG -> {
+                        intent.getStringExtra(OrbotConstants.LOCAL_EXTRA_BOOTSTRAP_PERCENT)?.let {
+                            connectViewModel.updateBootstrapPercent(it.toIntOrNull() ?: 0)
+                        }
+                        intent.getStringExtra(OrbotConstants.LOCAL_EXTRA_LOG)?.let {
+                            logBottomSheet.appendLog(it)
+                        }
                     }
-                    intent.getStringExtra(OrbotConstants.LOCAL_EXTRA_LOG)?.let {
-                        logBottomSheet.appendLog(it)
-                    }
-                }
 
-                OrbotConstants.LOCAL_ACTION_PORTS -> {
-                    val socks = intent.getIntExtra(OrbotConstants.EXTRA_SOCKS_PROXY_PORT, -1)
-                    val http = intent.getIntExtra(OrbotConstants.EXTRA_HTTP_PROXY_PORT, -1)
-                    if (http > 0 && socks > 0) {
-                        portSocks = socks
-                        portHttp = http
+                    OrbotConstants.LOCAL_ACTION_PORTS -> {
+                        val socks = intent.getIntExtra(OrbotConstants.EXTRA_SOCKS_PROXY_PORT, -1)
+                        val http = intent.getIntExtra(OrbotConstants.EXTRA_HTTP_PROXY_PORT, -1)
+                        if (http > 0 && socks > 0) {
+                            portSocks = socks
+                            portHttp = http
+                        }
                     }
-                }
 
-                else -> {}
+                    else -> {}
+                }
             }
         }
-    }
 
     private fun promptDeviceAuthenticationIfRequired() {
-        if (!Prefs.requireDeviceAuthentication)
-            return
+        if (!Prefs.requireDeviceAuthentication) return
 
-        if (!OrbotApp.shouldRequestAuthentication)
-            return
+        if (!OrbotApp.shouldRequestAuthentication) return
 
         // if app was closed, we should re-request password upon
         // re-open, even if we've gotten it already
         OrbotApp.shouldRequestAuthentication = false
 
-        if (OrbotApp.isAuthenticationPromptOpenLegacyFlag)
-            return
+        if (OrbotApp.isAuthenticationPromptOpenLegacyFlag) return
 
         OrbotApp.isAuthenticationPromptOpenLegacyFlag = true
 
         rootLayout?.visibility = View.INVISIBLE
-        DeviceAuthenticationPrompt.openPrompt(this, object :
-            BiometricPrompt.AuthenticationCallback() {
-            override fun onAuthenticationError(errorCode: Int, errorMsg: CharSequence) {
-                OrbotApp.isAuthenticationPromptOpenLegacyFlag = false
-                if (errorCode == BiometricPrompt.ERROR_USER_CANCELED) {
-                    OrbotApp.resetLockFlags()
-                    finish() // user presses back, just close
-                } else if (errorCode == BiometricPrompt.ERROR_HW_UNAVAILABLE) {
-                    // we set this flag when Orbot *can't* authenticate, ie no password or unsupported device
-                    showToast(errorMsg) // String set in RequirePasswordPrompt.kt
+        DeviceAuthenticationPrompt.openPrompt(
+            this,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationError(errorCode: Int, errorMsg: CharSequence) {
+                    OrbotApp.isAuthenticationPromptOpenLegacyFlag = false
+                    if (errorCode == BiometricPrompt.ERROR_USER_CANCELED) {
+                        OrbotApp.resetLockFlags()
+                        finish() // user presses back, just close
+                    } else if (errorCode == BiometricPrompt.ERROR_HW_UNAVAILABLE) {
+                        // we set this flag when Orbot *can't* authenticate, ie no password or
+                        // unsupported device
+                        showToast(errorMsg) // String set in RequirePasswordPrompt.kt
+                        rootLayout?.visibility = View.VISIBLE
+                    }
+                }
+
+                override fun onAuthenticationSucceeded(
+                    result: BiometricPrompt.AuthenticationResult
+                ) {
+                    OrbotApp.shouldRequestAuthentication = false
+                    OrbotApp.isAuthenticationPromptOpenLegacyFlag = false
                     rootLayout?.visibility = View.VISIBLE
                 }
-            }
 
-            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                OrbotApp.shouldRequestAuthentication = false
-                OrbotApp.isAuthenticationPromptOpenLegacyFlag = false
-                rootLayout?.visibility = View.VISIBLE
-            }
-
-            override fun onAuthenticationFailed() {
-                OrbotApp.resetLockFlags()
-                finish()
-            }
-        })
+                override fun onAuthenticationFailed() {
+                    OrbotApp.resetLockFlags()
+                    finish()
+                }
+            },
+        )
     }
 
     companion object {

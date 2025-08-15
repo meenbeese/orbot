@@ -1,6 +1,5 @@
 package org.torproject.android
 
-
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -11,9 +10,7 @@ import tools.fastlane.screengrab.Screengrab
 
 class ScreenshotChooseHowToConnect : BaseScreenshotTest() {
 
-    @get:Rule
-    var mActivityScenarioRule = ActivityScenarioRule(OrbotActivity::class.java)
-
+    @get:Rule var mActivityScenarioRule = ActivityScenarioRule(OrbotActivity::class.java)
 
     @Test
     fun screenshotChooseHowToConnect() {
