@@ -50,7 +50,7 @@
 
     <fragment
         android:id="@+id/settinsgFragment"
-        android:name="org.torproject.android.ui.more.SettingsPreferenceFragment"
+        android:name="org.torproject.android.ui.settings.SettingsFragment"
         android:label="fragment_settings">
 
         <action

@@ -12,6 +12,7 @@ androidx-preference = "1.2.1"
 androidx-rules = "1.7.0"
 androidx-runner = "1.7.0"
 androidx-work = "2.11.0"
+compose-bom = "2024.10.00"
 guardian-jtorctl = "0.4.5.7"
 junit-jupiter = "6.0.1"
 navigation-fragment-ktx = "2.9.6"
@@ -34,6 +35,12 @@ android-material = { group = "com.google.android.material", name = "material", v
 android-volley = { group = "com.android.volley", name = "volley", version.ref = "android-volley" }
 androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "androidx-activity" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx-appcompat" }
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
+androidx-compose-ui = { module = "androidx.compose.ui:ui" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
+androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
+androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 androidx-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-espresso" }
 androidx-espresso-contrib = { group = "androidx.test.espresso", name = "espresso-contrib", version.ref = "androidx-espresso" }
@@ -66,4 +73,5 @@ iptproxy = { group = "com.netzarchitekten", name = "IPtProxy", version.ref = "ip
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
