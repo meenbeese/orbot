@@ -14,8 +14,6 @@
     <string name="pref_entrance_node">Входни възли</string>
     <string name="pref_entrance_node_summary">Отпечатъци, псевдоними, държави и адреси за първия хоп</string>
     <string name="pref_entrance_node_dialog">Въведете входни възли</string>
-    <string name="pref_allow_background_starts_title">Зареждане във фонов режим</string>
-    <string name="pref_allow_background_starts_summary">Приложенията да могат да искат от Orbot да стартира Тор и услуги на Тор</string>
     <string name="pref_proxy_title">Сървър на мрежов посредник на изходящата мрежа (по избор)</string>
     <string name="pref_proxy_type_title">Вид изходящ сървър за прокси</string>
     <string name="pref_proxy_type_summary">Протокол на сървъра за прокси</string>

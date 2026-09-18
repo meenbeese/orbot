@@ -13,8 +13,6 @@
     <string name="pref_entrance_node">Entrance Nodes</string>
     <string name="pref_entrance_node_summary">Fingerprints, nicks, mga bansa at mga address para sa unang lukso</string>
     <string name="pref_entrance_node_dialog">Pumasok sa Entrance Nodes</string>
-    <string name="pref_allow_background_starts_title">Pahintulutan na magsimula sa background</string>
-    <string name="pref_allow_background_starts_summary">Hayaan ang kahit anong app na sabihin kay Orbot na magsimula ng Tor at anumang malapit na serbisyo.</string>
     <string name="pref_proxy_title">Outbound Network Proxy (Optional)</string>
     <string name="pref_proxy_type_title">Outbound Proxy Type</string>
     <string name="pref_proxy_type_summary">Mga protocol na gagamitin para sa proxy server</string>

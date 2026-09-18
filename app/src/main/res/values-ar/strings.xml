@@ -22,8 +22,6 @@
     <string name="pref_entrance_node">عُقد الدخول</string>
     <string name="pref_entrance_node_summary">بصمات، اسماء مستعارة، البلدان و العناوين لأول نقطة اتصال</string>
     <string name="pref_entrance_node_dialog">أدخل عُقد الدخول</string>
-    <string name="pref_allow_background_starts_title">إسمح بألبدأ في الخلفية</string>
-    <string name="pref_allow_background_starts_summary">إسمح لأي تطبيق بأن يُخبِر اوربت بأن يفعل تور مع الخدمات المرتبطة به</string>
     <string name="pref_proxy_title">وسيط الشبكة الصادرة (اختياري)</string>
     <string name="pref_proxy_type_title">نوع الوسيط الصادر</string>
     <string name="pref_proxy_type_summary">البروتوكول المستخدم لخادم الوسيط</string>

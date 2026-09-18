@@ -15,8 +15,6 @@
     <string name="pref_entrance_node">Nodos de entrada</string>
     <string name="pref_entrance_node_summary">Huellas digitales, apodos, países y direcciones para el primer salto</string>
     <string name="pref_entrance_node_dialog">Introduzca nodos de entrada</string>
-    <string name="pref_allow_background_starts_title">Permitir inicios en segundo plano</string>
-    <string name="pref_allow_background_starts_summary">Deja que cualquier aplicación le diga a Orbot que inicie Tor y servicios relacionados</string>
     <string name="pref_proxy_title">Proxy de salida a la red (opcional)</string>
     <string name="pref_proxy_type_title">Tipo de proxy saliente</string>
     <string name="pref_proxy_type_summary">Protocolo a usar para el servidor proxy saliente</string>

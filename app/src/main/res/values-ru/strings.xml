@@ -15,8 +15,6 @@
     <string name="pref_entrance_node">Входные узлы</string>
     <string name="pref_entrance_node_summary">Отпечатки, псевдонимы, страны и адреса для первого прыжка</string>
     <string name="pref_entrance_node_dialog">Введите входные узлы</string>
-    <string name="pref_allow_background_starts_title">Разрешить фоновую загрузку</string>
-    <string name="pref_allow_background_starts_summary">Позволить любому приложению требовать от Orbot запускать Tor и относящиеся к нему службы</string>
     <string name="pref_proxy_title">Исходящий сетевой прокси (необязательно)</string>
     <string name="pref_proxy_type_title">Тип прокси</string>
     <string name="pref_proxy_type_summary">Протокол для использования прокси</string>

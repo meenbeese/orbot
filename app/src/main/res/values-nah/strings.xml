@@ -15,8 +15,6 @@
     <string name="pref_entrance_node">Calacoayan tencuitliltetl</string>
     <string name="pref_entrance_node_summary">Mapilmachiyotl, nicks, hueyi altepetl ihuan chantilia pampa achto tzicuiniliztli</string>
     <string name="pref_entrance_node_dialog">Xitlacuilo calaquitencuitliltetl</string>
-    <string name="pref_allow_background_starts_title">Ximacahua motepotztlatlatquitl mochihuaz ayiliztli in oc ahmo tiquinmanili</string>
-    <string name="pref_allow_background_starts_summary">Xitlahuelcaquilia nochi motepoztlatlatquitl  quihtozqueh Orbot ma pehua Tor ihuan nochi itetlayecoltiliztli</string>
     <string name="pref_proxy_title">Matlatlproxy quizaliztli (ahmo cocolli)</string>
     <string name="pref_proxy_type_title">Yuhcayotl proxy quizaliztli</string>
     <string name="pref_proxy_type_summary">Tlacemmachiyotiliztli pampa Proxytetlayecolti</string>

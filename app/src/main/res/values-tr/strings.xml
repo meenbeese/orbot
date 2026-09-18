@@ -15,8 +15,6 @@
     <string name="pref_entrance_node">Giriş Düğümleri</string>
     <string name="pref_entrance_node_summary">İlk sıçrama noktası için parmak izleri, kısaltmalar, ülkeler ve adresler</string>
     <string name="pref_entrance_node_dialog">Giriş Düğümlerini Yazın</string>
-    <string name="pref_allow_background_starts_title">Arka Plan Başlatmalarına İzin Ver</string>
-    <string name="pref_allow_background_starts_summary">Herhangi bir uygulamanın Orbot\'a , Tor ve ilgili hizmetleri başlatmasına izin verin</string>
     <string name="pref_proxy_title">Giden Ağ Sunucusu (İsteğe Bağlı)</string>
     <string name="pref_proxy_type_title">Giden Vekil Sunucu Türü</string>
     <string name="pref_proxy_type_summary">Vekil sunucuda kullanılacak ağ iletişim kuralları</string>

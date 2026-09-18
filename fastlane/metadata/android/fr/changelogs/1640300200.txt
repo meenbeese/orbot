@@ -1,0 +1,4 @@
+* Ajout de la prise en charge des ponts Snowflake
+* Mise à jour de la prise en charge des ponts Obfs4 et Meek
+* Amélioration de la vitesse de la fonctionnalité « Demander de nouveaux ponts »
+* Mise à jour de Tor vers la version 0.4.4.6

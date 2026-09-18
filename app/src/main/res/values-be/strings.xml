@@ -23,8 +23,6 @@
     <string name="pref_entrance_node">Уваходныя вузлы</string>
     <string name="pref_entrance_node_summary">Адбіткі, псеўданімы, краіны і адрасы для першага скоку</string>
     <string name="pref_entrance_node_dialog">Увядзіце ўваходныя вузлы</string>
-    <string name="pref_allow_background_starts_title">Дазволіць фонавую загрузку</string>
-    <string name="pref_allow_background_starts_summary">Дазволіць кожнаму дадатку патрабаваць ад Orbot запускаць Tor і якія адносяцца да яго сэрвісы</string>
     <string name="pref_proxy_title">Выходны сеткавы проксі (неабавязкова)</string>
     <string name="pref_proxy_type_title">Тып проксі</string>
     <string name="pref_proxy_type_summary">Пратакол для выкарыстання проксі-серверам</string>

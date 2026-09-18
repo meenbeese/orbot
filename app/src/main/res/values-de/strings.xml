@@ -23,8 +23,6 @@
     <string name="pref_entrance_node">Eingangs-Netzknoten</string>
     <string name="pref_entrance_node_summary">Fingerabdrücke, Spitznamen, Länder und Adressen für den ersten Knotenpunkt</string>
     <string name="pref_entrance_node_dialog">Eingangs-Netzknoten eingeben</string>
-    <string name="pref_allow_background_starts_title">Starts im Hintergrund zulassen</string>
-    <string name="pref_allow_background_starts_summary">Jede App kann Orbot anweisen, Tor und damit verbundene Dienste zu starten</string>
     <string name="pref_proxy_title">Ausgehender Netzwerk-Proxy (Optional)</string>
     <string name="pref_proxy_type_title">Ausgehender Proxy-Typ</string>
     <string name="pref_proxy_type_summary">Zu verwendendes Protokoll für den Proxy-Server</string>

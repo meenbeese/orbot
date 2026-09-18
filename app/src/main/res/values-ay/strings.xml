@@ -23,8 +23,6 @@
     <string name="pref_entrance_node">Mantanir puriñawjanaka</string>
     <string name="pref_entrance_node_summary">Nayrïr jalakipañanakan ampar luk\'an chimpunaka, ñanqha sutinaka, markanaka, chiqawjanakapa</string>
     <string name="pref_entrance_node_dialog">Mantanir puriñawjanak qillqantam</string>
-    <string name="pref_allow_background_starts_title">Wakichäwinak qhiparkipstayaña</string>
-    <string name="pref_allow_background_starts_summary">Tor ukat niya kipka sirwisyunak qalltpan sasax kawkïr aplikasyunampis Orbot ukar sayakim</string>
     <string name="pref_proxy_title">Llikan uñstir proxy (munsta ukaki)</string>
     <string name="pref_proxy_type_title">Uñstir proxy</string>
     <string name="pref_proxy_type_summary">Uñstir yanapiri ajllt\'aña</string>

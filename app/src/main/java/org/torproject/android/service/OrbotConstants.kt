@@ -3,9 +3,6 @@ package org.torproject.android.service
 import androidx.core.net.toUri
 
 object OrbotConstants {
-    const val TAG = "Orbot"
-
-    const val APP_TOR_KEY = "_app_tor"
 
     const val DIRECTORY_TOR_DATA = "tordata"
 
@@ -60,11 +57,6 @@ object OrbotConstants {
 
     const val LOCAL_ACTION_LOG = "log"
     const val LOCAL_ACTION_STATUS = "status"
-    const val LOCAL_ACTION_BANDWIDTH = "bandwidth"
-    const val LOCAL_EXTRA_TOTAL_READ = "totalRead"
-    const val LOCAL_EXTRA_TOTAL_WRITTEN = "totalWritten"
-    const val LOCAL_EXTRA_LAST_WRITTEN = "lastWritten"
-    const val LOCAL_EXTRA_LAST_READ = "lastRead"
     const val LOCAL_EXTRA_LOG = "log"
     const val LOCAL_EXTRA_BOOTSTRAP_PERCENT = "percent"
     const val LOCAL_ACTION_PORTS = "ports"
@@ -72,17 +64,8 @@ object OrbotConstants {
 
     const val LOCAL_ACTION_QUICK_SETTINGS_NEWNYM = "TILE_NEWNYM"
 
-
-    /**
-     * The user has disabled the ability for background starts triggered by
-     * apps. Fallback to the old Intent action that brings up Orbot:
-     * [.ACTION_START]
-     */
-    const val STATUS_STARTS_DISABLED = "STARTS_DISABLED"
-
     // actions for internal command Intents
     const val CMD_SET_EXIT = "setexit"
-    const val CMD_ACTIVE = "ACTIVE"
 
     const val ONION_SERVICES_DIR = "v3_onion_services"
     const val V3_CLIENT_AUTH_DIR = "v3_client_auth"

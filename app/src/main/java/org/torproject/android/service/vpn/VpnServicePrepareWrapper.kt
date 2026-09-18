@@ -108,11 +108,11 @@ object VpnServicePrepareWrapper {
     }
 
     @SuppressLint("QueryPermissionsNeeded")
-    private fun PackageManager.getInstalledPackagesList(@Suppress("SameParameterValue") flags: Int = 0): List<PackageInfo> =
+    private fun PackageManager.getInstalledPackagesList(): List<PackageInfo> =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            getInstalledPackages(PackageManager.PackageInfoFlags.of(flags.toLong()))
+            getInstalledPackages(PackageManager.PackageInfoFlags.of(0L))
         } else {
-            @Suppress("DEPRECATION") getInstalledPackages(flags)
+            @Suppress("DEPRECATION") getInstalledPackages(0)
         }
 
     fun openVpnSystemSettings(fragment: Fragment) {

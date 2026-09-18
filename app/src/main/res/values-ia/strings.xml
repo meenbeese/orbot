@@ -64,7 +64,6 @@
     <string name="user_services">Servicios de usator</string>
     <string name="app_services">Servicios de application</string>
     <string name="pref_entrance_node_dialog">Insere le nodos de entrata</string>
-    <string name="pref_allow_background_starts_title">Permitter le initio in secunde plano</string>
     <string name="pref_proxy_type_summary">Protocollo a usar pro le servitor proxy</string>
     <string name="pref_proxy_host_title">Servitor proxy de sortita</string>
     <string name="pref_proxy_username_title">Nomine de usator de proxy de sortita</string>

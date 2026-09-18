@@ -27,18 +27,16 @@ import android.net.VpnService;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.os.ParcelFileDescriptor;
 import android.system.OsConstants;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.torproject.android.service.Notifications;
 import org.torproject.android.service.OrbotService;
 import org.torproject.android.service.TProxyService;
-import org.torproject.android.util.Prefs;
 import org.torproject.jni.TorService;
 
 import java.io.DataOutputStream;
@@ -47,7 +45,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class OrbotVpnManager implements Handler.Callback {
+public class OrbotVpnManager {
     private static final String TAG = "OrbotVpnManager";
     boolean isStarted = false;
     private ParcelFileDescriptor mInterface;
@@ -59,11 +57,11 @@ public class OrbotVpnManager implements Handler.Callback {
 
     private static final int DELAY_FD_LISTEN_MS = 5000;
 
-    public OrbotVpnManager(OrbotService service) {
+    public OrbotVpnManager(@NonNull OrbotService service) {
         mService = service;
     }
 
-    public void handleIntent(VpnService.Builder builder, Intent intent) {
+    public void handleIntent(@NonNull VpnService.Builder builder, @Nullable Intent intent) {
         if (intent == null) return;
         var action = intent.getAction();
         if (action == null) return;
@@ -93,7 +91,7 @@ public class OrbotVpnManager implements Handler.Callback {
         }
     }
 
-    public void restartVPN(VpnService.Builder builder) {
+    public void restartVPN(@NonNull VpnService.Builder builder) {
         stopVPN();
         setupTun2Socks(builder);
     }
@@ -118,12 +116,6 @@ public class OrbotVpnManager implements Handler.Callback {
         } catch (Exception | Error e) {
             Log.d(TAG, "error stopping tun2socks", e);
         }
-    }
-
-    @Override
-    public boolean handleMessage(@NonNull Message message) {
-        Toast.makeText(mService, message.what, Toast.LENGTH_SHORT).show();
-        return true;
     }
 
     private synchronized void setupTun2Socks(final VpnService.Builder builder) {
@@ -171,6 +163,7 @@ public class OrbotVpnManager implements Handler.Callback {
         }
     }
 
+    @NonNull
     public File getHevSocksTunnelConfFile() throws IOException {
         var file = new File(mService.getCacheDir(), "tproxy.conf");
         //noinspection ResultOfMethodCallIgnored
@@ -216,15 +209,13 @@ public class OrbotVpnManager implements Handler.Callback {
     }
 
     private void doAppBasedRouting(VpnService.Builder builder) throws NameNotFoundException {
-        var apps = TorifiedApp.Companion.getApps(mService);
+        var apps = TorifiedApp.getApps(mService);
         var individualAppsWereSelected = false;
         var isLockdownMode = isVpnLockdown(mService);
 
         for (TorifiedApp app : apps) {
             if (app.isTorified() && (!app.getPackageName().equals(mService.getPackageName()))) {
-                if (Prefs.isAppTorified(app.getPackageName())) {
-                    builder.addAllowedApplication(app.getPackageName());
-                }
+                builder.addAllowedApplication(app.getPackageName());
                 individualAppsWereSelected = true;
             }
         }

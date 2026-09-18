@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import org.torproject.android.OrbotActivity
 import org.torproject.android.R
 import org.torproject.android.databinding.FragmentMoreBinding
-import org.torproject.android.util.sendIntentToService
 import org.torproject.android.service.OrbotConstants
 import org.torproject.android.service.OrbotService
 import org.torproject.android.service.vpn.VpnServicePrepareWrapper
@@ -21,11 +20,12 @@ import org.torproject.android.ui.OrbotMenuAction
 import org.torproject.android.ui.v3onionservice.OnionServiceActivity
 import org.torproject.android.ui.v3onionservice.clientauth.ClientAuthActivity
 import org.torproject.android.util.StringUtils
+import org.torproject.android.util.sendIntentToService
 import org.torproject.jni.TorService
 
 class MoreFragment : Fragment() {
-    private var httpPort = -1
-    private var socksPort = -1
+    private var httpPort = OrbotActivity.PORT_NOT_SET_VALUE
+    private var socksPort = OrbotActivity.PORT_NOT_SET_VALUE
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,7 +39,6 @@ class MoreFragment : Fragment() {
     private fun updateStatus() {
         val labelHttp = getString(R.string.http_port)
         val labelSocks = getString(R.string.socks_port)
-        val notSet = "——"
         val labels = listOf(labelHttp, labelSocks, "Orbot", "Tor")
         val labelWidth = labels.maxOf { it.length } + 6
         val isLeftToRight = StringUtils.isLeftToRight()
@@ -51,17 +50,14 @@ class MoreFragment : Fragment() {
 
         val rows = mutableListOf<String>()
 
-        rows += if (httpPort != -1 && socksPort != -1) {
-            listOf(
-                row(labelHttp, httpPort.toString()),
-                row(labelSocks, socksPort.toString())
-            )
-        } else {
-            listOf(
-                row(labelHttp, notSet),
-                row(labelSocks, notSet)
-            )
-        }
+        val (httpValue, socksValue) = proxyPortDisplayValues(
+            httpPort,
+            socksPort
+        )
+        rows += listOf(
+            row(labelHttp, httpValue),
+            row(labelSocks, socksValue)
+        )
 
         val pm = requireActivity().packageManager
         val info = pm.getPackageInfo(requireActivity().packageName, 0)
@@ -140,4 +136,15 @@ class MoreFragment : Fragment() {
         requireActivity().finish()
     }
 
+    companion object {
+        const val PORT_NOT_SET_STRING = "--"
+    }
+
 }
+
+internal fun proxyPortDisplayValues(
+    httpPort: Int,
+    socksPort: Int,
+): Pair<String, String> =
+    (if (httpPort > 0) httpPort.toString() else MoreFragment.PORT_NOT_SET_STRING) to
+            (if (socksPort > 0) socksPort.toString() else MoreFragment.PORT_NOT_SET_STRING)

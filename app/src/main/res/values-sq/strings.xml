@@ -108,7 +108,6 @@
     <string name="menu_new_identity">Identitet i Ri</string>
     <string name="pref_start_boot_summary">Nise automatikisht Orbot-in dhe lidhu me Tor-in, kur niset pajisja Android</string>
     <string name="pref_entrance_node_summary">Shenja gishtash, nofka, vende dhe adresa për hopin e parë</string>
-    <string name="pref_allow_background_starts_summary">Lejoni çfarëdo aplikacioni t’i thotë Orbot-it të nisë Tor-in dhe shërbime të lidhura me të</string>
     <string name="strict_nodes_description">Trajtojini rregullimet për Nyje Dalëse si një domosdoshmëri për ngritjen e krejt qarqeve. Kjo mund të dëmtojë funksione, nëse s’është e mundur të prodhohen qarqe me rregullimet tuaja për Nyje Dalëse.</string>
     <string name="pref_open_proxy_on_all_interfaces_summary">Lejoni të pranishëm në Wi-Fi-n tuaj, pajisje të lidhura dhe këdo tjetër që mund të lidhet te IP-ja juaj, të hyjnë në</string>
     <string name="pref_socks_summary">Portë te e cila Tor-i ofron ndërmjetësin e vet SOCKS (parazgjedhje: 9050, ose 0 për ta çaktivizuar)</string>
@@ -131,7 +130,6 @@
     <string name="pref_disable_ipv4_summary">U thotë daljeve të mos lidhen me adresa IPv4</string>
     <string name="bridge_snowflake_amp">Lidhuni përmes përdoruesish të tjerë të Tor-it, duke përdorur Snowflake (Metoda 1 - AMP)</string>
     <string name="snowflake_proxy_msg_description">Shfaqni një mesazh kur Snowflake-u juaj ndihmon dikë të anashkalojë censurim</string>
-    <string name="pref_allow_background_starts_title">Lejo Nisje Në Prapaskenë</string>
     <string name="pref_proxy_title">Ndërmjetës Rrjeti Në Dalje (Opsional)</string>
     <string name="pref_proxy_type_title">Lloj Ndërmjetësi Në Dalje</string>
     <string name="pref_proxy_host_title">Strehë Ndërmjetësi Në Dalje</string>

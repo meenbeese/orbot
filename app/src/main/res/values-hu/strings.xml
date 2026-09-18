@@ -15,8 +15,6 @@
     <string name="pref_entrance_node">Belépő csomópontok</string>
     <string name="pref_entrance_node_summary">Ujjlenyomatok, becenevek, országok és címek az első ugráshoz</string>
     <string name="pref_entrance_node_dialog">Belépő csomópontok megadása</string>
-    <string name="pref_allow_background_starts_title">Háttérbeli indulások engedélyezése</string>
-    <string name="pref_allow_background_starts_summary">Bármely alkalmazás közölheti az Orbot-tal, hogy indítsa a Tor-t és a kapcsolódó szolgáltatásokat</string>
     <string name="pref_proxy_title">Kimenő hálózati proxy (választható)</string>
     <string name="pref_proxy_type_title">Proxy típus</string>
     <string name="pref_proxy_type_summary">A Proxy szerver által használandó protokoll</string>

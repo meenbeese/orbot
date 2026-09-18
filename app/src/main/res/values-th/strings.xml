@@ -15,8 +15,6 @@
     <string name="pref_entrance_node">โหนดทางเข้า</string>
     <string name="pref_entrance_node_summary">ลายนิ้วมือ ชื่อเล่น ประเทศ และที่อยู่ของฮอพแรก</string>
     <string name="pref_entrance_node_dialog">ระบุโหนดทางเข้า</string>
-    <string name="pref_allow_background_starts_title">อนุญาตให้เริ่มการทำงานพื้นหลัง</string>
-    <string name="pref_allow_background_starts_summary">ให้แอปทุกตัวแจ้ง Orbot ให้ Tor และบริการที่เกี่ยวข้องเริ่มทำงาน</string>
     <string name="pref_proxy_title">พร็อกซีเครือข่ายขาออก (ระบุหรือไม่ก็ได้)</string>
     <string name="pref_proxy_type_title">ชนิดของพร็อกซีขาออก</string>
     <string name="pref_proxy_type_summary">โพรโทคอลที่ใช้สำหรับเซิร์ฟเวอร์พร็อกซี</string>

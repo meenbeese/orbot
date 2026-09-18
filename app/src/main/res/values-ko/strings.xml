@@ -14,8 +14,6 @@
     <string name="pref_entrance_node">입구 노드</string>
     <string name="pref_entrance_node_summary">첫번째 Hop을 위한핑거프린트, 별칭, 나라와 주소</string>
     <string name="pref_entrance_node_dialog">입구 노드 입력</string>
-    <string name="pref_allow_background_starts_title">백그라운드에서 시작 허용</string>
-    <string name="pref_allow_background_starts_summary">모든 어플리케이션이 Orbot에 Tor를 시작하고 관련 서비스를 시작할 수 있도록 지시하는것을 허락합니다</string>
     <string name="pref_proxy_title">외부 네트워크 프록시 (선택)</string>
     <string name="pref_proxy_type_title">외부 프록시 유형</string>
     <string name="pref_proxy_type_summary">프록시 서버를 위한 사용되는 프로토콜</string>

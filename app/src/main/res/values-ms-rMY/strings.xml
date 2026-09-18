@@ -56,8 +56,6 @@
     <string name="connected_title">Bersambung</string>
     <string name="disable">Lumpuhkan</string>
     <string name="connect">Sambung</string>
-    <string name="pref_allow_background_starts_title">Benarkan bermula di latar belakang</string>
-    <string name="pref_allow_background_starts_summary">Benarkan mana-mana aplikasi memberitahu Orbot untuk mulakan Tor dan servis berkenaan</string>
     <string name="newnym">Anda bertukar ke identiti Tor baharu!</string>
     <string name="pref_socks_title">Tor SOCKS</string>
     <string name="status_starting_up">Orbot telah dimulakan..</string>

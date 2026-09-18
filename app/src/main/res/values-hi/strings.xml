@@ -23,8 +23,6 @@
     <string name="pref_entrance_node">घुसनेवाले नोड</string>
     <string name="pref_entrance_node_summary">फिंगरप्रिंट, निक, देश, और पता पहले कूद के लिए</string>
     <string name="pref_entrance_node_dialog">घुसनेवाले नोड डालें</string>
-    <string name="pref_allow_background_starts_title">बैकग्राउंड में शुरू करें</string>
-    <string name="pref_allow_background_starts_summary">किसी भी ऐप को ऑरबॉट को टॉर और जुड़े हुए सेवा शुरू करने के लिए बोलने दें</string>
     <string name="pref_proxy_title">आउटबाउंड नेटवर्क प्रॉक्सी (ज़रूरी नहीं)</string>
     <string name="pref_proxy_type_title">आउटबाउंड प्रॉक्सी टाइप</string>
     <string name="pref_proxy_type_summary">प्रॉक्सी सर्वर के लिए इस्तेमाल किए जानेवाले प्रोटोकॉल</string>

@@ -32,7 +32,7 @@ object Regionalization {
         BRAZIL, CZECH_REPUBLIC, DENMARK,
         FINLAND, UNITED_KINGDOM, HUNGARY,
         NETHERLANDS, JAPAN, ROMANIA,
-        RUSSIA, SINGAPORE, SWEDEN
+        RUSSIA, SINGAPORE, SWEDEN, UKRAINE
     )
 
     // censored countries with built-in DNSTT JSON configuration
@@ -73,7 +73,7 @@ object Regionalization {
     private const val CZECH_REPUBLIC = "CZ"
     private const val DENMARK = "DK"
     private const val FINLAND = "FI"
-    private const val UNITED_KINGDOM = "UK"
+    private const val UNITED_KINGDOM = "GB"
     private const val HUNGARY = "HU"
     private const val NETHERLANDS = "NL"
     private const val JAPAN = "JP"
@@ -93,5 +93,6 @@ object Regionalization {
     private const val SYRIA = "SY"
     const val TURKEY = "TR"
     private const val UGANDA = "UG"
-    private const val UZBEKISTAN = "UR"
+    private const val UKRAINE = "UA"
+    private const val UZBEKISTAN = "UZ"
 }

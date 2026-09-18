@@ -16,8 +16,6 @@
     <string name="pref_entrance_node"> kepiamik Nodos</string>
     <string name="pref_entrance_node_summary">Tasik urek warik, nɵtrɵ pirɵmerai munchi, chu warapelɵ kuisrɵ eshkamik ik utɵwan pɵrtrawa purampamik</string>
     <string name="pref_entrance_node_dialog">Nodoswei kepiamik kepip</string>
-    <string name="pref_allow_background_starts_title">Katɵkan nɵɵrɵ pɵlpasrinkaruntrap</string>
-    <string name="pref_allow_background_starts_summary">Mɵ purukupik kɵpen Orbotpa kelicha Torwan pɵlpasrtrai cha karumik</string>
     <string name="pref_proxy_title">Red wepintrai proxy marik (marinkui-marmuinkui)</string>
     <string name="pref_proxy_type_title">Wepintrai proxy marik</string>
     <string name="pref_proxy_type_summary">Proxyn mantɵ aship maramikwan eshkapik: HTTPS, SOCKS4, SOCKS5</string>

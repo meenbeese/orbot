@@ -1,0 +1,6 @@
+- mise à jour vers Tor 0.4.9.11 et Snowflake 2.14.1
+- refonte du mode Gentilisse : vérification plus claire de la qualité du proxy, indication du type de NAT en temps réel et gestion plus intelligente dans les régions soumises à la censure
+- prise en charge d'Android 17, incluant la gestion des autorisations pour l'option « ouvrir le proxy sur toutes les interfaces »
+- suivi plus précis de la progression de la connexion, conservé lors d'une rotation de l'écran
+- corrections concernant l'effacement des journaux lors d'une rotation, un plantage lié au Play Store et le démarrage automatique au lancement
+- mise à jour des ponts intégrés, des données GeoIP et de nombreuses traductions

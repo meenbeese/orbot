@@ -16,8 +16,6 @@
     <string name="pref_entrance_node">Các nút giao mạng đầu vào</string>
     <string name="pref_entrance_node_summary">Dấu vân tay theo dõi (Fingerprint), biệt hiệu, quốc gia và địa chỉ cho nút giao mạng đầu tiên</string>
     <string name="pref_entrance_node_dialog">Nhập thông tin nút giao mạng đầu vào</string>
-    <string name="pref_allow_background_starts_title">Cho phép khởi động ngầm</string>
-    <string name="pref_allow_background_starts_summary">Cho phép ứng dụng bất kỳ yêu cầu Orbot khởi động Tor và các dịch vụ liên quan</string>
     <string name="pref_proxy_title">Proxy mạng ngõ ra (Outbound Network) (Tùy chọn)</string>
     <string name="pref_proxy_type_title">Kiểu Proxy ngõ ra</string>
     <string name="pref_proxy_type_summary">Giao thức dùng cho proxy</string>

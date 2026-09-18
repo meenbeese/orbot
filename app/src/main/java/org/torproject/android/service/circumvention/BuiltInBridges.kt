@@ -31,9 +31,9 @@ data class BuiltInBridges(
 
     companion object {
 
-        private const val FILE_NAME = "builtin-bridges.json"
+        private const val ASSETS_BUILT_IN_BRIDGE_FILENAME = "builtin-bridges.json"
 
-        private const val UPDATE_FILE_NAME = "updated-bridges.json"
+        private const val UPDATED_BRIDGES_FILENAME = "updated-bridges.json"
 
         /**
          * https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/trac/-/issues/40001#note_2811603
@@ -70,7 +70,10 @@ data class BuiltInBridges(
             if (instance == null && context != null) {
                 try {
                     instance =
-                        read(context.assets.open(FILE_NAME).bufferedReader().use { it.readText() })
+                        read(
+                            context.assets.open(ASSETS_BUILT_IN_BRIDGE_FILENAME)
+                                .bufferedReader()
+                                .use { it.readText() })
                 } catch (_: Throwable) {
                 }
             }
@@ -95,9 +98,9 @@ data class BuiltInBridges(
             instance = null
         }
 
-        fun getUpdateFile(context: Context): File {
-            return File(context.cacheDir, UPDATE_FILE_NAME)
-        }
+        internal fun getUpdateFile(context: Context): File =
+            File(context.cacheDir, UPDATED_BRIDGES_FILENAME)
+
 
         private fun read(json: String): BuiltInBridges? {
             return try {

@@ -83,8 +83,6 @@
     <string name="snowflake_subtitle">டோர் தன்னார்வலர்கள் மூலம் இணைகிறது. தடுப்பதற்காக யாரையாவது சுற்றி வருக.</string>
     <string name="pref_proxy_title">வெளிச்செல்லும் பிணையம் பதிலாள் (விரும்பினால்)</string>
     <string name="pref_proxy_host_title">வெளிச்செல்லும் பதிலாள் புரவலன்</string>
-    <string name="pref_allow_background_starts_title">பின்னணி தொடங்க அனுமதிக்கவும்</string>
-    <string name="pref_allow_background_starts_summary">டோர் மற்றும் தொடர்புடைய சேவைகளைத் தொடங்க எந்தவொரு பயன்பாடும் ஆர்போட்டிடம் சொல்லட்டும்</string>
     <string name="pref_proxy_host_summary">பதிலாள் சர்வர் ஓச்ட்பெயர்</string>
     <string name="third_party_software">3 வது-கட்சி-மென்பொருள்:</string>
     <string name="please_restart_Orbot_to_enable_the_changes">மாற்றங்களை இயக்க ஆர்போட்டை மறுதொடக்கம் செய்யுங்கள்</string>

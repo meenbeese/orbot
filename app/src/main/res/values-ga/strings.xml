@@ -16,8 +16,6 @@
     <string name="pref_entrance_node">Nóid Iontrála</string>
     <string name="pref_entrance_node_summary">Méarloirg, leasainmneacha, tíortha agus seoltaí don chéad hop</string>
     <string name="pref_entrance_node_dialog">Cuir Nóid Iontrála Isteach</string>
-    <string name="pref_allow_background_starts_title">Ceadaigh Tosaithe sa Chúlra</string>
-    <string name="pref_allow_background_starts_summary">Lig d’aon aip a rá le hOrbot Tor agus seirbhísí gaolmhara a thosú</string>
     <string name="pref_proxy_title">Seachfhreastalaí Líonra Amach (Roghnach)</string>
     <string name="pref_proxy_type_title">Cineál Seachfhreastalaí Amach</string>
     <string name="pref_proxy_type_summary">Prótacal le húsáid le haghaidh seachfhreastalaí</string>

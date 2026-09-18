@@ -14,8 +14,6 @@
     <string name="pref_entrance_node">入口节点</string>
     <string name="pref_entrance_node_summary">首个跃点的指纹、昵称、国家/地区和地址</string>
     <string name="pref_entrance_node_dialog">输入入口节点</string>
-    <string name="pref_allow_background_starts_title">允许后台启动</string>
-    <string name="pref_allow_background_starts_summary">允许任何应用告知 Orbot 启动 Tor 及相关服务</string>
     <string name="pref_proxy_title">出站网络代理（可选）</string>
     <string name="pref_proxy_type_title">出站代理类型</string>
     <string name="pref_proxy_type_summary">代理服务器使用的协议</string>

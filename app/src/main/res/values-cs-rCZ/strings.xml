@@ -14,8 +14,6 @@
     <string name="pref_entrance_node">Vstupní nody</string>
     <string name="pref_entrance_node_summary">Otisky (fingerprints), přezdívky serveru (nicks), státy a adresy pro první skok (hop)</string>
     <string name="pref_entrance_node_dialog">Zadejte vstupní nody</string>
-    <string name="pref_allow_background_starts_title">Povolit spuštění na pozadí</string>
-    <string name="pref_allow_background_starts_summary">Povolit všem aplikacím spustit Orbot, Tor a přslušně služby</string>
     <string name="pref_proxy_title">Odchozí síťová proxy (volitelné)</string>
     <string name="pref_proxy_type_title">Typ odchozí proxy</string>
     <string name="pref_proxy_type_summary">Protokol pro proxy server</string>

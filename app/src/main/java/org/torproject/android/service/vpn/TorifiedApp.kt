@@ -49,6 +49,7 @@ class TorifiedApp : Comparable<TorifiedApp> {
 
     companion object {
         @SuppressLint("QueryPermissionsNeeded")
+        @JvmStatic
         fun getApps(context: Context): ArrayList<TorifiedApp> {
             val torifiedPackages = Prefs.torifiedApps
                 .split("|")

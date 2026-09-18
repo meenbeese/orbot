@@ -22,8 +22,6 @@
     <string name="pref_entrance_node">Ulazni Čvorovi</string>
     <string name="pref_entrance_node_summary">Otisci prstiju, nadimci, države i adrese za prvi skok</string>
     <string name="pref_entrance_node_dialog">Unesi Ulazne Čvorove</string>
-    <string name="pref_allow_background_starts_title">Dozvoli pokretanja u pozadini</string>
-    <string name="pref_allow_background_starts_summary">Dopusti bilo kojoj aplikaciji da kaže Orbot-u da pokrene Tor i povezane usluge</string>
     <string name="pref_proxy_title">Izlazni Mrežni Proxy (Opcionalno)</string>
     <string name="pref_proxy_type_title">Vrsta Izlaznog Proxy-a</string>
     <string name="pref_proxy_type_summary">Protokol koji se koristi za proxy server</string>

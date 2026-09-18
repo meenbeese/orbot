@@ -25,6 +25,8 @@ class LogBottomSheet : OrbotBottomSheetDialogFragment() {
         PreferenceManager
             .getDefaultSharedPreferences(requireContext())
             .registerOnSharedPreferenceChangeListener(logPrefObserver)
+        binding.orbotLog.text = Prefs.getOrbotServiceLog()
+        scrollToBottom()
     }
 
     override fun onStop() {
@@ -59,9 +61,8 @@ class LogBottomSheet : OrbotBottomSheetDialogFragment() {
         SharedPreferences.OnSharedPreferenceChangeListener { sharedPrefs, key ->
             if (key != Prefs.PREF_ORBOT_SERVICE_LOG) return@OnSharedPreferenceChangeListener
             val newLog = Prefs.getOrbotServiceLog()
-            if (newLog.length > binding.orbotLog.text.length) {
-                binding.orbotLog.append(newLog.substring(binding.orbotLog.text.length))
-            } else binding.orbotLog.text = newLog
+            val delta = appendableDelta(binding.orbotLog.text.toString(), newLog)
+            if (delta != null) binding.orbotLog.append(delta) else binding.orbotLog.text = newLog
             scrollToBottom()
         }
 
@@ -70,6 +71,12 @@ class LogBottomSheet : OrbotBottomSheetDialogFragment() {
         fun show(fragmentManager: FragmentManager) {
             LogBottomSheet().show(fragmentManager, TAG)
         }
+
+        // the service clears and regrows the stored log across restarts, so longer does not mean grown
+        fun appendableDelta(displayed: String, stored: String): String? =
+            if (stored.length > displayed.length && stored.startsWith(displayed))
+                stored.substring(displayed.length)
+            else null
     }
 
 }

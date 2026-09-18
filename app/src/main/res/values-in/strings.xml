@@ -14,8 +14,6 @@
     <string name="pref_entrance_node">Simpul Masuk</string>
     <string name="pref_entrance_node_summary">Sidik jari, alias, negara dan alamat untuk loncatan pertama</string>
     <string name="pref_entrance_node_dialog">Masukkan Simpul Masuk</string>
-    <string name="pref_allow_background_starts_title">Izinkan Memulai di Latar Belakang</string>
-    <string name="pref_allow_background_starts_summary">Biarkan aplikasi lain memberitahu Orbot untuk memulai Tor dan layanan terkait</string>
     <string name="pref_proxy_title">Outbound Proxy Jaringan (Opsional)</string>
     <string name="pref_proxy_type_title">Outbound Jenis Proxy</string>
     <string name="pref_proxy_type_summary">Protokol yang digunakan untuk server proxy</string>

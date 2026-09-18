@@ -15,8 +15,6 @@
     <string name="pref_entrance_node">Nodi di entrata</string>
     <string name="pref_entrance_node_summary">Impronte, nickname, Paesi ed indirizzi per il primo salto</string>
     <string name="pref_entrance_node_dialog">Inserisci nodi di entrata</string>
-    <string name="pref_allow_background_starts_title">Permetti avvii in secondo piano</string>
-    <string name="pref_allow_background_starts_summary">Permetti a qualsiasi app di comunicare ad Orbot di avviare Tor e servizi relativi</string>
     <string name="pref_proxy_title">Proxy di rete in uscita (facoltativo)</string>
     <string name="pref_proxy_type_title">Tipo di proxy in uscita</string>
     <string name="pref_proxy_type_summary">Protocolli da utilizzare per i server proxy</string>

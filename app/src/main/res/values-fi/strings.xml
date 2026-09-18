@@ -14,8 +14,6 @@
     <string name="pref_entrance_node">Lähtösolmut</string>
     <string name="pref_entrance_node_summary">Leimat, nimimerkit, maat ja osoitteet ensimmäiseen hyppyyn.</string>
     <string name="pref_entrance_node_dialog">Syötä lähtösolmut</string>
-    <string name="pref_allow_background_starts_title">Salli taustakäynnistys</string>
-    <string name="pref_allow_background_starts_summary">Salli muiden sovellusten ohjata Orbotia käynnistämään Tor ja tarpeelliset palvelut.</string>
     <string name="pref_proxy_title">Lähtevä välityspalvelin (valinnainen)</string>
     <string name="pref_proxy_type_title">Välityspalvelimen tyyppi</string>
     <string name="pref_proxy_type_summary">Lähtevän välityspalvelimen yhteysprotokolla</string>

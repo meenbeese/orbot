@@ -2,7 +2,6 @@ package org.torproject.android.util
 
 import android.content.ContentResolver
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import java.io.BufferedReader
 import java.io.File
@@ -25,20 +24,6 @@ object DiskUtils {
         }
         reader.close()
         return sb.toString()
-    }
-
-    @JvmStatic
-    fun createWriteFileIntent(filename: String, mimeType: String): Intent =
-        Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = mimeType
-            putExtra(Intent.EXTRA_TITLE, filename)
-        }
-
-    @JvmStatic
-    fun createReadFileIntent(mimeType: String): Intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-        addCategory(Intent.CATEGORY_OPENABLE)
-        type = mimeType
     }
 
     @JvmStatic
@@ -75,7 +60,7 @@ object DiskUtils {
 
     @JvmStatic
     @Throws(IOException::class)
-    fun flushTextToFile(file: File, text: String, append: Boolean)  {
+    fun flushTextToFile(file: File, text: String, append: Boolean) {
         val ps = PrintWriter(FileWriter(file, append))
         ps.print(text)
         ps.flush()

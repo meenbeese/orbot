@@ -95,7 +95,7 @@ configure<ApplicationExtension> {
         }
     }
 
-    ndkVersion = "29.0.14206865"
+    ndkVersion = "30.0.16248370"
     externalNativeBuild {
         ndkBuild {
             path = file("src/main/jni/Android.mk")
@@ -189,7 +189,6 @@ dependencies {
     implementation(libs.rootbeer.lib)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.androidx.work.kotlin)
     implementation(libs.upnp)
     implementation(libs.quickie)
     implementation(libs.material3)
@@ -206,6 +205,8 @@ dependencies {
     api(libs.tor.android)
     // uncomment to use a local build of tor-android:
     // api(files("../../tor-android/tor-android-binary/build/outputs/aar/tor-android-binary-debug.aar"))
+
+    testImplementation(libs.junit)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso)

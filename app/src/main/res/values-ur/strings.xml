@@ -33,8 +33,6 @@
     <string name="pref_entrance_node">داخلی نوڈس (Entrance Nodes)</string>
     <string name="pref_entrance_node_summary">پہلے ہاپ کے لیے فنگر پرنٹس، عرفی نام، ممالک اور پتے</string>
     <string name="pref_entrance_node_dialog">داخلی نوڈس درج کریں</string>
-    <string name="pref_allow_background_starts_title">بیک گراؤنڈ میں شروع ہونے کی اجازت دیں</string>
-    <string name="pref_allow_background_starts_summary">کسی بھی ایپ کو اوربوٹ کو ٹور اور متعلقہ سروسز شروع کرنے کا کہنے دیں</string>
     <string name="pref_proxy_title">آؤٹ باؤنڈ نیٹ ورک پراکسی (اختیاری)</string>
     <string name="pref_proxy_type_title">آؤٹ باؤنڈ پراکسی کی قسم</string>
     <string name="pref_proxy_type_summary">پراکسی سرور کے لیے استعمال ہونے والا پروٹوکول</string>

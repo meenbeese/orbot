@@ -26,7 +26,6 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import net.freehaven.tor.control.TorControlCommands
 import org.torproject.android.R
 import org.torproject.android.databinding.FragmentConnectBinding
 import org.torproject.android.service.OrbotConstants
@@ -206,7 +205,7 @@ class ConnectFragment : Fragment(),
     }
 
     private fun sendNewnymSignal() {
-        requireContext().sendIntentToService(TorControlCommands.SIGNAL_NEWNYM)
+        requireContext().sendIntentToService(OrbotService.SIGNAL_NEWNYM)
         binding.ivStatus.animate().alpha(0f).duration = 500
 
         lifecycleScope.launch(Dispatchers.Main) {

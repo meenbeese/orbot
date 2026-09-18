@@ -10,12 +10,13 @@ import android.os.Build
 import android.provider.Settings
 import android.util.Log
 import androidx.core.content.ContextCompat
+import org.torproject.android.ui.kindness.SnowflakeProxyService
 import java.net.InetSocketAddress
 import java.net.Socket
 
 object NetworkUtils {
     private const val TAG = "NetworkUtils"
-    fun isNetworkAvailable(context: Context, allowOtherVpnApps: Boolean = false): Boolean {
+    fun isNetworkAvailable(context: Context, allowOtherVpnApps: Boolean): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = connectivityManager.activeNetwork ?: return false
@@ -27,6 +28,39 @@ object NetworkUtils {
             capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
             else -> false
         }
+    }
+
+    fun isNetworkAvailableForKindnessMode(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN) && !Prefs.useVpn()) {
+            Log.wtf(SnowflakeProxyService.TAG, "some other VPN is running!")
+            return false
+        }
+        val transports = arrayListOf(NetworkCapabilities.TRANSPORT_WIFI)
+        if (!Prefs.limitSnowflakeProxyingWifi())
+            transports.addAll(
+                listOf(
+                    NetworkCapabilities.TRANSPORT_CELLULAR,
+                    NetworkCapabilities.TRANSPORT_ETHERNET
+                )
+            )
+        transports.forEach { transport ->
+            if (capabilities.hasTransport(transport)) {
+                Log.d(
+                    SnowflakeProxyService.TAG,
+                    "Found Viable Network Transport: $transport " +
+                            "(Cellular=${NetworkCapabilities.TRANSPORT_CELLULAR}, " +
+                            "Wifi=${NetworkCapabilities.TRANSPORT_WIFI}, " +
+                            "Ethernet=${NetworkCapabilities.TRANSPORT_ETHERNET})"
+                )
+                return true
+            }
+        }
+        Log.d(SnowflakeProxyService.TAG, "No Viable Network Transports Found...")
+        return false
     }
 
     /** Used for kindness mode connection test, returns true *if and only if* Orbot is the registered
@@ -54,7 +88,7 @@ object NetworkUtils {
         // we either don't have a VPN app running, if it is, check for certain it's not Orbot
         if (!deviceUsingVpn) return false
         val isOrbotRegisteredAsVpn = VpnService.prepare(context) != null
-        Log.d(logTag, "isOrbotRegisteredAsVpn: $isOrbotRegisteredAsVpn")
+        Log.d(logTag, "isOrbotRegisteredAsVpn=$isOrbotRegisteredAsVpn")
         return isOrbotRegisteredAsVpn
     }
 
@@ -115,7 +149,7 @@ object NetworkUtils {
             var isPortUsed = true
             var port = portString.toInt()
             while (isPortUsed) {
-                isPortUsed = isPortOpen("127.0.0.1", port, 500)
+                isPortUsed = isPortOpen(port)
                 if (isPortUsed)  //the specified port is not available, so find one instead
                     port++
             }
@@ -124,10 +158,10 @@ object NetworkUtils {
         return portString
     }
 
-    fun isPortOpen(ip: String?, port: Int, timeout: Int): Boolean {
+    private fun isPortOpen(port: Int, timeout: Int = 500): Boolean {
         try {
             val socket = Socket()
-            socket.connect(InetSocketAddress(ip, port), timeout)
+            socket.connect(InetSocketAddress("127.0.0.1", port), timeout)
             socket.close()
             return true
         } catch (_: Exception) {

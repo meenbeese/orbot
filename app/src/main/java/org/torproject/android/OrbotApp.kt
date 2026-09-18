@@ -22,7 +22,7 @@ class OrbotApp : Application() {
         // set state dir for IPtProxy
         try {
             stateLocation = cacheDir.path
-        } catch (_ : Exception) {
+        } catch (_: Exception) {
             Log.e("OrbotApp", "Couldn't set PT state dir")
         }
 
@@ -44,6 +44,7 @@ class OrbotApp : Application() {
 //        )
 
         Prefs.setContext(applicationContext)
+        Prefs.orbotServiceLogClear()
         LocaleHelper.onAttach(applicationContext)
 
         Languages.setup(OrbotActivity::class.java, R.string.menu_settings)
@@ -76,6 +77,7 @@ class OrbotApp : Application() {
 
     companion object {
         var shouldRequestAuthentication: Boolean = true
+
         // see https://github.com/guardianproject/orbot-android/issues/1340
         var isAuthenticationPromptOpenLegacyFlag: Boolean = false
         fun resetLockFlags() {

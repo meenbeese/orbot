@@ -1,0 +1,3 @@
+- mise à jour vers Tor 0.4.8.1
+- diverses améliorations de l'interface utilisateur
+- prise en charge actualisée de WebTunnel et Snowflake Proxy

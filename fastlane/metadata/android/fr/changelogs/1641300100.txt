@@ -1,0 +1,3 @@
+- suppression de l'option de pont « Meek Azure » car elle n'est plus prise en charge
+- améliorations supplémentaires de la prise en charge des services Onion de version 3
+- pour le ticket n° 441 : correction de la recherche d'applications pour la sélection de VPN par application

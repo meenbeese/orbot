@@ -14,8 +14,6 @@
     <string name="pref_entrance_node">Ieejas mezgli</string>
     <string name="pref_entrance_node_summary">Ciparvirknes, segvārdi, valstis un adreses pirmajam lēkumam</string>
     <string name="pref_entrance_node_dialog">Ievadiet ieejas mezglus</string>
-    <string name="pref_allow_background_starts_title">Ļaut sākšanos fonā</string>
-    <string name="pref_allow_background_starts_summary">Norādīt visām lietotnēm uzdot Orbot palaist Tor un saistītos pakalpojumus.</string>
     <string name="pref_proxy_title">Tīkla ārejošais starpnieks (neobligāts)</string>
     <string name="pref_proxy_type_title">Ārvērstā starpnieka tips</string>
     <string name="pref_proxy_type_summary">Starpnieka serverim izmantojamais protokols</string>

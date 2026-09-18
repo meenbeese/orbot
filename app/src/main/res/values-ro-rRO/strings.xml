@@ -22,8 +22,6 @@
     <string name="pref_entrance_node">Noduri de intrare</string>
     <string name="pref_entrance_node_summary">Amprente, nick name-uri si adrese pentru primul hop</string>
     <string name="pref_entrance_node_dialog">Introdu noduri de intrare</string>
-    <string name="pref_allow_background_starts_title">Permite pornirile din fundal</string>
-    <string name="pref_allow_background_starts_summary">Permite oricărei aplicaţie să anunţe Orbot că porneşti Tor şi serviciile asociate</string>
     <string name="pref_proxy_title">Proxy de retea pentru iesire (optional)</string>
     <string name="pref_proxy_type_title">Tipul proxy-ului de iesire</string>
     <string name="pref_proxy_type_summary">Tipul protocolului pentru proxy</string>

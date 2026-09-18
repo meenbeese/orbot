@@ -15,8 +15,6 @@
     <string name="pref_entrance_node">Ingångsnoder</string>
     <string name="pref_entrance_node_summary">Fingeravtryck, nicks, länder, och adresser för första hoppet</string>
     <string name="pref_entrance_node_dialog">Skriv in Ingångs Noder</string>
-    <string name="pref_allow_background_starts_title">Tillåt start i bakgrunden</string>
-    <string name="pref_allow_background_starts_summary">Låt alla appar säga åt Orbot att starta Tor och relaterade tjänster</string>
     <string name="pref_proxy_title">Utgående nätverksproxy (Valfri)</string>
     <string name="pref_proxy_type_title">Proxy-typ</string>
     <string name="pref_proxy_type_summary">Protokoll att använda för proxyserver</string>

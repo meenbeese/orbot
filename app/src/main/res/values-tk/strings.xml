@@ -2,7 +2,6 @@
 <resources>
     <string name="pref_start_boot_title">Orbot-y Boot-da başladyň</string>
     <string name="pref_start_boot_summary">Android enjamyňyz açylanda Orbot awtomatiki işe giriziň we Tor-y birikdiriň</string>
-    <string name="pref_allow_background_starts_summary">Orbot arkaly Tor we degişli hyzmatlary işe girizmek üçin islendik programma üpjün edýär</string>
     <string name="pref_proxy_password_summary">Proksi Paroly (Islege Görä)</string>
     <string name="app_name">Orbot</string>
     <string name="menu_settings">Sazlamalar</string>
@@ -14,7 +13,6 @@
     <string name="pref_entrance_node">Giriş Düwünleri</string>
     <string name="pref_entrance_node_summary">Barmak yzlary, lakamlar, ýurtlar we ilkinji hop üçin salgylar</string>
     <string name="pref_entrance_node_dialog">Giriş Düwünlerini Giriziň</string>
-    <string name="pref_allow_background_starts_title">Arka planda başlamaga rugsat beriň</string>
     <string name="pref_proxy_title">Çykýan Network Proksi (islege görä)</string>
     <string name="pref_proxy_type_title">Çykýan Proksi Görnüşi</string>
     <string name="pref_proxy_host_summary">Proksi Serweriň host ady</string>

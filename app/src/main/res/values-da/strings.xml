@@ -22,7 +22,6 @@
     <string name="pref_entrance_node">Indgangspunkter til Tor netværket</string>
     <string name="pref_entrance_node_summary">Fingeraftryk, servernavne, lande og adresser for første hop</string>
     <string name="pref_entrance_node_dialog">Indtast indgangspunkter</string>
-    <string name="pref_allow_background_starts_title">Tillad baggrunds starts</string>
     <string name="pref_proxy_title">Udgående netværksproxy (Valgfri)</string>
     <string name="pref_proxy_type_title">Udgående proxy-type</string>
     <string name="pref_proxy_type_summary">Protokol til proxy serveren</string>
@@ -80,7 +79,6 @@
     <string name="btn_choose_apps">Vælg apps</string>
     <string name="btn_change_exit">Ændring af udgang</string>
     <string name="btn_refresh">Opdater</string>
-    <string name="pref_allow_background_starts_summary">Lad en hvilken som helst app fortælle Orbot, at Tor og relaterede tjenester skal startes</string>
     <string name="version">Version:</string>
     <string name="license">Licens:</string>
     <string name="menu_new_identity">Ny identitet</string>

@@ -8,6 +8,7 @@ import android.content.SharedPreferences
 import android.database.Cursor
 import android.database.MatrixCursor
 import android.net.Uri
+import android.util.Log
 import androidx.core.database.getFloatOrNull
 import androidx.core.database.getIntOrNull
 import androidx.core.database.getLongOrNull
@@ -16,10 +17,11 @@ import androidx.core.net.toUri
 import androidx.preference.PreferenceManager
 import org.torproject.android.BuildConfig
 
-class PreferenceProvider: ContentProvider() {
+class PreferenceProvider : ContentProvider() {
 
     companion object {
         private const val AUTHORITY = "${BuildConfig.APPLICATION_ID}.provider.preferences"
+        const val TAG = "PreferenceProvider"
 
         val CONTENT_URI = "content://$AUTHORITY".toUri()
 
@@ -106,17 +108,34 @@ class PreferenceProvider: ContentProvider() {
     }
 }
 
-private fun <T> ContentResolver.getPref(key: String, converter: (Cursor, Int) -> T?): T? {
-    val cursor = query(Uri.withAppendedPath(PreferenceProvider.CONTENT_URI, key),
-        null, null, null, null) ?: return null
-
-    cursor.use {
-        if (it.moveToFirst()) {
-            return converter(it, it.getColumnIndex(PreferenceProvider.ROW_VALUE))
-        }
+internal fun <T> preferenceProviderCall(defaultValue: T, action: () -> T): T =
+    try {
+        action()
+    } catch (_: IllegalArgumentException) {
+        defaultValue
     }
 
-    return null
+private fun <T> ContentResolver.getPref(key: String, converter: (Cursor, Int) -> T?): T? {
+    return preferenceProviderCall(null) {
+        val cursor = query(
+            Uri.withAppendedPath(PreferenceProvider.CONTENT_URI, key),
+            null, null, null, null
+        )
+        if (cursor == null) {
+            return@preferenceProviderCall null
+        }
+
+        cursor.use {
+            if (it.moveToFirst()) {
+                return@preferenceProviderCall converter(
+                    it, it.getColumnIndex(PreferenceProvider.ROW_VALUE)
+                )
+            }
+        }
+
+        null
+    }
+
 }
 
 fun ContentResolver.getPrefString(key: String, default: String? = null): String? {
@@ -137,14 +156,17 @@ fun ContentResolver.getPrefLong(key: String, default: Long? = null): Long? {
     return getPref(key) { c, i -> c.getLongOrNull(i) } ?: default
 }
 
-@Suppress("unused")
-fun ContentResolver.getPrefFloat(key: String, default: Float? = null): Float? {
-    return getPref(key) { c, i -> c.getFloatOrNull(i) } ?: default
-}
-
 private fun ContentResolver.putPref(key: String, values: ContentValues) {
-    update(Uri.withAppendedPath(PreferenceProvider.CONTENT_URI, key),
-        values, null, null)
+    val result: Unit? = preferenceProviderCall(null) {
+        update(
+            Uri.withAppendedPath(PreferenceProvider.CONTENT_URI, key),
+            values, null, null
+        )
+        Unit
+    }
+    if (result == null) {
+        Log.e(PreferenceProvider.TAG, "Couldn't update preference $key")
+    }
 }
 
 fun ContentResolver.putPref(key: String, value: String?) {
@@ -171,14 +193,6 @@ fun ContentResolver.putPref(key: String, value: Int) {
 fun ContentResolver.putPref(key: String, value: Long) {
     putPref(key, ContentValues().apply {
         put(PreferenceProvider.ROW_TYPE, Long::class.toString())
-        put(PreferenceProvider.ROW_VALUE, value)
-    })
-}
-
-@Suppress("unused")
-fun ContentResolver.putPref(key: String, value: Float) {
-    putPref(key, ContentValues().apply {
-        put(PreferenceProvider.ROW_TYPE, Float::class.toString())
         put(PreferenceProvider.ROW_VALUE, value)
     })
 }
