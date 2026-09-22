@@ -57,8 +57,8 @@ object Prefs {
     const val PREF_ORBOT_SERVICE_LOG = "pref_orbotservice_log"
 
 
-    private const val PREF_REACHABLE_ADDRESSES = "pref_reachable_addresses"
-    private const val PREF_REACHABLE_ADDRESSES_PORTS = "pref_reachable_addresses_ports"
+    const val PREF_REACHABLE_ADDRESSES = "pref_reachable_addresses"
+    const val PREF_REACHABLE_ADDRESSES_PORTS = "pref_reachable_addresses_ports"
 
     private const val PREF_DNSPORT = "pref_dnsport"
     const val PREF_HTTP = "pref_http"

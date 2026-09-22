@@ -41,9 +41,9 @@
     <string name="strict_nodes_description">Treat Exclude Nodes settings as a requirement for building all circuits. This may break functionality if no circuits can be built with your Exclude Nodes settings.</string>
     <string name="reachable_addresses">Reachable Addresses</string>
     <string name="run_as_a_client_behind_a_firewall_with_restrictive_policies">Run as a client behind a firewall with restrictive policies</string>
-    <string name="reachable_ports">Reachable ports</string>
+    <string name="reachable_ports">Reachable Ports</string>
     <string name="ports_reachable_behind_a_restrictive_firewall">Ports reachable behind a restrictive firewall</string>
-    <string name="enter_ports">Enter ports</string>
+    <string name="enter_ports">Enter Ports</string>
     <string name="enable_debug_log_to_output_must_use_adb_or_alogcat_to_view_">Enable debug log to output (must use adb or aLogcat to view)</string>
     <string name="project_home">Project Home:</string>
     <string name="orbot_url" translatable="false">https://orbot.app/</string>

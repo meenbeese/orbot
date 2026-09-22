@@ -132,6 +132,23 @@ class SettingsPreferenceFragment : AbstractPreferenceFragment(), OnPreferenceCha
             setListenersForLocalNetworkPreferences()
         }
 
+        val reachableAddressesPref =
+            findPreference<CheckBoxPreference>(Prefs.PREF_REACHABLE_ADDRESSES)
+        val reachableAddressesPorts =
+            findPreference<EditTextPreference>(Prefs.PREF_REACHABLE_ADDRESSES_PORTS)
+        if (reachableAddressesPref?.isChecked == true) {
+            reachableAddressesPorts?.isEnabled = reachableAddressesPref.isChecked
+        } else {
+            reachableAddressesPorts?.isEnabled = false
+        }
+        reachableAddressesPref?.onPreferenceChangeListener =
+            OnPreferenceChangeListener { _, newValue ->
+                val isChecked = newValue as Boolean
+                findPreference<EditTextPreference>(Prefs.PREF_REACHABLE_ADDRESSES_PORTS)?.isEnabled =
+                    isChecked
+                true
+            }
+
 
         val proxyType = findPreference<ListPreference>(Prefs.PREF_PROXY_TYPE)
         if (!ShadowSocks.isShadowSocksSupported()) {
