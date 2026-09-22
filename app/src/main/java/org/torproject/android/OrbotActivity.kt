@@ -230,7 +230,7 @@ class OrbotActivity : BaseActivity() {
         super.onResume()
 
         /**
-         * When OrbotService gets CMD_ACTIVE it:
+         * When OrbotService gets SIGNAL_ACTIVE it:
          * 1. Checks if the control port is open & tor is connected:
          *   1a. If true, sends tor the "ACTIVE" signal over the control port
          * 2. OrbotService replies back to OrbotActivity with its status, regardless of step 1
