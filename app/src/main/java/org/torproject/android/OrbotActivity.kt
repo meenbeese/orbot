@@ -250,14 +250,6 @@ class OrbotActivity : BaseActivity() {
         unregisterReceiver(orbotServiceBroadcastReceiver)
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_VPN && resultCode == RESULT_OK) {
-            connectViewModel.triggerStartTorAndVpn()
-        }
-    }
-
     private val orbotServiceBroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val status = intent?.getStringExtra(TorService.EXTRA_STATUS)
@@ -342,7 +334,6 @@ class OrbotActivity : BaseActivity() {
         private const val TAG = "OrbotActivity"
         private const val BUNDLE_KEY_SOCKS = "socks"
         private const val BUNDLE_KEY_HTTP = "http"
-        const val REQUEST_CODE_VPN = 1234
 
         // Make sure this is only shown once per app-start, not on every device rotation.
         private var rootDetectionShown = false
