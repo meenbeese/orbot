@@ -6,7 +6,7 @@
     <string name="menu_log">記錄檔</string>
     <string name="menu_about">關於</string>
     <string name="menu_exit">離開</string>
-    <string name="wizard_details_msg">Orbot 是一個開源應用程式，包含 Tor、IPtProxy（Obfs4Proxy、Meek、Snowflake）、Go-Tun2Socks 和 LibEvent。它提供了一個 VPN 隧道、一個本地 HTTP 連接代理（HTTPS 僅在連接埠 8118 上）和一個 SOCKS 代理（9050）進入 Tor 網路。</string>
+    <string name="wizard_details_msg">Orbot 是一個開源應用程式，包含 Tor、IPtProxy（Lyrebird、Meek、Snowflake）、hev-socks5-tunnel 和 LibEvent。它提供了一個 VPN 隧道、一個本地 HTTP 連接代理（HTTPS 僅在連接埠 8118 上）和一個 SOCKS 代理（9050）進入 Tor 網路。</string>
     <string name="pref_general_group">一般</string>
     <string name="pref_start_boot_title">開機時自動啟動 Orbot</string>
     <string name="pref_start_boot_summary">當你的 Android  裝置開機時自動開啟 Orbot 並連接 Tor 網路</string>
@@ -63,7 +63,7 @@
     <string name="onion_port">洋蔥端口</string>
     <string name="name">名稱</string>
     <string name="copy_address_to_clipboard">複製地址到剪貼簿</string>
-    <string name="backup_service">備份服務<i>（警告：這可能會將你的服務配置暴露給其他應用程式）</i></string>
+    <string name="backup_service">備份服務（警告：這可能會將你的服務配置暴露給其他應用程式）</string>
     <string name="delete_service">刪除服務</string>
     <string name="backup_saved_at_external_storage">備份檔儲存在外部儲存器</string>
     <string name="backup_restored">備份已還原</string>
@@ -108,7 +108,7 @@
     <string name="v3_backup_key_warning">警告：這可能會將你的金鑰暴露給其他應用程式</string>
     <string name="v3_key_hash">Base32 編碼的 x25519 私鑰</string>
     <string name="snowflake_proxy_msg_description">當你幫助某人規避審查時顯示訊息</string>
-    <string name="strict_nodes_description">將「排除節點」設定視為建構所有迴路的要求。如果因為你的「排除節點」設定而無法產生任何迴路，這可能會破壞功能。</string>
+    <string name="strict_nodes_description">將「排除節點」設定視為建構所有迴路的要求。如果因為你的「排除節點」設定而無法構建任何迴路，這可能會破壞功能。</string>
     <string name="app_services">應用程式服務</string>
     <string name="pref_http_dialog">HTTP 連接埠配置</string>
     <string name="v3_delete_client_authorization_confirm">刪除用戶軟體驗證</string>
@@ -173,4 +173,10 @@
     <string name="kindness_mode_active_message" formatted="true">您已幫助 %1$d 人繞過審查</string>
     <string name="app_icon_dialog_msg" formatted="true">切換到 %1$s 將重啟應用程式</string>
     <string name="setting_app_icon_description">選擇 Orbot 在您的裝置上的顯示方式</string>
+    <string name="system_vpn_settings">Android VPN 設定</string>
+    <string name="pref_proxy_no_proxy">無代理</string>
+    <string name="pref_proxy_ss_title">ShadowSocks 設定網址</string>
+    <string name="pref_proxy_ss_summary">以 ss:// 開頭的完整 ShadowSocks 設定網址</string>
+    <string name="open_proxy_needs_local_network_permission">在 Android 17 及更高版本中，Orbot 需要「允許存取附近裝置」的權限，才能在所有介面上開啟代理伺服器。</string>
+    <string name="pref_isolate_keep_alive">維持隔離線路的存活</string>
 </resources>
