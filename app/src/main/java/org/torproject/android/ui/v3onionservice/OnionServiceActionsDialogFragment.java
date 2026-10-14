@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import org.torproject.android.R;
 import org.torproject.android.util.StringUtils;
@@ -29,9 +30,14 @@ public class OnionServiceActionsDialogFragment extends DialogFragment {
             new ActivityResultContracts.CreateDocument(ZipUtilities.ZIP_MIME_TYPE), this::attemptToWriteBackup
     );
 
-    OnionServiceActionsDialogFragment(Bundle arguments) {
+    public OnionServiceActionsDialogFragment() {
         super();
-        setArguments(arguments);
+    }
+
+    public static void show(FragmentManager fragmentManager, Bundle arguments) {
+        OnionServiceActionsDialogFragment fragment = new OnionServiceActionsDialogFragment();
+        fragment.setArguments(arguments);
+        fragment.show(fragmentManager, OnionServiceActionsDialogFragment.class.getSimpleName());
     }
 
     @NonNull
@@ -69,7 +75,7 @@ public class OnionServiceActionsDialogFragment extends DialogFragment {
                 assert arguments != null;
                 doBackup(arguments, getContext());
             } else if (position == 2) {
-                new OnionServiceDeleteDialogFragment(arguments).show(getParentFragmentManager(), OnionServiceDeleteDialogFragment.class.getSimpleName());
+                OnionServiceDeleteDialogFragment.show(getParentFragmentManager(), arguments);
             }
             if (position != 1) dismiss();
         });

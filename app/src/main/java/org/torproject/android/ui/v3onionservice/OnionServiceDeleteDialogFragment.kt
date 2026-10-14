@@ -8,6 +8,7 @@ import android.provider.BaseColumns
 
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 
 import org.torproject.android.R
 import org.torproject.android.util.DiskUtils.recursivelyDeleteDirectory
@@ -15,10 +16,7 @@ import org.torproject.android.service.OrbotConstants
 
 import java.io.File
 
-class OnionServiceDeleteDialogFragment internal constructor(arguments: Bundle?) : DialogFragment() {
-    init {
-        setArguments(arguments)
-    }
+class OnionServiceDeleteDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(requireContext())
@@ -26,6 +24,15 @@ class OnionServiceDeleteDialogFragment internal constructor(arguments: Bundle?) 
             .setPositiveButton(android.R.string.ok) { _: DialogInterface?, _: Int -> doDelete(arguments, requireContext()) }
             .setNegativeButton(android.R.string.cancel) { dialog: DialogInterface, _: Int -> dialog.cancel() }
             .create()
+    }
+
+    companion object {
+        const val TAG = "OnionServiceDeleteDialog"
+        @JvmStatic
+        fun show(fragmentManager: FragmentManager, arguments: Bundle?) =
+            OnionServiceDeleteDialogFragment().apply {
+                this.arguments = arguments
+            }.show(fragmentManager, TAG)
     }
 
     private fun doDelete(arguments: Bundle?, context: Context) {

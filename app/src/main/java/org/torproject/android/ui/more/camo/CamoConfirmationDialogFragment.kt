@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import org.torproject.android.BuildConfig
 import org.torproject.android.R
 import org.torproject.android.util.Prefs
@@ -46,16 +47,17 @@ class CamoConfirmationDialogFragment : DialogFragment() {
         const val BUNDLE_KEY_NAME = "name"
         const val BUNDLE_KEY_ALT_ICON_VAL = "alt"
         const val TAG = "CamoConfirmDialog"
-        fun newInstance(
+        fun show(
+            fragmentManager: FragmentManager,
             drawableId: Int,
             nameStringId: Int,
             altIconValue: Int
-        ): CamoConfirmationDialogFragment = CamoConfirmationDialogFragment().apply {
+        ) = CamoConfirmationDialogFragment().apply {
             arguments = Bundle().apply {
                 putInt(BUNDLE_KEY_IMAGE_ID, drawableId)
                 putInt(BUNDLE_KEY_NAME, nameStringId)
                 putInt(BUNDLE_KEY_ALT_ICON_VAL, altIconValue)
             }
-        }
+        }.show(fragmentManager, TAG)
     }
 }

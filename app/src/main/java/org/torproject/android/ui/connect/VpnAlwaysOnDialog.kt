@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import org.torproject.android.R
 import org.torproject.android.service.vpn.VpnServicePrepareWrapper
 
@@ -40,10 +41,10 @@ class VpnAlwaysOnDialog : DialogFragment() {
     companion object {
         const val EXTRA_MESSAGE = "msg"
         const val TAG = "AlwaysOnDialog"
-        fun newInstance(message: String): VpnAlwaysOnDialog =
+        fun show(fragmentManager: FragmentManager, message: String) =
             VpnAlwaysOnDialog().apply {
                 arguments = Bundle().apply { putString(EXTRA_MESSAGE, message) }
-            }
+            }.show(fragmentManager, TAG)
     }
 
 }

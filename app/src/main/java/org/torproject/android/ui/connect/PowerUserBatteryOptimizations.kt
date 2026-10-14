@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import org.torproject.android.R
 import org.torproject.android.util.Prefs
 import org.torproject.android.util.areBatteryOptimizationsDisabled
@@ -28,6 +29,8 @@ class PowerUserBatteryOptimizations : DialogFragment() {
 
     companion object {
         const val TAG = "PowerUserBatteryDialog"
+        fun show(fragmentManager: FragmentManager) =
+            PowerUserBatteryOptimizations().show(fragmentManager, TAG)
         fun shouldShowDialog(context: Context): Boolean {
             if (Prefs.stopShowingPowerUserBatteryOptDialog) return false
             return !context.areBatteryOptimizationsDisabled()

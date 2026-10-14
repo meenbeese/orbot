@@ -9,11 +9,14 @@ import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import org.torproject.android.R
 
 class RequestPostNotificationPermission : DialogFragment() {
     companion object {
         const val TAG = "RequestPNPDialog"
+        fun show(fragmentManager: FragmentManager) =
+            RequestPostNotificationPermission().show(fragmentManager, TAG)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

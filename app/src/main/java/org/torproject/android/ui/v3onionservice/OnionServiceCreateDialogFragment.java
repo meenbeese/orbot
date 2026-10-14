@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import org.torproject.android.R;
 import org.torproject.android.service.db.OnionServiceColumns;
@@ -22,6 +23,10 @@ public class OnionServiceCreateDialogFragment extends DialogFragment {
 
     private EditText etServer, etLocalPort, etOnionPort;
     private TextWatcher inputValidator;
+
+    public static void show(FragmentManager fragmentManager) {
+        new OnionServiceCreateDialogFragment().show(fragmentManager, OnionServiceCreateDialogFragment.class.getSimpleName());
+    }
 
     @Override
     public void onStart() {

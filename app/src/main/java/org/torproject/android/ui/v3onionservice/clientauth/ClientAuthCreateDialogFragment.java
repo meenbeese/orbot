@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import org.torproject.android.R;
 import org.torproject.android.service.db.V3ClientAuthColumns;
@@ -21,6 +22,10 @@ public class ClientAuthCreateDialogFragment extends DialogFragment {
 
     private EditText etOnionUrl, etKeyHash;
     private TextWatcher inputValidator;
+
+    public static void show(FragmentManager fragmentManager) {
+        new ClientAuthCreateDialogFragment().show(fragmentManager, ClientAuthCreateDialogFragment.class.getSimpleName());
+    }
 
     @NonNull
     @Override

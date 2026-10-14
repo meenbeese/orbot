@@ -109,9 +109,8 @@ class MoreFragment : Fragment() {
                 startActivity(Intent(requireActivity(), ClientAuthActivity::class.java))
             },
             OrbotMenuAction(R.string.menu_about, R.drawable.ic_about) {
-                AboutDialogFragment().show(
-                    requireActivity().supportFragmentManager,
-                    AboutDialogFragment.TAG
+                AboutDialogFragment.show(
+                    requireActivity().supportFragmentManager
                 )
             }
         )

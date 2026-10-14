@@ -212,14 +212,13 @@ class ConnectFragment : Fragment(),
         val alarmManager =
             requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()) {
-            PowerUserForegroundPermDialog().createTransactionAndShow(requireActivity())
+            PowerUserForegroundPermDialog.show(requireActivity())
             turnOffConnectSwitchWithoutEvent()
             return false // user can try again after granting permission
         }
         if (PowerUserBatteryOptimizations.shouldShowDialog(requireActivity())) {
-            PowerUserBatteryOptimizations().show(
-                requireActivity().supportFragmentManager,
-                PowerUserBatteryOptimizations.TAG
+            PowerUserBatteryOptimizations.show(
+                requireActivity().supportFragmentManager
             )
         }
         startTorConnection()
@@ -260,9 +259,9 @@ class ConnectFragment : Fragment(),
 
     private fun displayVpnStartError(msg: String) {
         turnOffConnectSwitchWithoutEvent()
-        VpnAlwaysOnDialog.newInstance(msg).show(
+        VpnAlwaysOnDialog.show(
             requireActivity().supportFragmentManager,
-            VpnAlwaysOnDialog.TAG
+            msg
         )
     }
 
@@ -302,9 +301,8 @@ class ConnectFragment : Fragment(),
                     statusString = connectStrLabel
                 ) { openConfigureTorConnection() },
                 OrbotMenuAction(R.string.btn_change_exit, 0) {
-                    ExitNodeBottomSheet().show(
-                        requireActivity().supportFragmentManager,
-                        "ExitNodeBottomSheet"
+                    ExitNodeBottomSheet.show(
+                        requireActivity().supportFragmentManager
                     )
                 },
                 OrbotMenuAction(R.string.btn_refresh, R.drawable.ic_refresh) { sendNewnymSignal() })
@@ -391,8 +389,7 @@ class ConnectFragment : Fragment(),
 
 
     private fun openConfigureTorConnection() {
-        ConfigConnectionBottomSheet()
-            .show(requireActivity().supportFragmentManager, ConfigConnectionBottomSheet.TAG)
+        ConfigConnectionBottomSheet.show(requireActivity().supportFragmentManager)
     }
 
     override fun onExitNodeSelected(countryCode: String) {

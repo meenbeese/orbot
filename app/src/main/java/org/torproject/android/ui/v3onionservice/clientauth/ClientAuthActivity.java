@@ -63,7 +63,7 @@ public class ClientAuthActivity extends BaseActivity {
         mResolver.registerContentObserver(ClientAuthContentProvider.CONTENT_URI, true, new V3ClientAuthContentObserver(new Handler(Looper.getMainLooper())));
 
         findViewById(R.id.fab).setOnClickListener(_ ->
-                new ClientAuthCreateDialogFragment().show(getSupportFragmentManager(), ClientAuthCreateDialogFragment.class.getSimpleName()));
+                ClientAuthCreateDialogFragment.show(getSupportFragmentManager()));
 
         ListView auths = findViewById(R.id.auth_hash_list);
         auths.setAdapter(mAdapter);
@@ -73,7 +73,7 @@ public class ClientAuthActivity extends BaseActivity {
             args.putInt(BUNDLE_KEY_ID, item.getInt(item.getColumnIndex(V3ClientAuthColumns._ID)));
             args.putString(BUNDLE_KEY_DOMAIN, item.getString(item.getColumnIndex(V3ClientAuthColumns.DOMAIN)));
             args.putString(BUNDLE_KEY_HASH, item.getString(item.getColumnIndex(V3ClientAuthColumns.HASH)));
-            new ClientAuthActionsDialogFragment(args).show(getSupportFragmentManager(), ClientAuthActionsDialogFragment.class.getSimpleName());
+            ClientAuthActionsDialogFragment.show(getSupportFragmentManager(), args);
         });
     }
 

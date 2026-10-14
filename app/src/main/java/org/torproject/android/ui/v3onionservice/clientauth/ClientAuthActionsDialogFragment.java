@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import org.torproject.android.R;
 
@@ -21,9 +22,10 @@ public class ClientAuthActionsDialogFragment extends DialogFragment {
 
     public ClientAuthActionsDialogFragment() {}
 
-    public ClientAuthActionsDialogFragment(Bundle args) {
-        super();
-        setArguments(args);
+    public static void show(FragmentManager fragmentManager, Bundle args) {
+        ClientAuthActionsDialogFragment fragment = new ClientAuthActionsDialogFragment();
+        fragment.setArguments(args);
+        fragment.show(fragmentManager, ClientAuthActionsDialogFragment.class.getSimpleName());
     }
 
     @NonNull
@@ -53,9 +55,9 @@ public class ClientAuthActionsDialogFragment extends DialogFragment {
         });
         ad.getListView().setOnItemClickListener((_, _, position, _) -> {
             if (position == 0)
-                new ClientAuthBackupDialogFragment(getArguments()).show(requireActivity().getSupportFragmentManager(), ClientAuthBackupDialogFragment.class.getSimpleName());
+                ClientAuthBackupDialogFragment.show(requireActivity().getSupportFragmentManager(), getArguments());
             else
-                new ClientAuthDeleteDialogFragment(getArguments()).show(requireActivity().getSupportFragmentManager(), ClientAuthDeleteDialogFragment.class.getSimpleName());
+                ClientAuthDeleteDialogFragment.show(requireActivity().getSupportFragmentManager(), getArguments());
             ad.dismiss();
         });
         return ad;

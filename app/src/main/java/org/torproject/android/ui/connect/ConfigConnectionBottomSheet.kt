@@ -15,6 +15,7 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.net.toUri
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import kotlinx.coroutines.Dispatchers
@@ -55,6 +56,8 @@ class ConfigConnectionBottomSheet :
 
     companion object {
         const val TAG = "ConfigConnectionBottomSheet"
+        fun show(fragmentManager: FragmentManager) =
+            ConfigConnectionBottomSheet().show(fragmentManager, TAG)
     }
 
     override fun onCreateView(
@@ -211,16 +214,14 @@ class ConfigConnectionBottomSheet :
             } else if (binding.rbDnstt.isChecked) {
                 Prefs.transport = Transport.DNSTT
                 Prefs.smartConnect = false
-                DNSTTConfirmationDialog().show(
-                    requireActivity().supportFragmentManager,
-                    DNSTTConfirmationDialog.TAG
+                DNSTTConfirmationDialog.show(
+                    requireActivity().supportFragmentManager
                 )
             }
 
             if (binding.rbTelegram.isChecked || binding.rbEmail.isChecked || binding.rbCustom.isChecked) {
-                CustomBridgeBottomSheet().show(
-                    requireActivity().supportFragmentManager,
-                    CustomBridgeBottomSheet.TAG
+                CustomBridgeBottomSheet.show(
+                    requireActivity().supportFragmentManager
                 )
             }
 

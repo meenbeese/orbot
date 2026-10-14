@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import org.torproject.android.R;
 import org.torproject.android.service.db.V3ClientAuthColumns;
@@ -14,9 +15,11 @@ import org.torproject.android.service.db.V3ClientAuthColumns;
 public class ClientAuthDeleteDialogFragment extends DialogFragment {
 
     public ClientAuthDeleteDialogFragment() {}
-    public ClientAuthDeleteDialogFragment(Bundle args) {
-        super();
-        setArguments(args);
+
+    public static void show(FragmentManager fragmentManager, Bundle args) {
+        ClientAuthDeleteDialogFragment fragment = new ClientAuthDeleteDialogFragment();
+        fragment.setArguments(args);
+        fragment.show(fragmentManager, ClientAuthDeleteDialogFragment.class.getSimpleName());
     }
 
     @NonNull

@@ -58,7 +58,7 @@ public class OnionServiceActivity extends BaseActivity {
 
         mLayoutRoot = findViewById(R.id.hostedServiceCoordinatorLayout);
         fab = findViewById(R.id.fab);
-        fab.setOnClickListener(_ -> new OnionServiceCreateDialogFragment().show(getSupportFragmentManager(), OnionServiceCreateDialogFragment.class.getSimpleName()));
+        fab.setOnClickListener(_ -> OnionServiceCreateDialogFragment.show(getSupportFragmentManager()));
 
         mContentResolver = getContentResolver();
         mAdapter = new OnionV3ListAdapter(this, mContentResolver.query(OnionServiceContentProvider.CONTENT_URI, OnionServiceColumns.getV3_ONION_SERVICE_PROJECTION(), BASE_WHERE_SELECTION_CLAUSE + '1', null, null));
@@ -80,8 +80,7 @@ public class OnionServiceActivity extends BaseActivity {
             arguments.putString(BUNDLE_KEY_PORT, item.getString(item.getColumnIndex(OnionServiceColumns.PORT)));
             arguments.putString(BUNDLE_KEY_DOMAIN, item.getString(item.getColumnIndex(OnionServiceColumns.DOMAIN)));
             arguments.putString(BUNDLE_KEY_PATH, item.getString(item.getColumnIndex(OnionServiceColumns.PATH)));
-            OnionServiceActionsDialogFragment dialog = new OnionServiceActionsDialogFragment(arguments);
-            dialog.show(getSupportFragmentManager(), OnionServiceActionsDialogFragment.class.getSimpleName());
+            OnionServiceActionsDialogFragment.show(getSupportFragmentManager(), arguments);
         });
     }
 

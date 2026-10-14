@@ -10,6 +10,7 @@ import android.text.style.StyleSpan
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import org.torproject.android.R
 import org.torproject.android.databinding.LayoutAboutBinding
 import org.torproject.android.util.DiskUtils
@@ -23,6 +24,8 @@ class AboutDialogFragment : DialogFragment() {
         const val TAG = "AboutDialogFragment"
         const val VERSION: String = VERSION_NAME
         private const val BUNDLE_KEY_TV_ABOUT_TEXT = "about_tv_txt"
+        fun show(fragmentManager: FragmentManager) =
+            AboutDialogFragment().show(fragmentManager, TAG)
     }
 
     private lateinit var binding: LayoutAboutBinding

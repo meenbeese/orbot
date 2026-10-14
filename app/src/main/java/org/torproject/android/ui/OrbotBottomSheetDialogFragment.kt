@@ -22,9 +22,20 @@ import org.torproject.android.R
 Class to set up default bottom sheet behavior for Config Connection, MOAT and any other
 bottom sheets to come
  */
-open class OrbotBottomSheetDialogFragment(
-    val minMode: Boolean = false
-) : BottomSheetDialogFragment() {
+open class OrbotBottomSheetDialogFragment : BottomSheetDialogFragment() {
+
+    protected var minMode: Boolean = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            minMode = it.getBoolean(ARG_MIN_MODE, minMode)
+        }
+    }
+
+    companion object {
+        const val ARG_MIN_MODE = "min_mode"
+    }
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = BottomSheetDialog(requireActivity(), theme)
         dialog.setOnShowListener {

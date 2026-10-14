@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
 
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,12 @@ import java.util.Locale
 import java.util.TreeMap
 
 class ExitNodeBottomSheet : OrbotBottomSheetDialogFragment() {
+
+    companion object {
+        const val TAG = "ExitNodeBottomSheet"
+        fun show(fragmentManager: FragmentManager) =
+            ExitNodeBottomSheet().show(fragmentManager, TAG)
+    }
 
     interface ExitNodeSelectedCallback {
         fun onExitNodeSelected(countryCode: String)

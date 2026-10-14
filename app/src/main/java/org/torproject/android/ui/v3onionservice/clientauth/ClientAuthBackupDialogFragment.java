@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import org.torproject.android.R;
 import org.torproject.android.ui.core.NoPersonalizedLearningEditText;
@@ -39,9 +40,10 @@ public class ClientAuthBackupDialogFragment extends DialogFragment {
     public ClientAuthBackupDialogFragment() {
     }
 
-    public ClientAuthBackupDialogFragment(Bundle args) {
-        super();
-        setArguments(args);
+    public static void show(FragmentManager fragmentManager, Bundle args) {
+        ClientAuthBackupDialogFragment fragment = new ClientAuthBackupDialogFragment();
+        fragment.setArguments(args);
+        fragment.show(fragmentManager, ClientAuthBackupDialogFragment.class.getSimpleName());
     }
 
     @NonNull

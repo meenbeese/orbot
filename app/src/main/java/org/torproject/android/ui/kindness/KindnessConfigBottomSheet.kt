@@ -10,7 +10,11 @@ import org.torproject.android.databinding.KindnessConfigBottomSheetBinding
 import org.torproject.android.ui.OrbotBottomSheetDialogFragment
 import org.torproject.android.util.Prefs
 
-class KindnessConfigBottomSheet : OrbotBottomSheetDialogFragment(minMode = true) {
+class KindnessConfigBottomSheet : OrbotBottomSheetDialogFragment() {
+
+    init {
+        minMode = true
+    }
 
     private lateinit var mBinding: KindnessConfigBottomSheetBinding
 
@@ -43,7 +47,11 @@ class KindnessConfigBottomSheet : OrbotBottomSheetDialogFragment(minMode = true)
     companion object {
         const val KEY_CONFIG_CHANGED = "kindness_config_changed"
         fun show(fragmentManager: FragmentManager) =
-            KindnessConfigBottomSheet().show(
+            KindnessConfigBottomSheet().apply {
+                arguments = Bundle().apply {
+                    putBoolean(ARG_MIN_MODE, true)
+                }
+            }.show(
                 fragmentManager,
                 "KindnessConfig"
             )

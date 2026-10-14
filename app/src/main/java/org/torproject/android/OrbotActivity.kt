@@ -215,8 +215,8 @@ class OrbotActivity : BaseActivity() {
             Log.d(TAG, "User just granted ${Manifest.permission.POST_NOTIFICATIONS}")
         } else {
             Log.d(TAG, "Notification denied")
-            RequestPostNotificationPermission().show(
-                supportFragmentManager, RequestPostNotificationPermission.TAG
+            RequestPostNotificationPermission.show(
+                supportFragmentManager
             )
         }
     }

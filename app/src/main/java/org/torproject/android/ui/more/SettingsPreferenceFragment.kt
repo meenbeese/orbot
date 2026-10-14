@@ -121,9 +121,8 @@ class SettingsPreferenceFragment : AbstractPreferenceFragment(), OnPreferenceCha
 
         findPreference<Preference>("pref_open_battery_opt")?.onPreferenceClickListener =
             Preference.OnPreferenceClickListener {
-                BatteryOptimizationsSettingDialog().show(
-                    requireActivity().supportFragmentManager,
-                    BatteryOptimizationsSettingDialog.TAG
+                BatteryOptimizationsSettingDialog.show(
+                    requireActivity().supportFragmentManager
                 )
                 true
             }

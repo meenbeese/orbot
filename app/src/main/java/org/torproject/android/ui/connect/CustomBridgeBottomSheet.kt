@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.view.ViewCompat
+import androidx.fragment.app.FragmentManager
 import io.github.g00fy2.quickie.QRResult
 import io.github.g00fy2.quickie.ScanCustomCode
 import io.github.g00fy2.quickie.config.ScannerConfig
@@ -27,6 +28,9 @@ class CustomBridgeBottomSheet : OrbotBottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "CustomBridgeBottomSheet"
+
+        fun show(fragmentManager: FragmentManager) =
+            CustomBridgeBottomSheet().show(fragmentManager, TAG)
 
         // https://regex101.com
         private val validBridgeRegex = Regex(

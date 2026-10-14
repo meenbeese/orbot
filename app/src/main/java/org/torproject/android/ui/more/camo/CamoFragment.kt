@@ -88,8 +88,12 @@ class CamoFragment : Fragment() {
     }
 
     private fun showDialog(@DrawableRes imageId: Int, @StringRes appName: Int, altIconValue: Int) {
-        CamoConfirmationDialogFragment.newInstance(imageId, appName, altIconValue)
-            .show(requireActivity().supportFragmentManager, CamoConfirmationDialogFragment.TAG)
+        CamoConfirmationDialogFragment.show(
+            requireActivity().supportFragmentManager,
+            imageId,
+            appName,
+            altIconValue
+        )
     }
 
     private fun createAppMenuItem(

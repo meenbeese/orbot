@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import org.torproject.android.R
 import org.torproject.android.service.vpn.VpnServicePrepareWrapper
 import org.torproject.android.util.areBatteryOptimizationsDisabled
@@ -12,6 +13,8 @@ import org.torproject.android.util.openBatteryOptimizationAppListScreen
 class BatteryOptimizationsSettingDialog : DialogFragment() {
     companion object {
         const val TAG = "BatteryOptimizationDialog"
+        fun show(fragmentManager: FragmentManager) =
+            BatteryOptimizationsSettingDialog().show(fragmentManager, TAG)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
